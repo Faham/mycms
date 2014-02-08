@@ -1,0 +1,32 @@
+BODY {
+	background-color: white;
+	color:		#666666;
+	font-family:	sans-serif;
+} /* end body box */
+
+a:link {
+	text-decoration: none; 
+	color: #3377aa;
+}
+a:visited {
+	text-decoration: none; 
+	color: #448844;
+}
+a:active {
+	text-decoration: underline;
+	color: #990000;
+	/*background: white;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #003300;
+  font-family: sans-serif;
+  /*background: white;*/
+  padding: 0px;
+ }
+
+.notes {
+	text-align: justify;
+	vertical-align: middle;
+	width: 700px;
+}

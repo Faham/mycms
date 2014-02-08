@@ -1,0 +1,175 @@
+#content {
+	padding-bottom: 29px;
+}
+
+#top {
+	background: url(../images/top.gif) no-repeat;
+}
+
+#header {
+	background: url(../images/header-back.gif) repeat-x;
+}
+
+#logo {
+	padding: 4px 0 0 22px !important;
+}
+
+#logo a {
+	background: url(../images/logo.gif) no-repeat;
+}
+
+#graphic {
+	background: url(../images/admin-logo.png) no-repeat;
+	width: 141px;
+	margin: 20px 0 0;
+    height: 45px;
+}
+
+.text, textarea {
+	width: 400px;
+}
+select {
+	width: 404px;
+}
+
+textarea {
+	font: 12px/1.5 arial, sans-serif;
+}
+
+input {
+margin-left: 0;
+}
+
+label input {
+	vertical-align: top;
+	margin-right: 5px;
+}
+
+#sortable {
+	list-style-type: none;
+	padding: 0px;
+	margin: -4px 0 15px;
+	width: 160px;
+	font-size: 13px;
+	font-family: Arial, sans-serif;
+}
+#sortable li {
+	cursor: move;
+	padding: 3px 5px 3px 14px;
+	border: 1px solid rgb(190, 190, 190);
+	background: rgb(250, 250, 255) url(js/handle.png) no-repeat;
+	height: 17px;
+	position: relative;
+	margin-top: 4px;
+}
+#sortable li .left {
+	width: 90%;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+}
+#sortable li .right {
+	width: 11px;
+	float: right;
+	padding-top: 3px;
+}
+#sortable li a {
+	display: block;
+	width: 10px;
+	height: 10px;
+	background: url(close.gif) no-repeat;
+	cursor: pointer;
+}
+#sortable li a:hover {
+	opacity: 0.7;
+}
+
+#sortable2 {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0 0 2px;
+}
+#sortable2 li {
+	padding: 3px 5px 3px 21px;
+	background: url(../images/drag_handle.png) no-repeat 0 6px;
+	position: relative;
+	height: 19px;
+}
+#sortable2 select {
+	width: 383px;
+}
+
+#sortable3 {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0 0 5px;
+}
+#sortable3 li {
+	padding: 0 5px 0 21px;
+	background: url(../images/drag_handle.png) no-repeat 0 3px;
+	position: relative;
+	height: 23px;
+	cursor: default;
+}
+#sortable3 li:nth-child(2n+1) tr {
+	background: rgb(241, 245, 255);
+}
+
+.saveandclose {
+	padding-top: 20px;
+	border-top: 1px solid rgb(210, 210, 210);
+	text-align: center;
+}
+
+.pubdate td {
+	padding: 25px 7px 1px;
+	font-weight: bold !important;
+	border-bottom: 1px solid rgb(235, 235, 235);
+	border-top: 1px solid rgb(235, 235, 235);
+}
+
+.pubrow td{
+	padding: 2px 6px 3px;
+}
+.pubrow .edit, .pubrow .delete, .pubrow .demote {
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+}
+.pubrow .edit {
+	width: 29px;
+}
+.pubrow .delete {
+	width: 50px;
+}
+.pubrow .demote {
+	width: 60px;
+}
+.alternate {
+	background: rgb(241, 245, 255);
+}
+
+#pubnew select {
+	margin-top: 5px;
+}
+#pubadd {
+	margin-top: 3px;
+}
+#pubadd a {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.message {
+	background: rgb(255, 255, 225);
+	border: 1px solid rgb(205, 205, 155);
+	padding: 5px 13px 6px;
+	margin: 5px 0 10px;
+	font-weight: bold;
+}
+
+.smalltext {
+	color: rgb(180, 180, 180);
+	font-size: 11px;
+	padding-top: 2px;
+}

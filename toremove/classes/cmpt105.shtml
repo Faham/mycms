@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>Computer Science Courses: University Of Saskatchewan</title>
+<style type="text/css">
+body {
+	font-family:Arial, Helvetica, sans-serif
+}
+a {color:silver; text-decoration:underline
+}
+
+.style1 {
+	text-align: center;
+}
+
+</style>
+</head>
+
+<body bgcolor="#333333" text="#FFFFFF">
+
+<center>
+    <table border="0" cellpadding="0" cellspacing="10" width="580">
+<tr><td align="left" style="width: 550px; " valign="bottom"> <font face="century gothic, sans-serif" size="+2">CMPT 105.3 - Introduction to Computing and Interactive Systems</font>
+</td></tr>
+<tr><td style="width: 550px">
+CMPT 105 will provide an introduction to ideas and concepts in both computer science and the design of interactive systems. Concepts in computing will be explored using interactive multimedia systems as the focus. Basic concepts in design, 
+visual layout, and interaction will be introduced.
+
+<p>
+No background in programming or computer science is needed to take this class! We'll teach you everything you need to know. We're particularly interested in people who have interests in art, music, games, collaboration, and interaction.
+<br><br><center><img src="105ComputerUsers.jpg" alt="gamers"></center><br>
+<p>
+Some of the things we'll be doing in this class:
+<ul>
+<li>Basic Interaction: simple animation, creating sprites, making the computer 
+respond to the user&#39;s actions<li>Basics of multimedia: images, sound, and video, 
+representation and encoding, types and formats
+<li>More advanced interaction: making the computer respond differently depending 
+on different conditions, decisions and basic problem solving<li>Basics of 
+computing: how computers work, input and output devices, pixels and screens<li>Design basics: users and tasks, game design concepts, prototyping and storyboarding, and the iterative design process 
+<li>Working with data: loading and manipulating images, looping through image data, working with pixels
+<li>Working with the Internet: networks, the internet, and the web; commands for getting and working with web pages
+<li>Graphical User Interfaces: user input, basic widgets, building GUIs, and visual design principles
+<li>Putting it all together: building an interactive game or story
+</ul>
+</td></tr>
+
+
+
+	<tr>
+	  <td style="width: 550px"><br><br>
+<font face="century gothic, sans-serif" size="+2">For more information, contact us!</font><p>
+	    
+Professor Regan Mandryk (regan @ cs.usask.ca)<br>
+Professor Carl Gutwin (gutwin @ cs.usask.ca)<br>
+Department of Computer Science, University of Saskatchewan<br>
+110 Science Place, Saskatoon, SK, S7N 5C9<br>
+
+	  </td>
+	</tr>
+
+	<tr>
+	  <td style="width: 550px; height: 80px;" valign="bottom" class="style1">
+		<a href="main.shtml">Main </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="cmpt106.shtml">&nbsp;CMPT 106</a></td>
+	</tr>
+
+    </table>
+    </center>
+    </body>
+
+
+
+
+

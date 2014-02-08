@@ -1,0 +1,27 @@
+<?php
+require_once "../common.php";
+
+
+outputHeader(1, "Forward Error Correction for Groupware", "The Human-Computer Interaction Lab is a research facility in the Department of Computer Science at the University of Saskatchewan.");
+?>
+
+<h1>Forward Error Correction for Groupware</h1>
+<h2>Abstract</h2>
+<p>Network delays can cause serious usability problems in synchronous groupware systems. Delays can often be reduced by switching to lightweight protocols, such as UDP, but this switch also sacrifices any guarantee of message reliability. To address this problem, we investigate the use of adaptive forward error correction (AFEC) for groupware. Adaptive FEC is a technique that can maintain a predefined level of reliability while avoiding the overhead of acknowledgements or retransmission. This paper describes an adaptive FEC technique designed to meet the needs of synchronous groupware. We ran an experiment that measured message reliability and latency using TCP, plain UDP, UDP with non-adaptive FEC, and UDP with adaptive FEC under several different simulated network conditions. Our results show that for message types that can tolerate some loss, such as awareness information, both FEC techniques keep latency at nearly the plain-UDP level while dramatically improving reliability. Adaptive FEC, however, is the only technique that can guarantee a level of reliability while minimizing delay as network conditions change.</p>
+
+<h2>Authors</h2>
+<ul>
+<li>Jeff Dyck</li>
+<li>Carl Gutwin</li>
+</ul>
+<p>See the <a href="/people">people</a> page for author profiles.</p>
+
+<h2>Paper</h2>
+<p>A <a href="/publications/2002/AFEC_CSCW_2002.pdf">PDF version</a> of the paper is available.</p>
+
+<h2>Toolkit download</h2>
+<p><a href="/software/gw-afec.zip">The toolkit</a> is available for download, including a simple whiteboard telepointer client-server project which shows the toolkit in use.</p>
+
+<?php
+outputFooter();
+?>

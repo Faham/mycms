@@ -1,0 +1,7 @@
+body, #content, #content td {
+	font-size: 12pt;
+}
+
+#header, #menu {
+	display: none;
+}

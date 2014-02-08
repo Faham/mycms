@@ -1,0 +1,13 @@
+#top {
+	margin-bottom: -5px !important;
+}
+
+#imagedisplay {
+	width: 791px;
+}
+#imagedisplay img {
+	margin: 0 9px 9px 0;
+}
+#imagedisplay .right img {
+	margin: 0 0 9px 0;
+}

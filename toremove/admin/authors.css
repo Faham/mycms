@@ -1,0 +1,13 @@
+body {
+	margin: 0 20px 25px;
+	background: white;
+}
+
+.prompt {
+	font-size: 12px;
+}
+
+h2 {
+	font-size: 15px;
+	font-weight: bold;
+}

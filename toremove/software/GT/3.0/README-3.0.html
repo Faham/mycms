@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<TITLE>GT 3.0: The Groupware Toolkit</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="made" HREF="http://www.cs.ubc.ca/~bsd/">
+<STYLE type="text/css">
+dl dt { float:left; clear:left; margin-left:1em; margin-right:1em; font-weight:bold; }
+dt:after { content: ':'; }
+dl dd { margin-left:2.5em; }
+</STYLE>
+
+</HEAD>
+
+<BODY>
+<H1>GT 3.0: The Groupware Toolkit</H1>
+
+<P>The GT library is a groupware toolkit with two goals: to simplify
+the development of real-time distributed groupware, and to improve
+the performance of distributed applications.  The toolkit makes it
+simple to build groupware by taking care of networking and by
+providing several high-level programming abstractions to deal with
+communication and distributed data.  It is designed to speed the
+development of simple groupware applications by allowing developers
+to create distributed systems without the need to program lower-level
+networking code.</P>
+
+<P>This distribution includes the GT source code, prebuilt binaries,
+and several demonstration programs.  The demonstration clients rely
+upon a simple broadcasting server called the <TT>ClientRepeater</TT>;
+you must ensure a copy is started.</P>
+
+<P>GT is made available under the GNU Lesser General Public License (LGPL)
+v2.1 or later.  A copy of this license is included in the distribution as
+<A HREF="LICENSE.txt"><TT>LICENSE.txt</TT></A>.</P>
+
+
+<H2>Requirements</H2>
+<UL>
+<LI> GT has been developed against .NET 2.0.  Unfortunately
+    the MSI installers seem to require .NET 3.5, due to GT being
+    developed on VisualStudio 2008.  The actual DLLs are for .NET 2.0
+    however.</LI>
+<LI> We recommend you use a minimum of VS2005 SP1 for your own
+    development as there are reports that the VS2005 installation
+    prior to SP1 may have some faulty networking code.</LI>
+</UL>
+
+<H2>Programming Model</H2>
+
+<P>GT maintains a strong separation of clients and servers. Although
+peer-to-peer systems can be implemented by having a node maintain both a
+client and a server, this has not been GT's focus.</P>
+
+<P>GT exports a notion of communicating across a set of typed channels.
+Channels are typed to simplify sending structured information, such as
+strings, bytes, objects, or session messages. There may be up to 255
+different channels of each type. Each bit of structured information is
+sent across as a message.</P>
+
+<P>GT is designed to be non-blocking and, ideally, single-threaded.
+Applications are required to periodically poll by calling the Update()
+method on their GT interface (e.g., Client.Update() or Server.Update()).
+Events are signalled through .NET events. Applications are responsible
+for implementing equivalent blocking semantics when required.</P>
+
+<H2>Architectural Overview</H2>
+
+<P>GT is structured as a three-level architecture. At the top level is the
+application level API, represented as instances of
+<TT>GT.Net.Client</TT> and
+<TT>GT.Net.Server</TT>.  Clients and servers export different
+interfaces for handling messages.  These interfaces are nominally
+connectionless.  At the middle level are <EM>connexions</EM> and
+<EM>marshallers</EM>.  Connexions serve as an aggregation of the
+different resources that can be used to communicate with a particular
+endpoint; connexions are represented as instances of <TT>IConnexion</TT>.
+Clients and servers use <EM>marshallers</EM> to convert messages
+into a form suitable to be communicated across a network; marshallers
+are represented as instances of <TT>GT.Net.IMarshaller</TT>.
+At the lowest level are <EM>transports</EM> which serve to communicate
+bundles of bytes to an endpoint using some network protocol; these
+transports are represented as instances of <TT>ITransport</TT>.</P>
+
+<P>GT supports communicating across a variety of networking mechanisms,
+such as TCP and UDP. Applications can provide minimum delivery
+requirements for particular channels and for individual messages, such
+as whether a message must be sent across a networking mechanism with
+guaranteed delivery, or particular ordering requirements. These
+requirements are used to select a particular transport instance that
+meet those requirements.</P>
+
+<P>Both clients and servers are built using a configuration object,
+<TT>GT.Net.ClientConfiguration</TT> for the client and
+<TT>GT.Net.ServerConfiguration</TT> for the server. Sample
+configurations are provided in <TT>GT.Net.DefaultClientConfiguration</TT>
+and <TT>GT.Net.DefaultServerConfiguration</TT>; these configurations
+are intended to serve only as examples and may change between
+releases.  The examples should be copied and adapted for your
+particular application needs.</P>
+
+<H3>The GT Client</H3>
+
+<P>A client encapsulates the communication to different servers. Clients
+export a channel as a typed stream. We currently support 4 types of
+streams: strings (<TT>IStringStream</TT>), binary arrays
+(<TT>IBinaryStream</TT>), objects
+(<TT>IObjectStream</TT>), and session events (<TT>ISessionStream</TT>).
+GT also supports tuple streams, which provide automatically updating
+structures.</P>
+
+<P>The main interface to GT Client is through instances of the
+<TT>GT.Net.Client</TT> class and the various stream instances.</P>
+
+<P>Channels have quality-of-services requirements, described using a
+<TT>ChannelDeliveryRequirements</TT> object. These QoS requirements are used to
+find an appropriate transport able to meet those requirements. These QoS
+requirements may be overridden on a per-message basis using a
+<TT>MessageDeliveryRequirements</TT> object. Care must be taken for
+requirements specifying an aggregation level of
+<TT>MessageAggregation.Aggregatable</TT>: the user is responsible for
+periodically flushing the channel manually.  These messages will be
+flushed by the periodic client/server ping, though this is usually
+scheduled to occur once every 10 seconds</P>
+
+
+<H3>The GT Server</H3>
+
+<P>Servers provide a more event-driven interface. As servers must scale to
+multiple clients, they are generally required to be more performant.</P>
+
+<H3>GT Marshallers</H3>
+
+<P>Marshallers have the responsibility of breaking object graphs into
+bytes, forms that can be transported across a network connection or
+written and read from disk. As multiple messages may be bundled together
+into a transport-level packet, a marshaller is responsible for placing
+message boundaries. This typically means that the marshaller should
+either write an explicit end-of-message indicator or tack a prefix to
+the content with a message length.</P>
+
+<P>GT provides a standard object marshaller that uses the .NET
+Serialization. There are two variants of the marshaller.  The first
+variant is a lightweight marshaller
+(<TT>LightweightDotNetSerializingMarshaller</TT>) that unmarshals
+only system-level messages, and leaves all application messages
+received as uninterpreted bytes; this is helpful for servers such
+as the ClientRepeater by avoiding any unnecessary latency by dropping
+all but the most basic functionality.  The heavier-weight marshaller
+(<TT>DotNetSerializingMarshaller</TT>) uses the .NET serialization
+facilities.</P>
+
+<P>We have also provided a proof-of-concept implementation of the
+<EM>general message compressor</EM>, an adaptively compressing
+marshaller that is well suited to marshalling data with repetitive
+structure between messages.  This scheme is described in:</P>
+<BLOCKQUOTE>
+    C Gutwin, C Fedak, M Watson, J Dyck, T Bell (2006).  Improving
+    network efficiency in real-time groupware with general message
+    compression.  In Proc of the Conf on Computer
+    Supported Cooperative Work (CSCW), 119--128.
+    (<A HREF="http://dx.doi.org/10.1145/1180875.1180894">doi:10.1145/1180875.1180894</A>,
+    <A HREF="http://hci.usask.ca/publications/2006/compression.pdf">pdf</A>)
+</BLOCKQUOTE>
+<P>Although GMC is fully functional, it is currently only supported
+across reliable and ordered transports.</P>
+
+<P>GT Marshallers should never produce 0-byte messages. Marshallers should
+throw a <TT>GT.Net.MarshallingException</TT> exception on error.</P>
+
+<H3>GT Transports</H3>
+
+<P>Transports are responsible for carrying a set of bytes, called a
+<TT>Packet</TT>, to some remote endpoint. Transports describe their
+transportation characteristics which are used to match against a
+channel or message's required QoS requirements.</P>
+
+<P>GT Transports should throw a <TT>GT.Net.TransportError</TT> when
+requested to send a 0-byte message.</P>
+
+<H3>Communicating Errors and Exceptions</H3>
+
+<P>GT uses both exceptions and an error event mechanism to communicate
+errors as they occur. There are several situations where errors may
+occur:</P>
+<UL>
+<LI> Errors due to GT programming errors</LI>
+<LI> Errors due to application programming errors</LI>
+<LI> Errors due to application violation of GT calling conventions
+    and APIs</LI>
+<LI> Errors due to resource issues (i.e., all the above, but on the
+    remote side)</LI>
+<LI> Errors due to network problems.</LI>
+</UL>
+<P>GT will raise exceptions on API violations or truly exceptional
+occurrences. Otherwise exceptions and errors are reported using the
+error event mechanism.</P>
+
+<P>The exceptions currently defined are:</P>
+<DL>
+<DT>System.ArgumentException, System.ArgumentNullException</DT>
+<DD>Thrown with invalid arguments</DD>
+
+<DT>GT.ContractViolation</DT>
+<DD>Thrown when documented conventions/contracts/constraints are
+    violated; these are situations where there aren't particular
+    problems with arguments to a method</DD>
+
+<DT>GT.InvalidStateException</DT>
+<DD>Thrown when a component is used when in an
+    invalid state (i.e., it has been stopped or disposed)</DD>
+
+<DT>GT.Net.MarshallingException</DT>
+<DD>Thrown when an error occurs during marshalling / unmarshalling</DD>
+
+<DT>GT.Net.TransportError</DT>
+<DD>Thrown when an error has occurred when communicating across a
+    particular transport</DD>
+
+<DT>GT.Net.CannotConnectException</DT>
+<DD>Thrown when there was a problem connecting to a remote endpoint.
+    Raised only when connecting, such as when getting a stream.</DD>
+
+<DT>GT.Net.CannotSendMessagesError</DT>
+<DD>Thrown when a set of messages could not be sent for
+    various reasons. This is a composite exception.  The exception
+    contains the set of messages that could not be sent; the handler
+    can decide whether to re-send the messages.</DD>
+
+<DT>GT.Net.NoMatchingTransport</DT>
+<DD>Thrown when there is no transport that meets the
+    message/channel delivery requirements</DD>
+
+</DL>
+
+<P>All GT exceptions and error events have an assessment as to their
+severity:</P>
+
+<DL>
+<DT>Fatal</DT>
+<DD>an error has occurred such that GT cannot continue in its operation.</DD>
+
+<DT>Error</DT>
+<DD>an error has occurred; the application will likely be able to
+    continue, but GT functionality may be significantly limited.</DD>
+
+<DT>Warning</DT>
+<DD>an error has occurred such that GT is able to continue, but the
+    application's functionality may be compromised</DD>
+
+<DT>Information</DT>
+<DD>a problem has occurred but has been dealt with; the error
+    is being reported purely for information</DD>
+</DL>
+<P>Errors/exceptions reported using the error event mechanism are notified
+using an <TT>ErrorSummary</TT> object. The <TT>ErrorSummary</TT> provides:</P>
+<UL>
+<LI> a descriptive summary code (a SummaryErrorCode, described
+    below);</LI>
+<LI> a descriptive message as to the cause and implications of the error,
+    hopefully suitable for displaying to the user;</LI>
+<LI> the severity of the error (which may be different from the severity of
+    the underlying exception);</LI>
+<LI> the context of the error, such as exception that was raised, if
+    available.</LI>
+</UL>
+<P>There are currently 5 different forms of a SummaryErrorCode which
+represent the implications of the error:</P>
+<DL>
+<DT>UserException</DT>
+<DD>there was an exception trapped when running application-provided
+    code (e.g., thrown from an event listener);</DD>
+
+<DT>RemoteUnavailable</DT>
+<DD>the remote system could not be contacted;</DD>
+
+<DT>MessagesCannotBeSent</DT>
+<DD>there were message(s) that could not be sent; these messages
+    have been dequeued and are available in the exception;</DD>
+
+<DT>InvalidIncomingMessage</DT>
+<DD>there was an error unmarshalling a message from
+    an incoming connection;</DD>
+
+<DT>TransportBacklogged</DT>
+<DD>a transport has too much information awaiting; the data has been
+    queued for later transmission, but may be significantly delayed.</DD>
+
+</DL>
+
+<H2>Reporting Feedback, Problems, and Requesting Help</H2>
+
+We're interested in hearing about your experiences with GT! 
+Feel free to send feedback, criticisms, and questions to both
+Brian de&nbsp;Alwis
+(<A HREF="mailto:brian.de.alwis@usask.ca">brian.de.alwis@usask.ca</A>)
+and Carl Gutwin
+(<A HREF="mailto:gutwin@cs.usask.ca">gutwin@cs.usask.ca</A>).
+Please report any problems, etc. through the 
+<A HREF="https://papyrus.usask.ca/trac/gt/">GT Trac</A> at:</P>
+<BLOCKQUOTE>
+    <TT><A HREF="https://papyrus.usask.ca/trac/gt/">https://papyrus.usask.ca/trac/gt/</A></TT>
+</BLOCKQUOTE>
+<P>The Trac also hosts a list of
+<A HREF="https://papyrus.usask.ca/trac/gt/wiki/FrequentlyAskedQuestions">Frequently
+Asked Questions</A>.</P>
+
+</BODY>
+</HTML>

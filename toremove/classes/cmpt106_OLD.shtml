@@ -1,0 +1,82 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>Computer Science Courses: University Of Saskatchewan</title>
+<style type="text/css">
+body {
+	font-family:Arial, Helvetica, sans-serif
+}
+a {color:silver; text-decoration:underline
+}
+
+.style1 {
+	text-align: center;
+}
+
+</style>
+</head>
+
+<body bgcolor="#333333" text="#FFFFFF">
+
+<center>
+    <table border="0" cellpadding="0" cellspacing="10" width="580">
+<tr><td align="left" colspan="2" style="width: 550px"> <font face="century gothic, sans-serif" size="+2">CMPT 106.3 - Design and Construction of Games and Interactive Systems</font>
+</td></tr>
+<tr><td style="width: 550px">
+CMPT 106 continues where 105 leaves off, and introduces additional concepts in computer science and interaction design. 
+The course will focus on the design and analysis of a wide variety of computer 
+games. You will practice your programming skills (and learn new ones!) by designing and implementing 
+your own games.&nbsp; CMPT 106 will teach you practical computing skills while 
+allowing you to exercise your creativity and design skills.<br>
+<br>
+You will learn new computing topics such as representation of data, use of expressions, development of subprograms, and creation and manipulation of graphical images. Design topics will include consideration of narrative, game rules, collaboration, and animation.
+<br>
+<br>
+<center><img src="106Gamers.jpg" alt="gamers"></center>
+<br>
+<strong>Learning Objectives</strong><br>
+By successfully completing the course, a student should be able to:<br>
+<ul>
+<li>Discuss game design features and game mechanics</li>
+<li>Relate current game designs to earlier examples, from the direct predecessors to 
+the first recorded examples</li>
+<li>Plan game design projects according to best practice descriptions</li>
+<li>Develop a game design concept from initial idea to a full game design document, 
+using iterative design processes and prototyping</li>
+<li>Implement your game concept and create an interactive computer game using 
+new programming skills</li>
+<li>Specify target audiences and develop specific game design concepts for 
+specific target audiences</li>
+<li>Analyze different game designs using analytical tools to be able to suggest design changes and 
+compare different game designs</li>
+<li>Pitch game design concepts for an audience</li>
+</ul>
+</td></tr>
+
+	<tr>
+	  <td style="width: 550px"><br><br>
+<font face="century gothic, sans-serif" size="+2">For more information, contact us!</font><p>
+	    
+Professor Regan Mandryk (regan @ cs.usask.ca)<br>
+Professor Carl Gutwin (gutwin @ cs.usask.ca)<br>
+Department of Computer Science, University of Saskatchewan<br>
+110 Science Place, Saskatoon, SK, S7N 5C9<br>
+
+	  </td>
+	</tr>
+		<tr>
+	  <td style="width: 550px; height: 80px;" valign="bottom" class="style1">
+		<a href="main.shtml">Main </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="cmpt105.shtml">&nbsp;CMPT 105</a></td>
+	</tr>
+
+
+    </table>
+    </center>
+    </body>
+
+
+
+
+

@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /manual/
+Disallow: /addon-modules/
+Disallow: /admin/
+Disallow: /error.php
+Disallow: /old/
+Disallow: /pmwiki/
