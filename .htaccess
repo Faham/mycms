@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /hci/
+RewriteBase /mycms/
 
 #no-www
 #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]

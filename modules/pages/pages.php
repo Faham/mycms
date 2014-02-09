@@ -15,12 +15,12 @@ $g['template'] = 'home';
 // Set main menu options
 $menu = [
 	['name' => 'Home',         'url' => '',             ],
-	['name' => 'People',       'url' => 'pages/people',       ],
-	['name' => 'Research',     'url' => 'pages/research',     ],
-	['name' => 'Publications', 'url' => 'pages/publications', ],
-	['name' => 'Courses',      'url' => 'pages/courses',      ],
-	['name' => 'Download',     'url' => 'pages/download',     ],
-	['name' => 'Contact',      'url' => 'pages/contact',      ]
+	['name' => 'People',       'url' => 'people',       ],
+	['name' => 'Research',     'url' => 'research',     ],
+	['name' => 'Publications', 'url' => 'publications', ],
+	['name' => 'Courses',      'url' => 'courses',      ],
+	['name' => 'Download',     'url' => 'download',     ],
+	['name' => 'Contact',      'url' => 'contact',      ]
 ];
 $g['smarty']->assign('menu', $menu);
 

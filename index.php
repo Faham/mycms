@@ -2,12 +2,13 @@
 
 require_once('config.php');
 
-//$g['error']->push($_GET);
+$g['error']->push($_GET);
 
 // if no module option, show dashboard!
 if(!isset($_GET['module']) || $_GET['module'] == ''){
     $_GET['module'] = 'pages';
 }
+
 
 //if($g['user']->role == 'guest'){
 //    if(isset($_REQUEST['params']) && $_REQUEST['params'] != 'users/login'){
@@ -19,7 +20,7 @@ if(!isset($_GET['module']) || $_GET['module'] == ''){
 //    $g['smarty']->assign('cuser', $user['rows'][0]);
 //}
 
-// include requested action/page
+// find and include requested action/page
 if(is_file("modules/{$_GET['module']}/{$_GET['module']}.php")){
     require_once("modules/{$_GET['module']}/{$_GET['module']}.php");
 }else{
