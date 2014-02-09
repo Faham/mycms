@@ -1,20 +1,63 @@
 <?php
 
-class _db
-{
+//-----------------------------------------------------------------------------
 
-    function __construct()
-    {
+namespace mycms;
+require_once 'PEAR.php';
+require_once 'DB.php';
+
+//-----------------------------------------------------------------------------
+
+class db {
+
+//-----------------------------------------------------------------------------
+
+    public $name;
+    public $_db;
+
+//-----------------------------------------------------------------------------
+
+    function __construct() {
         global $g;
+        //mysql_connect($g['db_host'],$g['db_user'],$g['db_pass'],null);//,MYSQL_CLIENT_SSL);
+        //mysql_select_db($g['db_name']);
+        //mysql_query('SET NAMES "utf8"');
+        //mysql_query("SET time_zone = '{$g['timezone']}'");
 
-        mysql_connect($g['db_host'],$g['db_user'],$g['db_pass'],null);//,MYSQL_CLIENT_SSL);
-        mysql_select_db($g['db_name']);
-        mysql_query('SET NAMES "utf8"');
-        mysql_query("SET time_zone = '{$g['timezone']}'");
+        // setting database connections
+        $db_opts    =& \PEAR::getStaticProperty('DB_DataObject','options');
+        $db_opts    = $g['DB_DataObject'];
+        $this->name = substr($g['DB_DataObject']['database'], strrpos($g['DB_DataObject']['database'], '/') + 1);
+        $this->_db  =& \DB::Connect( $g['DB_DataObject']['database'], array() );
+        if (\PEAR::isError($this->_db)) {
+            die($this->_db->getMessage());
+        }
+
+        $this->_db->setFetchMode(DB_FETCHMODE_ASSOC);
     }
 
-    function query($q, $params = array())
-    {
+//-----------------------------------------------------------------------------
+
+    function query($q) {
+        global $g;
+
+        $q = str_replace('!!!', $this->name . '_', $q);
+        $r = ['error' => false, 'rows' => [], 'count' => 0];
+
+        if ($g['runmode'] ==  'debug')
+            $g['error']->push($q);
+
+        $res =& $this->_db->query($q);
+        while ($res->fetchInto($row)) {
+            $r['rows'][] = $row;
+        }
+        $r['count'] = count($r['rows']);
+        return $r;
+    }
+
+//-----------------------------------------------------------------------------
+
+    function _old_query($q, $params = array()) {
         global $g;
 
         if(count($params) != substr_count($q, '###')){
@@ -140,8 +183,9 @@ class _db
         return $ret;
     }
 
-    function get_type($table, $column)
-    {
+//-----------------------------------------------------------------------------
+
+    function get_type($table, $column) {
         $table = mysql_real_escape_string($table);
         $column = mysql_real_escape_string($column);
 
@@ -154,4 +198,10 @@ class _db
 
         return $res;
     }
+
+//-----------------------------------------------------------------------------
+
 }
+
+//-----------------------------------------------------------------------------
+

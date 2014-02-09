@@ -19,9 +19,9 @@
 		{/if}
 	</div>
 	<div>
-		<a href='{gl url="pages/publications/{$val.publication_id}"}' class="pub">{$val.publication_title}</a>
+		<a href='{gl url="publications/{$val.publication_id}"}' class="pub">{$val.publication_title}</a>
 		<br/>
-		{include "templates/snippets/citation.tpl" publication=$val}	
+		{include "templates/snippets/citation.tpl" publication=$val}
 	</div>
 	<div class="cb"></div>
 </div>

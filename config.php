@@ -2,6 +2,10 @@
 
 //-----------------------------------------------------------------------------
 
+//namespace mycms;
+
+//-----------------------------------------------------------------------------
+
 // session init
 //session_set_cookie_params(0, dirname($_SERVER['PHP_SELF']));
 //session_start();
@@ -12,8 +16,6 @@
 set_time_limit(0);
 
 //-----------------------------------------------------------------------------
-
-require_once("PEAR.php");
 
 $config = parse_ini_file('config.ini',TRUE);
 
@@ -52,13 +54,9 @@ $g['fullpath']     = dirname(__FILE__) . '/';
 $g['weburl']       = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
 $g['content']      = array ();
 $g['default_page_to_display'] = "templates/index.tpl";
-
 $g['lang'] = $g['default_lang'];
 include_once("lang/{$g['lang']}.php");
-
-// setting database connections
-$db_opts = &PEAR::getStaticProperty('DB_DataObject','options');
-$db_opts = $config['DB_DataObject'];
+$g['DB_DataObject'] = $config['DB_DataObject'];
 
 //-----------------------------------------------------------------------------
 
@@ -67,8 +65,8 @@ foreach(glob('classes/*.php') as $c){
     require_once($c);
 }
 
-//$g['db']     = new _db();
-$g['error']  = new error();
+$g['db']     = new mycms\db();
+$g['error']  = new mycms\error();
 $g['smarty'] = new mysmarty();
 
 //-----------------------------------------------------------------------------
@@ -77,21 +75,23 @@ $g['urls'] = array (
     '^admin(/.*|)' => 'admin',
     '^.*'          => 'pages');
 
-system::interpret_params();
+mycms\system::interpret_params();
 
 //-----------------------------------------------------------------------------
 
-function __autoload($name)
-{
-    require_once("modules/{$name}/{$name}.class.php");
-}
+//function __autoload($name)
+//{
+//    require_once("modules/{$name}/{$name}.class.php");
+//}
 
 // loading setting variables
-__autoload('settings');
-settings::get_all();
+require_once("modules/settings/settings.class.php");
+//__autoload('settings');
+mycms\settings::get_all();
 
-__autoload('users');
-$g['user']   = new users();
+require_once("modules/users/users.class.php");
+//__autoload('users');
+$g['user']   = new mycms\users();
 
 // set ajax
 //$g['ajax'] = isset($_SERVER["HTTP_AJAX_REQUEST"]) ? true : false;

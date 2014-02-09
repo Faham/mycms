@@ -1,9 +1,16 @@
 <?php
 
-class settings
-{
-    public static function get($var)
-    {
+//-----------------------------------------------------------------------------
+
+namespace mycms;
+
+//-----------------------------------------------------------------------------
+
+class settings {
+
+//-----------------------------------------------------------------------------
+
+    public static function get($var) {
         global $g;
 
         $p = array(
@@ -15,8 +22,9 @@ class settings
         return $r['rows'][0]['val'];
     }
 
-    public static function get_all()
-    {
+//-----------------------------------------------------------------------------
+
+    public static function get_all() {
         echo __FILE__ . ':' . __LINE__ . '(' . __FUNCTION__ . ')' . " not implemented";
         /*
         global $g;
@@ -31,8 +39,9 @@ class settings
         */
     }
 
-    public static function set($var, $val)
-    {
+//-----------------------------------------------------------------------------
+
+    public static function set($var, $val) {
         global $g;
 
         $var = strtolower($var);
@@ -55,8 +64,9 @@ class settings
         $g['db']->query($q, $p);
     }
 
-    public static function set_all($vars)
-    {
+//-----------------------------------------------------------------------------
+
+    public static function set_all($vars) {
         global $g;
 
         foreach($vars as $var){
@@ -70,4 +80,10 @@ class settings
             $g['db']->query('UPDATE !!!settings SET val = ### WHERE var = ###', $p);
         }
     }
+
+//-----------------------------------------------------------------------------
+
 }
+
+//-----------------------------------------------------------------------------
+

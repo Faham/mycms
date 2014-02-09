@@ -2,17 +2,17 @@
 
 //-----------------------------------------------------------------------------
 
+namespace mycms;
 require_once 'DB/DataObject.php';
 
 //-----------------------------------------------------------------------------
 
-abstract class content extends DB_DataObject {
+abstract class content extends \DB_DataObject {
 
 //-----------------------------------------------------------------------------
 
-	protected $m_type        = 'unknown';
-
-	public $displays = array();
+	protected $m_type = 'unknown';
+	public $displays  = array();
 
 //-----------------------------------------------------------------------------
 
@@ -23,8 +23,15 @@ abstract class content extends DB_DataObject {
 //-----------------------------------------------------------------------------
 
 	public function getall() {
+		global $g;
 
-	    $data_obj = DB_DataObject::Factory($this->m_type);
+	    $data_obj = \DB_DataObject::Factory('mycms\\' . $this->m_type);
+
+	    if ($data_obj instanceof \DB_DataObject_Error) {
+	    	$g['error']->push($data_obj->message);
+	    	return;
+	    }
+
 		$count = $data_obj->find();
 		$rows = array();
 
@@ -38,7 +45,7 @@ abstract class content extends DB_DataObject {
 
 //-----------------------------------------------------------------------------
 
-    public function _get($display = 'teaser', $where = '', $sortby = '', $limit = '0,99', $get_referenced_data = true) {
+    public function view($display = 'teaser', $where = '', $sortby = '', $limit = '0,99', $get_referenced_data = true) {
         global $g;
 
 		if (!array_key_exists($display, $this->displays)) {
@@ -108,7 +115,7 @@ abstract class content extends DB_DataObject {
 						$refindices[$rt] .= (empty($refindices[$rt])?'':',') . $row[$rt];
 
 				if (!empty($refindices[$rt]))
-					$rd = $g['content'][$rt]->get('teaser', "$rt.{$rt}_id IN (" . $refindices[$rt] . ")", "$rt.{$rt}_id ASC", '0,99', $display == 'teaser'? false: true);
+					$rd = $g['content'][$rt]->view('teaser', "$rt.{$rt}_id IN (" . $refindices[$rt] . ")", "$rt.{$rt}_id ASC", '0,99', $display == 'teaser'? false: true);
 			}
 
 			// Find and put each records data from $refdata into $r;
@@ -142,3 +149,5 @@ abstract class content extends DB_DataObject {
 //-----------------------------------------------------------------------------
 
 }
+
+//-----------------------------------------------------------------------------
