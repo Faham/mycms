@@ -1,69 +1,248 @@
 
-<h2>Add a Person</h2>
+{*---------------------------------------------------------------------------*}
+
+{include "templates/snippets/section_title.tpl" title={t s='Add a Person' m=0}}
+
+<div class="TTWForm-container">
+
+	<form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
+			{if isset($people)}
+			action='{gl url="admin/people/edit"}/{$people->people_id}'
+			{else}
+			action='{gl url="admin/people/create"}'
+			{/if}
+	>
+
+		<div id="people_firstname-container" class="field f_100">
+			<label for="people_firstname">
+				First Name
+			</label>
+			<input type="text" name="people_firstname" id="people_firstname" required pattern="[a-zA-Zs]+"
+				{if isset($people)}
+				value="{$people->people_firstname}"
+				{/if}
+			>
+		</div>
+
+		<div id="people_middlename-container" class="field f_100">
+			<label for="people_middlename">
+				Middle Name
+			</label>
+			<input type="text" name="people_middlename" id="people_middlename" pattern="[a-zA-Zs]+"
+				{if isset($people)}
+				value="{$people->people_middlename}"
+				{/if}
+			>
+		</div>
+
+		<div id="people_lastname-container" class="field f_100">
+			<label for="people_lastname">
+				Last Name
+			</label>
+			<input type="text" name="people_lastname" id="people_lastname" required pattern="[a-zA-Zs]+"
+				{if isset($people)}
+				value="{$people->people_lastname}"
+				{/if}
+			>
+		</div>
+
+		<div id="people_affiliation-container" class="field f_100">
+			<label for="people_affiliation">
+				Affiliation
+			</label>
+			<input type="text" name="people_affiliation" id="people_affiliation"
+				{if isset($people)}
+				value="{$people->people_affiliation}"
+				{/if}
+			>
+		</div>
+
+		<div id="people_email-container" class="field f_100">
+			<label for="people_email">
+				Email Address
+			</label>
+			<input type="email" name="people_email" id="people_email"
+				{if isset($people)}
+				value="{$people->people_email}"
+				{/if}
+			>
+		</div>
+
+		<div id="field11-container" class="field f_100">
+			<label for="field11">
+				Group
+			</label>
+
+			<select name="people_group" id="people_group" required>
+				<option id="people_group-1" value="faculty"
+				{if isset($people) and "faculty" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='faculty' m=0}
+				</option>
+				<option id="people_group-2" value="adjunct_faculty"
+				{if isset($people) and "adjunct_faculty" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='adjunct_faculty' m=0}
+				</option>
+				<option id="people_group-3" value="researcher"
+				{if isset($people) and "researcher" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='researcher' m=0}
+				</option>
+				<option id="people_group-4" value="graduate_student"
+				{if isset($people) and "graduate_student" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='graduate_student' m=0}
+				</option>
+				<option id="people_group-5" value="undergraduate_student"
+				{if isset($people) and "undergraduate_student" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='undergraduate_student' m=0}
+				</option>
+				<option id="people_group-6" value="alumni"
+				{if isset($people) and "alumni" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='alumni' m=0}
+				</option>
+				<option id="people_group-7" value="recent_visitor"
+				{if isset($people) and "recent_visitor" == $people->people_group}
+					selected
+				{/if}
+				>
+					{t s='recent_visitor' m=0}
+				</option>
+			</select>
+
+		</div>
+
+		<div id="people_start-container" class="field f_100">
+			<label for="people_start">
+				Start Date
+			</label>
+			<input class="ttw-date date" id="people_start" maxlength="524288" name="people_start"
+			size="20" tabindex="0" title=""
+				{if isset($people)}
+				value="{$people->people_start}"
+				{/if}
+			>
+		</div>
+
+		<div id="people_end-container" class="field f_100">
+			<label for="people_end">
+				End Date
+			</label>
+			<input class="ttw-date date" id="people_end" maxlength="524288" name="people_end"
+			size="20" tabindex="0" title=""
+				{if isset($people)}
+				value="{$people->people_end}"
+				{/if}
+			>
+		</div>
+
+		<div id="people_bio-container" class="field f_100">
+			<label for="people_bio">
+				Bio
+			</label>
+			<textarea rows="5" cols="20" name="people_bio" id="people_bio">{if isset($people)}{$people->people_bio}{/if}</textarea>
+		</div>
+
+		<div id="image-container" class="field f_100">
+			<label for="image">
+				Images
+			</label>
+			<input type="file" name="IMAGE" /><span class="smalltext">(.jpg, .gif, or .png)</span>
+		</div>
+
+		<div id="research-container" class="field f_100">
+			<label for="research">
+				Research
+			</label>
+			<input type="text" name="research" />
+		</div>
+
+		<div id="publication-container" class="field f_100">
+			<label for="publication">
+				Publication
+			</label>
+			<input type="text" name="publication" />
+		</div>
+
+		<div id="form-submit" class="field f_100 clearfix submit">
+			<input type="submit" value="Submit">
+		</div>
+
+	</form>
+</div>
+
+<!--
 <form method="post" action="people.php" enctype="multipart/form-data">
-<table cellspacing="10" width="641">
-<tr>
-	<td class="prompt">First Name:</td>
-	<td><input type="text" class="text" name="FIRSTNAME" value="" id="firstText" /></td>
-</tr>
-<tr>
-	<td class="prompt">Middle Initial:</td>
-	<td><input type="text" class="text" name="MIDDLEINITIAL" value="" /></td>
-</tr>
-<tr>
-	<td class="prompt">Last Name:</td>
-	<td><input type="text" class="text" name="LASTNAME" value="" /></td>
-</tr>
-<tr>
-	<td class="prompt">Affiliation:</td>
-	<td><input type="text" class="text" name="AFFILIATION" value="" /></td>
-</tr>
-<tr>
-	<td class="prompt">Email:</td>
-	<td><input type="text" class="text" name="EMAIL" value="" /></td>
-</tr>
-<tr>
-	<td class="prompt">Bio:</td>
-	<td>
+	<label>First Name:</label>
+	<input type="text" class="text" name="FIRSTNAME" value="" id="firstText" />
+
+	<label class="prompt">Middle Initial:</label>
+	<input type="text" class="text" name="MIDDLEINITIAL" value="" />
+
+	<label class="prompt">Last Name:</label>
+	<input type="text" class="text" name="LASTNAME" value="" />
+
+	<label class="prompt">Affiliation:</label>
+	<input type="text" class="text" name="AFFILIATION" value="" />
+
+	<label class="prompt">Email:</label>
+	<input type="text" class="text" name="EMAIL" value="" />
+
+	<label class="prompt">Bio:</label>
 	<textarea rows="8" name="BIO"></textarea>
-	</td>
-</tr>
-<tr>
-	<td class="prompt">Group:</td>
-	<td><select name="GROUP" style="min-width: 50%">
-	<option value=""></option>
-	<option value="1">Faculty</option><option value="2">Adjunct Faculty</option><option value="3">Researchers</option><option value="4">Graduate Students</option><option value="5">Staff</option><option value="6">Alumni</option><option value="7">Recent visitors</option><option value="8">Undergraduate Students</option>	</select>
-	</td>
-</tr>
-<tr>
-	<td class="prompt">Image:</td>
-	<td><table cellspacing="0" cellpadding="0"><tr><td style="padding-top: 1px"><input type="file" name="IMAGE" /><span class="smalltext"> (.jpg, .gif, or .png)</span></td></tr></table></td>
-</tr>
-<tr>
-	<td></td>
-	<td>
+
+	<label class="prompt">Group:</label>
+	<select name="GROUP" style="min-width: 50%">
+		<option value=""></option>
+		<option value="1">Faculty</option>
+		<option value="2">Adjunct Faculty</option>
+		<option value="3">Researchers</option>
+		<option value="4">Graduate Students</option>
+		<option value="5">Staff</option>
+		<option value="6">Alumni</option>
+		<option value="7">Recent visitors</option>
+		<option value="8">Undergraduate Students</option>
+	</select>
+
+	<label class="prompt">Image:</label>
+	<input type="file" name="IMAGE" /><span class="smalltext"> (.jpg, .gif, or .png)</span>
+
 	<input type="hidden" name="SAVEEDIT" value="" />
 	<input type="submit" value="Submit" />
-	</td>
-</tr>
-</table>
 </form>
+!-->
 
+<br clear="all" />
 
 {*---------------------------------------------------------------------------*}
 
-{if isset($people)}
-	<h2>{t s=People m=0}</h2>
-	<table cellpadding='0' cellspacing='0' class='persontable'10>
-	{for $i=0; $i < $people.count; $i++}
-		{assign var=ppl value=$people.rows[$i]}
-		<tr>
-		<td>{$ppl->people_firstname} {$ppl->people_middlename} {$ppl->people_lastname}</td>
-		<td><a href='{gl url="admin/people/edit/{$ppl->people_id}"}' class="edit">edit</a></td>
-		<td><a href='{gl url="admin/people/delete/{$ppl->people_id}"}' class="delete">delete</a></td>
-		</tr>
+{if isset($people_list)}
+	{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}
+	<ul class="admin">
+	{for $i=0; $i < $people_list.count; $i++}
+		<li>
+		{assign var=ppl value=$people_list.rows[$i]}
+		<span class="title">{$ppl->people_firstname} {$ppl->people_middlename} {$ppl->people_lastname}</span>
+		<span class="edit"><a href='{gl url="admin/people/view/{$ppl->people_id}"}'>edit</a></span>
+		<span class="remove"><a href='{gl url="admin/people/remove/{$ppl->people_id}"}'>remove</a></span>
+		</li>
 	{/for}
-	</table>
+	</ul>
 {/if}
 
 {*---------------------------------------------------------------------------*}

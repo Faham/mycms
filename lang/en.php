@@ -35,3 +35,4 @@
 @define('L_VIEW_ALL', 'View All');
 @define('L_UNDERGRADUATE', 'Undergraduate');
 @define('L_GRADUATE', 'Graduate');
+@define('L_ADD_A_PERSON', 'Add a Person');

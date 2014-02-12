@@ -2,7 +2,10 @@
 
 require_once('config.php');
 
-$g['error']->push($_GET);
+if ('debug' == $g['runmode']) {
+	$g['error']->push($_GET);
+	$g['error']->push($_POST);
+}
 
 // if no module option, show dashboard!
 if(!isset($_GET['module']) || $_GET['module'] == ''){
