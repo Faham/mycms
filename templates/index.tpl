@@ -25,13 +25,18 @@
 {*---------------------------------------------------------------------------*}
 
 	<meta name="description" content="$g.desc">
-	<link rel="stylesheet" href="{$weburl}static/reset.css"   type="text/css" media="all">
-	<link rel="stylesheet" href="{$weburl}static/main.css"    type="text/css" media="all">
-    <link rel="stylesheet" href="{$weburl}static/ttwform.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{$weburl}static/uniform.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{$weburl}static/admin.css"   type="text/css" media="all"/>
-	<link rel="stylesheet" href="{$weburl}static/print.css"   type="text/css" media="print">
-	<script type="text/javascript" src="{$weburl}static/main.js"></script>
+	<link rel="stylesheet" href="{$weburl}static/css/reset.css"   type="text/css" media="all">
+	<link rel="stylesheet" href="{$weburl}static/css/main.css"    type="text/css" media="all">
+    <link rel="stylesheet" href="{$weburl}static/css/ttwform.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{$weburl}static/css/uniform.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{$weburl}static/css/admin.css"   type="text/css" media="all"/>
+	<link rel="stylesheet" href="{$weburl}static/css/print.css"   type="text/css" media="print">
+
+    <script type="text/javascript" src="{$weburl}static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{$weburl}static/js/jquery.tools.js"></script>
+    <script type="text/javascript" src="{$weburl}static/js/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="{$weburl}static/js/main.js"></script>
+
 	<link rel="shortcut icon" href="http://hci.usask.ca/static/images/favicon.png">
 	<!--[if lte IE 6]>
 		<link type="text/css" rel="stylesheet" href="/ie.css" media="all" />

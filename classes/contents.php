@@ -10,6 +10,10 @@ global $g;
 
 class image extends content {
 
+    public $ext      = ["gif", "jpeg", "jpg", "png"];
+    public $mime     = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
+    public $max_size = 409600; // 400 * 1024;
+
     public $__table = 'mycms_image';         // table name
     public $image_id;                        // int(11)  not_null primary_key unique_key auto_increment
     public $image_filename;                  // string(250)  not_null
@@ -44,6 +48,18 @@ class doc extends content {
 
 //=============================================================================
 
+/*
+
+int:min,max
+alphabetic
+alphabetic-utf8
+email
+string:regex_pattern
+enum:val1,val2...
+date:string_format
+
+*/
+
 class people extends content {
 
     public $__table = 'mycms_people';        // table name
@@ -57,6 +73,28 @@ class people extends content {
     public $people_group;                    // string(21)  not_null enum
     public $people_start;                    // date(10)  binary
     public $people_end;                      // date(10)  binary
+
+    public $field_type = [
+        'people_id'          => 'int:0,',
+        'people_firstname'   => 'alphabetic',
+        'people_middlename'  => 'alphabetic',
+        'people_lastname'    => 'alphabetic',
+        'people_affiliation' => 'string',
+        'people_email'       => 'email',
+        'people_bio'         => 'string',
+        'people_group'       => 'enum:faculty,adjunct_faculty,researcher,graduate_student,undergraduate_student,alumni,recent_visitor',
+        'people_start'       => 'date:Y-m-d',
+        'people_end'         => 'date:Y-m-d'
+    ];
+
+    public $references = [
+        'image',
+        'video',
+        'doc',
+        'research',
+        'publication'
+    ];
+
 	public function __construct() {
 		parent::__construct('people');
 	}

@@ -3,8 +3,8 @@
 require_once('config.php');
 
 if ('debug' == $g['runmode']) {
-	$g['error']->push($_GET);
-	$g['error']->push($_POST);
+	//$g['error']->push($_GET);
+	//$g['error']->push($_POST);
 }
 
 // if no module option, show dashboard!

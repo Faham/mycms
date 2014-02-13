@@ -28,7 +28,7 @@
 			<label for="people_middlename">
 				Middle Name
 			</label>
-			<input type="text" name="people_middlename" id="people_middlename" pattern="[a-zA-Zs]+"
+			<input type="text" name="people_middlename" id="people_middlename" pattern="[a-zA-Zs]*"
 				{if isset($people)}
 				value="{$people->people_middlename}"
 				{/if}
@@ -160,9 +160,15 @@
 
 		<div id="image-container" class="field f_100">
 			<label for="image">
-				Images
+				Images<span class="smalltext">(.jpg, .gif, or .png)</span>
 			</label>
-			<input type="file" name="IMAGE" /><span class="smalltext">(.jpg, .gif, or .png)</span>
+			<input type="file" name="image" accept="image/*"/>
+			{if isset($refrences)}
+				{for $i=0; $i < $refrences.image.count; $i++}
+					{assign var=img value=$refrences.image.rows[$i]}
+					<img id="image-{$i}" src="{$weburl}files/people/image/thumb/{$img->image_filename}"/>
+				{/for}
+			{/if}
 		</div>
 
 		<div id="research-container" class="field f_100">
@@ -186,47 +192,6 @@
 	</form>
 </div>
 
-<!--
-<form method="post" action="people.php" enctype="multipart/form-data">
-	<label>First Name:</label>
-	<input type="text" class="text" name="FIRSTNAME" value="" id="firstText" />
-
-	<label class="prompt">Middle Initial:</label>
-	<input type="text" class="text" name="MIDDLEINITIAL" value="" />
-
-	<label class="prompt">Last Name:</label>
-	<input type="text" class="text" name="LASTNAME" value="" />
-
-	<label class="prompt">Affiliation:</label>
-	<input type="text" class="text" name="AFFILIATION" value="" />
-
-	<label class="prompt">Email:</label>
-	<input type="text" class="text" name="EMAIL" value="" />
-
-	<label class="prompt">Bio:</label>
-	<textarea rows="8" name="BIO"></textarea>
-
-	<label class="prompt">Group:</label>
-	<select name="GROUP" style="min-width: 50%">
-		<option value=""></option>
-		<option value="1">Faculty</option>
-		<option value="2">Adjunct Faculty</option>
-		<option value="3">Researchers</option>
-		<option value="4">Graduate Students</option>
-		<option value="5">Staff</option>
-		<option value="6">Alumni</option>
-		<option value="7">Recent visitors</option>
-		<option value="8">Undergraduate Students</option>
-	</select>
-
-	<label class="prompt">Image:</label>
-	<input type="file" name="IMAGE" /><span class="smalltext"> (.jpg, .gif, or .png)</span>
-
-	<input type="hidden" name="SAVEEDIT" value="" />
-	<input type="submit" value="Submit" />
-</form>
-!-->
-
 <br clear="all" />
 
 {*---------------------------------------------------------------------------*}
@@ -246,10 +211,3 @@
 {/if}
 
 {*---------------------------------------------------------------------------*}
-
-<script type="text/javascript">
-
-publicationModeChange();
-projectModeChange();
-
-</script>

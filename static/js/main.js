@@ -9,7 +9,7 @@ $(document).ready(function()
     $("select, input:checkbox, input:radio, input:file").uniform();
 
     //Date and Range Inputs
-	$(".date").dateinput();
+	$("input.date").dateinput();
 
     /**
      * Get the jQuery Tools Validator to validate checkbox and
@@ -77,6 +77,7 @@ $(document).ready(function()
      * otherwise.
      */
 
+     /*
     $(".TTWForm").validator({effect:'labelMate'}).submit(function(e){
        var form = $(this), checkRadioValidation = validateCheckRadio();
 
@@ -96,6 +97,7 @@ $(document).ready(function()
 
         return false;
     });
+     */
 
     var validator = $('.TTWForm').data('validator');
 
