@@ -25,7 +25,7 @@ class settings {
 //-----------------------------------------------------------------------------
 
     public static function get_all() {
-        echo __FILE__ . ':' . __LINE__ . '(' . __FUNCTION__ . ')' . " not implemented";
+        //echo __FILE__ . ':' . __LINE__ . '(' . __FUNCTION__ . ')' . " not implemented";
         /*
         global $g;
 

@@ -67,7 +67,6 @@ class system {
     public static function interpret_params()
     {
         global $g;
-
         $query = explode('?', $_SERVER['REQUEST_URI']);
         if(isset($query[1])){
             $query = $query[1];

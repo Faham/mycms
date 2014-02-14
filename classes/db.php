@@ -44,8 +44,9 @@ class db {
         $q = str_replace('!!!', $this->name . '_', $q);
         $r = ['error' => false, 'rows' => [], 'count' => 0];
 
-        if ($g['runmode'] ==  'debug')
+        if ($g['runmode'] ==  'debug') {
             $g['error']->push($q);
+        }
 
         $res =& $this->_db->query($q);
         while ($res->fetchInto($row)) {

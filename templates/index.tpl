@@ -35,6 +35,7 @@
     <script type="text/javascript" src="{$weburl}static/js/jquery.min.js"></script>
     <script type="text/javascript" src="{$weburl}static/js/jquery.tools.js"></script>
     <script type="text/javascript" src="{$weburl}static/js/jquery.uniform.min.js"></script>
+    <script type="text/javascript">var weburl = '{$weburl}';</script>
     <script type="text/javascript" src="{$weburl}static/js/main.js"></script>
 
 	<link rel="shortcut icon" href="http://hci.usask.ca/static/images/favicon.png">
@@ -44,9 +45,6 @@
 
 {*---------------------------------------------------------------------------*}
 
-    <script type="text/javascript">
-        var weburl = '{$weburl}';
-    </script>
 </head>
 
 {*---------------------------------------------------------------------------*}

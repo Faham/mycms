@@ -358,9 +358,23 @@ input, textarea, select {
 	margin-bottom: 15px;
 }
 
-.resleft {
+.resteaser .resleft {
 	width: 53px;
 	float: left;
+}
+
+.research.tiny {
+	padding: 5px;
+}
+
+.research.tiny .resleft {
+	width: 27px;
+	float: left;
+}
+
+.research.tiny .resleft img {
+	width: 20px;
+	height: 20px;
 }
 
 .pubdefault {

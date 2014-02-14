@@ -80,7 +80,9 @@ function validate ($type, &$v) {
 	} case 'date': {
 		$val = date($format, strtotime($val));
 		break;
-	}
+	} default:
+		$val = false;
+		break;
 	} //switch
 
 	if (false === $val) {
@@ -116,6 +118,9 @@ function make_thumb($src, $dest, $desired_width) {
 //-----------------------------------------------------------------------------
 
 function save_file ($ct, $ct_id, $file, $type) {
+	if (empty($file['name']))
+		return;
+
 	global $g;
 	$db = $g['content'][$type];
 	$ext = end(explode('.', $file['name']));
@@ -247,7 +252,8 @@ else if (checkparams([
 				$g['error']->push("$ct updated successfully.");
 		}
 
-		save_file($ct, $_GET['id'], $_FILES['image'], 'image');
+		if (!empty($_FILES['image']['name']))
+			save_file($ct, $_GET['id'], $_FILES['image'], 'image');
 
 		$g['smarty']->assign($ct, $content);
 		$g['smarty']->assign("refrences", get_refrences($ct, $_GET['id']));

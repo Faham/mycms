@@ -7,7 +7,7 @@
 
 
 .TTWForm{
- 	width: 500px;
+ 	width: 95%;
 }
 
 
@@ -92,14 +92,14 @@
 .TTWForm select {
     padding: 6px 6px;
     overflow: hidden;
-    width: 60%;
+    width: 200px;
     border: 1px solid #d9d9d9;
     color: #999999;
 }
 
 .TTWForm textarea {
     overflow: hidden;
-    width: 60%;
+    width: 58%;
     border: 1px solid #d9d9d9;
 }
 
@@ -108,7 +108,7 @@
     text-align: left;
     font: 14px/24px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
     float: left;
-    width: 40%;
+    width: 150px;
 }
 
 .TTWForm .submit input {
@@ -330,10 +330,11 @@ a.caldisabled {
     height: 16px;
     font: 11px/16px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
     color: #ff0033;
-    padding: 1px 5px 1px 5px;
     z-index: 999;
     position:relative;
-    top:-1px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
 }
 
 

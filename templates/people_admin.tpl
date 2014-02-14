@@ -155,40 +155,49 @@
 			<label for="people_bio">
 				Bio
 			</label>
-			<textarea rows="5" cols="20" name="people_bio" id="people_bio">{if isset($people)}{$people->people_bio}{/if}</textarea>
-		</div>
-
-		<div id="image-container" class="field f_100">
-			<label for="image">
-				Images<span class="smalltext">(.jpg, .gif, or .png)</span>
-			</label>
-			<input type="file" name="image" accept="image/*"/>
-			{if isset($refrences)}
-				{for $i=0; $i < $refrences.image.count; $i++}
-					{assign var=img value=$refrences.image.rows[$i]}
-					<img id="image-{$i}" src="{$weburl}files/people/image/thumb/{$img->image_filename}"/>
-				{/for}
-			{/if}
-		</div>
-
-		<div id="research-container" class="field f_100">
-			<label for="research">
-				Research
-			</label>
-			<input type="text" name="research" />
-		</div>
-
-		<div id="publication-container" class="field f_100">
-			<label for="publication">
-				Publication
-			</label>
-			<input type="text" name="publication" />
+			<textarea name="people_bio" id="people_bio">{if isset($people)}{$people->people_bio}{/if}</textarea>
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
 			<input type="submit" value="Submit">
 		</div>
 
+		{if isset($people)}
+		<hr/>
+
+		<div id="image-container" class="field f_100">
+			<label for="image">
+				Images<span class="smalltext">(.jpg, .gif, or .png)</span>
+			</label>
+			<input type="file" name="image" accept="image/*"/>
+			<div class="image-list">
+			{if isset($refrences)}
+				{for $i=0; $i < $refrences.image.count; $i++}
+					{assign var=img value=$refrences.image.rows[$i]}
+					<img id="image-{$i}" src="{$weburl}files/people/image/thumb/{$img->image_filename}"/>
+				{/for}
+			{/if}
+			</div>
+		</div>
+
+		<div id="research-container" class="field f_100">
+			<label for="research">
+				Research
+			</label>
+			<input class="refrence" autocomplete=off type="text" name="research" />
+			<div class="tiny-list">
+			</div>
+		</div>
+
+		<div id="publication-container" class="field f_100">
+			<label for="publication">
+				Publication
+			</label>
+			<input class="refrence" autocomplete=off type="text" name="publication" />
+			<div class="tiny-list">
+			</div>
+		</div>
+		{/if}
 	</form>
 </div>
 

@@ -36,3 +36,4 @@
 @define('L_UNDERGRADUATE', 'Undergraduate');
 @define('L_GRADUATE', 'Graduate');
 @define('L_ADD_A_PERSON', 'Add a Person');
+@define('L_IMAGES', 'Images');

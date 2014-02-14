@@ -263,7 +263,7 @@ div.radio input {
 /* Uploader */
 
 div.uploader {
-    width: 59%;
+    width: 270px;
     float: left;
     overflow: hidden;
     padding: 0 !important;
@@ -328,7 +328,7 @@ div.checker input, div.radio input {
 }
 
 div.selector {
-    width: 59%;
+    width: 208px;
     font: 14px/20px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
     padding: 0px;
     color: #999999;
@@ -351,7 +351,7 @@ div.selector {
 }
 
 input {
-    width: 60%;
+    width: 200px;
     font: 14px/20px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
     padding: 3px 4px;
     color: #999999;
@@ -396,4 +396,17 @@ textarea {
     *top:6px;
     *position:relative;
     *width:18px;
+}
+
+.suggest {
+   position: absolute;
+   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 6px;
+   z-index: 99;
+   background-color: white;
+   border: 1px solid #E7E7E7;
+}
+
+.tiny-list, .image-list {
+    float: right;
+    width: 38%;
 }

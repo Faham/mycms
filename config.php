@@ -73,6 +73,7 @@ $g['smarty'] = new mysmarty();
 
 $g['urls'] = array (
     '^admin(/.*|)' => 'admin',
+    '^ajax(/.*|)'  => 'ajax',
     '^.*'          => 'pages');
 
 mycms\system::interpret_params();
