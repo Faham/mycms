@@ -107,6 +107,61 @@ $(document).ready(function()
 
 //-----------------------------------------------------------------------------
 
+    function selectSuggest(sug, id) {
+        var s = sug.data('selected');
+        var child_rows = sug.children().eq(0).children(s);
+        child_rows.eq(s).removeClass('focused');
+
+        sug.data('selected', id);
+        child_rows.eq(id).addClass('focused');
+
+        input = sug.parent().children('.refrence');
+        input.data('selected', child_rows.eq(id));
+    };
+
+//-----------------------------------------------------------------------------
+
+    function insertSuggest(sug) {
+        input = sug.parent().children('.refrence');
+        sug.remove();
+        s = input.data('selected');
+        input.removeData('selected');
+        input.attr('value', '');
+
+        // if not inserted before insert to db and append to reference-list
+        var frm = $(".TTWForm-container");
+        var v = {
+            'referer_type'  : frm.data('type'),
+            'referer_id'    : frm.data('id'),
+            'referred_type' : s.data('type'),
+            'referred_id'   : s.data('id'),
+        };
+        $.post(weburl + 'ajax/refer', 'params=' + JSON.stringify(v), function(data){
+            data = $.parseJSON(data);
+            if('success' == data.status){
+                // get referred teaser display and add to the teaser-list
+                var d = {
+                    'content' : input.attr('name'),
+                    'id'      : v.referred_id,
+                    'display' : 'teaser',
+                };
+                v.list    = false;
+
+                $.post(weburl + 'ajax/get', 'params=' + JSON.stringify(d), function(data){
+                    data = $.parseJSON(data);
+                    if('success' == data.status && 0 < data.count){
+                        var r = $(data.html);
+                        var tl = input.parent().children('.' + v.referred_type + '-refrence-list');
+                        tl.append(r);
+                        r.trigger("create");
+                    }
+                });
+            }
+        });
+    }
+
+//-----------------------------------------------------------------------------
+
 	var keypress_timeout = null
     var suggest_max = 5;
 	$(".TTWForm .refrence").keypress(function(e) {
@@ -116,40 +171,7 @@ $(document).ready(function()
 
         if (13 == e.keyCode) { // enter
             e.preventDefault();
-            input.parent().children('.suggest').remove();
-            s = input.data('selected');
-            s.css('background', 'white');
-            input.removeData('selected');
-            input.attr('value', '');
-
-            // if not inserted before insert to db and append to reference-list
-            var v = new Object();
-            var frm = $(".TTWForm-container");
-            v.referer_type  = frm.data('type');
-            v.referer_id    = frm.data('id');
-            v.referred_type = s.data('type');
-            v.referred_id   = s.data('id');
-            $.post(weburl + 'ajax/refer', 'params=' + JSON.stringify(v), function(data){
-                data = $.parseJSON(data);
-                if('success' == data.status){
-                    // get referred teaser display and add to the teaser-list
-                    var d     = new Object();
-                    d.content = input.attr('name');
-                    d.id      = v.referred_id;
-                    d.display = 'teaser';
-                    v.list    = false;
-
-                    $.post(weburl + 'ajax/get', 'params=' + JSON.stringify(d), function(data){
-                        data = $.parseJSON(data);
-                        if('success' == data.status && 0 < data.count){
-                            var r = $(data.html);
-                            var tl = input.parent().children('.' + v.referred_type + '-teaser-list');
-                            tl.append(r);
-                            r.trigger("create");
-                        }
-                    });
-                }
-            });
+            insertSuggest(input.parent().children('.suggest'));
             return;
         }
 
@@ -176,10 +198,25 @@ $(document).ready(function()
                     d.css('top', input.outerHeight() + input.position().top + 'px');
                     d.css('width', input.outerWidth() + 'px');
                     d.data('selected', -1);
+
+                    d.children().eq(0).children()
+                        .mouseover(function (e){
+                            selectSuggest(d, $(e.srcElement).closest('.tiny').index());
+                        }).mousedown(function (e){
+                            if (1 == e.which)
+                                insertSuggest(d);
+                        });
 				}
 			});
 		}, 500);
 	});
+
+    $(".TTWForm .refrence").focusout(function() {
+        //var input = $(this);
+        //if (input.data('suggest')) {
+        //    input.parent().children('.suggest').remove();
+        //};
+    });
 
     $(".TTWForm .refrence").keyup(function(e) {
         if (8 == e.keyCode ||  // backspace
@@ -195,10 +232,9 @@ $(document).ready(function()
         if (undefined != input.data('suggest') &&
             true      == input.data('suggest') &&
             (38 == e.keyCode || 40 == e.keyCode)) {
+
             var suggest = input.parent().children('.suggest');
             var s = suggest.data('selected');
-            var child_rows = suggest.children().eq(0).children(s);
-            child_rows.eq(s).css('background', 'white');
             if (38 == e.keyCode) { // move up
                 if (0 <= s)
                     --s;
@@ -206,9 +242,7 @@ $(document).ready(function()
                 ++s;
             }
             s = (s + suggest_max) % suggest_max;
-            suggest.data('selected', s);
-            input.data('selected', child_rows.eq(s));
-            child_rows.eq(s).css('background', 'rgb(209, 229, 223)');
+            selectSuggest(suggest, s);
         }
     });
 

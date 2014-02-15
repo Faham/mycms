@@ -176,15 +176,12 @@
 		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
 			<label for="image">
-				Upload image<span class="smalltext">(.jpg, .gif, or .png)</span>
+				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
 			<input type="file" name="image" accept="image/*"/>
 			<div class="image-list">
 			{if isset($refrences)}
-				{for $i=0; $i < $refrences.image.count; $i++}
-					{assign var=img value=$refrences.image.rows[$i]}
-					<img id="image-{$i}" src="{$weburl}files/people/image/thumb/{$img.image_filename}"/>
-				{/for}
+				{include "templates/snippets/image_thumb_list.tpl" image=$refrences.image content='people'}
 			{/if}
 			</div>
 		</div>
@@ -192,9 +189,9 @@
 		{include "templates/snippets/section_title.tpl" title={t s='Research' m=0}}
 		<div id="research-container" class="field f_100">
 			<label for="research">
-				Refrence research
+				Add research
 			</label>
-			<input class="refrence" autocomplete=off type="text" name="research" />
+			<input class="refrence" autocomplete=off type="text" name="research" placeholder="search"/>
 			{if isset($refrences)}
 				{include "templates/snippets/research_teaser_list.tpl" research=$refrences.research}
 			{/if}
@@ -203,9 +200,9 @@
 		{include "templates/snippets/section_title.tpl" title={t s='Publication' m=0}}
 		<div id="publication-container" class="field f_100">
 			<label for="publication">
-				Refrence publication
+				Add publication
 			</label>
-			<input class="refrence" autocomplete=off type="text" name="publication" />
+			<input class="refrence" autocomplete=off type="text" name="publication" placeholder="search"/>
 			{if isset($refrences)}
 				{include "templates/snippets/publication_teaser_list.tpl" publication=$refrences.publication}
 			{/if}

@@ -126,7 +126,7 @@ case 'publications': {
 		if (!$pubs['error'] && $pubs['count'] > 0)
 			$g['smarty']->assign('publications', $pubs);
 
-		$g['template'] = 'publications';
+		$g['template'] = 'publication';
 	}
 } break;
 

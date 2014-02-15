@@ -18,9 +18,9 @@ $err = false;
 
 // Set main menu options
 $menu = [
-	['name' => 'People',       'url' => 'admin/people',       ],
-	['name' => 'Research',     'url' => 'admin/research',     ],
-	['name' => 'Publications', 'url' => 'admin/publication', ]
+	['name' => 'people',       'url' => 'admin/people',       ],
+	['name' => 'research',     'url' => 'admin/research',     ],
+	['name' => 'publication', 'url' => 'admin/publication', ]
 ];
 $g['smarty']->assign('menu', $menu);
 
@@ -190,6 +190,8 @@ else if (checkparams([
 	$r = $content->get($_GET['id']);
 	if ($r == 1) {
 		$content->delete();
+		// todo: remove all related images videos and docs from filesystem
+		// other referenced types would be automatically dereferenced
 		$g['error']->push("1 $ct removed successfully");
 	} else if ($r == 0) {
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');

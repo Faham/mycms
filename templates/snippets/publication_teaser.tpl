@@ -1,7 +1,7 @@
 
 {*---------------------------------------------------------------------------*}
 
-<div class="publication-teaser" data-type='publication' data-id={$publication.publication_id}>
+<div class="publication-teaser teaser" data-type='publication' data-id={$publication.publication_id}>
 	<div class="publeft">
 		{if isset($publication.doc_filename)}
 			<a href='{gl url="files/publication/doc/{$publication.doc_filename}"}'>

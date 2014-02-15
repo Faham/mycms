@@ -44,7 +44,7 @@ div.selector, div.selector.focus, div.selector.hover {
 div.selector span {
     height: 28px;
     line-height: 29px;
-    padding: 3px 0 3px 6px;
+    padding: 3px 0 3px 3px;
 }
 
 div.selector select {
@@ -110,7 +110,6 @@ div.uploader span.action {
 
 div.uploader span.filename {
     height: 33px; /* change this line to adjust positioning of filename area */
-    margin: 2px 0px 2px 2px;
     line-height: 32px;
 }
 
@@ -134,7 +133,7 @@ div.selector span {
 
 div.selector span {
     color: #666;
-    width: 100%;
+    width: 82%;
     text-shadow: 0 1px 0 #fff;
 }
 
@@ -166,8 +165,8 @@ div.uploader span.action {
 }
 
 div.uploader span.filename {
-    color: #777;
-    width: 100%;
+    color: #999999;
+    width: 70%;
     border-right: solid 1px #bbb;
     font-size: 90%;
 }
@@ -211,6 +210,7 @@ div.selector span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: #999999;
 }
 
 div.selector select {
@@ -290,7 +290,7 @@ div.uploader span.action {
 }
 
 div.uploader span.filename {
-    padding: 0px 10px;
+    padding: 0px 0px 0px 5px;
     float: left;
     display: block;
     overflow: hidden;
@@ -409,4 +409,8 @@ textarea {
 .tiny-list, .image-list {
     float: right;
     width: 38%;
+}
+
+.smalltext {
+    font-size: smaller;
 }

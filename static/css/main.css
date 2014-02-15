@@ -200,7 +200,7 @@ input, textarea, select {
 
 .affiliation {
 	color: rgb(140, 140, 140);
-	font-size: 11px;
+	font-size: 10px;
 }
 
 .strike {
@@ -287,6 +287,10 @@ input, textarea, select {
 	width: 70px;
 }
 
+.left {
+	float: left;
+}
+
 .prompt {
 	vertical-align: top;
 	width: 110px;
@@ -351,8 +355,38 @@ input, textarea, select {
 	border: 0;
 }
 
-.people-teaser {
+.research-teaser-list, .people-refrence-list {
+	padding: 10px;
+}
 
+.people-refrence-list {
+
+}
+
+.people-teaser {
+	width: 30%;
+}
+
+.people-teaser {
+	padding: 5px;
+}
+
+.people-tiny .textside {
+	padding-left: 3px;
+}
+
+.people-tiny {
+	overflow: hidden;
+	padding: 0px 3px 3px 3px;
+}
+
+img.tiny {
+	width: 20px;
+	height: 20px;
+}
+
+
+.people-tiny-list {
 }
 
 .people-default {
@@ -360,7 +394,6 @@ input, textarea, select {
 }
 
 .people-teaser-list {
-
 }
 
 .research-default {
@@ -371,12 +404,26 @@ input, textarea, select {
 }
 
 .research-teaser {
-	margin-bottom: 15px;
+	padding: 5px;
 }
 
 .research-teaser .left {
-	width: 53px;
+	width: 45px;
 	float: left;
+}
+
+.research-teaser .textside {
+	width: 75%;
+	padding: 3px 5px;
+}
+
+.research-teaser .title, .people-teaser .title {
+	font-size: 12px;
+	color: rgb(0, 100, 0);
+}
+
+.research-teaser .summary {
+	font-size: 10px;
 }
 
 .research-tiny {
@@ -427,5 +474,27 @@ input, textarea, select {
 }
 
 .textside {
-	padding-top: 4px !important;
+	font-size: 12px;
+	padding: 4px 5px;
+	display: inline-block;
+	width: 73%;
+}
+
+.tiny {
+	overflow: hidden;
+	color: black;
+	display: block;
+}
+
+.tiny .textside {
+	padding: 2px 5px;
+}
+.teaser {
+	overflow: hidden;
+	display: inline-block;
+	color: black;
+}
+
+.tiny.focused, .tiny:hover, .teaser.focused, .teaser:hover {
+	background-color: rgb(247, 247, 247);
 }

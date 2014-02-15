@@ -30,7 +30,7 @@
 	{if isset($research.people) and $research.people.count > 0}
 		{include "templates/snippets/section_title.tpl" title={t s=Participants m=0}}
 		<div class="persontable">
-			{include "templates/snippets/people_list.tpl" people=$research.people group=false}
+			{include "templates/snippets/people_teaser_list.tpl" people=$research.people group=false}
 		</div>
 	{/if}
 </div>

@@ -34,7 +34,7 @@
 		</div>
 
 
-		<div id="field11-container" class="field f_100">
+		<div id="research_status-container" class="field f_100">
 			<label for="field11">
 				Status
 			</label>
@@ -76,18 +76,40 @@
 					{t s='unknown' m=0}
 				</option>
 			</select>
-
 		</div>
 
 		<div id="research_priority-container" class="field f_100">
-			<label for="research_priority">
-				Research priority
+			<label for="field11">
+				Priority
 			</label>
-			<input type="number" name="research_priority" id="research_priority" value="1" min="1" max="5" required
-				{if isset($research)}
-				value="{$research->research_priority}"
+
+			<select name="research_priority" id="research_priority" required>
+				<option id="research_priority-1" value="1"
+				{if isset($people) and "1" == $people->research_priority}
+					selected
 				{/if}
-			>
+				>1</option>
+				<option id="research_priority-2" value="2"
+				{if isset($people) and "2" == $people->research_priority}
+					selected
+				{/if}
+				>2</option>
+				<option id="research_priority-3" value="3"
+				{if isset($people) and "3" == $people->research_priority}
+					selected
+				{/if}
+				>3</option>
+				<option id="research_priority-4" value="4"
+				{if isset($people) and "4" == $people->research_priority}
+					selected
+				{/if}
+				>4</option>
+				<option id="research_priority-5" value="5"
+				{if isset($people) and "5" == $people->research_priority}
+					selected
+				{/if}
+				>5</option>
+			</select>
 		</div>
 
 		<div id="research_summary-container" class="field f_100">
@@ -118,42 +140,42 @@
 		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
 			<label for="image">
-				Upload image<span class="smalltext">(.jpg, .gif, or .png)</span>
+				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
 			<input type="file" name="image" accept="image/*"/>
 			{if isset($refrences)}
-				{include "templates/snippets/image_thumb_list.tpl" research=$refrences.image}
+				{include "templates/snippets/image_thumb_list.tpl" research=$refrences.image content='research'}
 			{/if}
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Videos' m=0}}
 		<div id="video-container" class="field f_100">
 			<label for="video">
-				Upload video<span class="smalltext">(.mp4, .webm, .ogg)</span>
+				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
 			<input type="file" name="video" accept="video/*"/>
 			{if isset($refrences)}
-				{include "templates/snippets/video_list.tpl" research=$refrences.video}
+				{include "templates/snippets/video_list.tpl" research=$refrences.video content='research'}
 			{/if}
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}
 		<div id="people-container" class="field f_100">
 			<label for="people">
-				Reference people
+				Add people
 			</label>
-			<input class="refrence" autocomplete=off type="text" name="people" />
+			<input class="refrence" autocomplete=off type="text" name="people" placeholder="search"/>
 			{if isset($refrences)}
-				{include "templates/snippets/people_teaser_list.tpl" people=$refrences.people group=false}
+				{include "templates/snippets/people_refrence_list.tpl" people=$refrences.people}
 			{/if}
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Publication' m=0}}
 		<div id="publication-container" class="field f_100">
 			<label for="publication">
-				Reference publication
+				Add publication
 			</label>
-			<input class="refrence" autocomplete=off type="text" name="publication" />
+			<input class="refrence" autocomplete=off type="text" name="publication" placeholder="search"/>
 			{if isset($refrences)}
 				{include "templates/snippets/publication_teaser_list.tpl" publication=$refrences.publication}
 			{/if}
