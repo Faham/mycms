@@ -1,6 +1,7 @@
 
 {*---------------------------------------------------------------------------*}
 
+<div class="people-default" data-type='people' data-id={$people.people_id}>
 {if isset($people)}
 	<h2>{$people.people_firstname} {$people.people_middlename} {$people.people_lastname}
 		<span class="headeraffiliation">{$people.people_affiliation}</span>
@@ -32,5 +33,6 @@
 		{/if}
 	</div>
 {/if}
+</div>
 
 {*---------------------------------------------------------------------------*}

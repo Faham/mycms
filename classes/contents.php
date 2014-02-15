@@ -83,17 +83,17 @@ date:string_format
 
 class people extends content {
 
-	public $__table = 'mycms_people';		// table name
-	public $people_id;					   // int(11)  not_null primary_key unique_key auto_increment
-	public $people_firstname;				// string(50)  not_null
-	public $people_middlename;			   // string(50)
-	public $people_lastname;				 // string(50)  not_null
-	public $people_affiliation;			  // string(100)
-	public $people_email;					// string(50)
-	public $people_bio;					  // string(1000)
-	public $people_group;					// string(21)  not_null enum
-	public $people_start;					// date(10)  binary
-	public $people_end;					  // date(10)  binary
+	public $__table = 'mycms_people';	// table name
+	public $people_id;					// int(11)  not_null primary_key unique_key auto_increment
+	public $people_firstname;			// string(50)  not_null
+	public $people_middlename;			// string(50)
+	public $people_lastname;			// string(50)  not_null
+	public $people_affiliation;			// string(100)
+	public $people_email;				// string(50)
+	public $people_bio;					// string(1000)
+	public $people_group;				// string(21)  not_null enum
+	public $people_start;				// date(10)  binary
+	public $people_end;					// date(10)  binary
 
 	public $field_type = [
 		'people_id'		     => 'int:0,',
@@ -110,8 +110,6 @@ class people extends content {
 
 	public $references = [
 		'image',
-		'video',
-		'doc',
 		'research',
 		'publication'
 	];
@@ -137,15 +135,29 @@ $g['content']['people'] = new people();
 
 class research extends content {
 
-	public $__table = 'mycms_research';	  // table name
-	public $research_id;					 // int(11)  not_null primary_key unique_key auto_increment
-	public $research_title;				  // string(150)  not_null
-	public $research_summary;				// string(300)
-	public $research_description;			// string(1500)
-	public $research_status;				 // string(7)  not_null enum
-	public $research_priority;			   // string(1)  not_null enum
+	public $__table = 'mycms_research';	 // table name
+	public $research_id;				 // int(11)  not_null primary_key unique_key auto_increment
+	public $research_title;				 // string(150)  not_null
+	public $research_summary;			 // string(300)
+	public $research_description;		 // string(1500)
+	public $research_status;			 // string(7)  not_null enum
+	public $research_priority;			 // string(1)  not_null enum
 
-	public $title_format = 'research_title';
+    public $field_type = [
+        'research_id'          => 'int:0,',
+        'research_title'       => 'string',
+        'research_summary'     => 'string',
+        'research_description' => 'string',
+        'research_status'      => 'enum:active,future,onhold,past,unknown',
+        'research_priority'    => 'enum:1,2,3,4,5',
+    ];
+
+    public $references = [
+        'image',
+        'video',
+        'people',
+        'publication'
+    ];
 
 	public $displays = [
 		'default' => [
@@ -159,6 +171,8 @@ class research extends content {
 			'research_title',
 			'image' => 'max']
 	];
+
+    public $title_format = 'research_title';
 
 	public function __construct() {
 		parent::__construct('research');

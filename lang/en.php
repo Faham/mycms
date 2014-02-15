@@ -35,5 +35,16 @@
 @define('L_VIEW_ALL', 'View All');
 @define('L_UNDERGRADUATE', 'Undergraduate');
 @define('L_GRADUATE', 'Graduate');
-@define('L_ADD_A_PERSON', 'Add a Person');
+@define('L_ADD_PEOPLE', 'Add people');
+@define('L_ADD_RESEARCH', 'Add research');
+@define('L_ADD_PUBLICATION', 'Add publication');
 @define('L_IMAGES', 'Images');
+@define('L_VIDEOS', 'Videos');
+@define('L_ACTIVE', 'Active');
+@define('L_FUTURE', 'Future');
+@define('L_ONHOLD', 'Onhold');
+@define('L_PAST', 'Past');
+@define('L_UNKNOWN', 'Unknown');
+@define('L_EDIT_PEOPLE', 'Edit people');
+@define('L_EDIT_RESEARCH', 'Edit research');
+@define('L_EDIT_RESEARCH', 'Edit publication');

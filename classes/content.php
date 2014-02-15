@@ -32,6 +32,24 @@ abstract class content extends \DB_DataObject {
 
 //-----------------------------------------------------------------------------
 
+	public function get_refrences($id) {
+		global $g;
+		$ct = $this->m_type;
+		$content = $g['content'][$ct];
+		$res = [];
+		$db = $g['db'];
+		foreach ($content->references as $ref) {
+			$res[$ref] = $db->query(
+				"SELECT * FROM !!!{$ref} as $ref
+				LEFT JOIN !!!{$ct}_{$ref} as {$ct}_$ref
+				ON ($ref.{$ref}_id = {$ct}_$ref.{$ref}_id)
+				WHERE {$ct}_{$ref}.{$ct}_id = $id");
+		}
+		return $res;
+	}
+
+//-----------------------------------------------------------------------------
+
 	public function getall() {
 		global $g;
 

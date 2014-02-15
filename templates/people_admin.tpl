@@ -1,9 +1,18 @@
 
 {*---------------------------------------------------------------------------*}
 
-{include "templates/snippets/section_title.tpl" title={t s='Add a Person' m=0}}
+{if isset($people)}
+{include "templates/snippets/section_title.tpl" title={t s='Edit people' m=0}}
+{else}
+{include "templates/snippets/section_title.tpl" title={t s='Add people' m=0}}
+{/if}
 
-<div class="TTWForm-container">
+<div class="TTWForm-container"
+			{if isset($people)}
+			data-type='people'
+			data-id='{$people->people_id}'
+			{/if}
+>
 
 	<form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
 			{if isset($people)}
@@ -163,39 +172,43 @@
 		</div>
 
 		{if isset($people)}
-		<hr/>
 
+		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
 			<label for="image">
-				Images<span class="smalltext">(.jpg, .gif, or .png)</span>
+				Upload image<span class="smalltext">(.jpg, .gif, or .png)</span>
 			</label>
 			<input type="file" name="image" accept="image/*"/>
 			<div class="image-list">
 			{if isset($refrences)}
 				{for $i=0; $i < $refrences.image.count; $i++}
 					{assign var=img value=$refrences.image.rows[$i]}
-					<img id="image-{$i}" src="{$weburl}files/people/image/thumb/{$img->image_filename}"/>
+					<img id="image-{$i}" src="{$weburl}files/people/image/thumb/{$img.image_filename}"/>
 				{/for}
 			{/if}
 			</div>
 		</div>
 
+		{include "templates/snippets/section_title.tpl" title={t s='Research' m=0}}
 		<div id="research-container" class="field f_100">
 			<label for="research">
-				Research
+				Refrence research
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="research" />
-			<div class="tiny-list">
-			</div>
+			{if isset($refrences)}
+				{include "templates/snippets/research_teaser_list.tpl" research=$refrences.research}
+			{/if}
 		</div>
 
+		{include "templates/snippets/section_title.tpl" title={t s='Publication' m=0}}
 		<div id="publication-container" class="field f_100">
 			<label for="publication">
-				Publication
+				Refrence publication
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="publication" />
-			<div class="tiny-list">
-			</div>
+			{if isset($refrences)}
+				{include "templates/snippets/publication_teaser_list.tpl" publication=$refrences.publication}
+			{/if}
 		</div>
 		{/if}
 	</form>

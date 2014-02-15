@@ -1,7 +1,7 @@
 
 {*---------------------------------------------------------------------------*}
 
-<div class="resdefault">
+<div class="research-default" data-type='research' data-id={$research.research_id}>
 	<h2>
 		<span style="color: gray">{t s=Project m=0}:</span>
 		{$research.research_title}

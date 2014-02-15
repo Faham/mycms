@@ -163,30 +163,6 @@ function save_file ($ct, $ct_id, $file, $type) {
 
 //-----------------------------------------------------------------------------
 
-function get_refrences($ct, $id) {
-	global $g;
-	$content = $g['content'][$ct];
-	$dbn = $content->database();
-	$res = [];
-	foreach ($content->references as $ref) {
-		$ref_db = $g['content'][$ref];
-		$ref_db->query(
-			"SELECT * FROM {$dbn}_{$ref} as $ref
-			LEFT JOIN {$dbn}_{$ct}_{$ref} as {$ct}_$ref
-			ON ($ref.{$ref}_id = {$ct}_$ref.{$ref}_id)
-			WHERE {$ct}_{$ref}.{$ct}_id = $id");
-
-		$ref_objs = [];
-		while ($ref_db->fetch())
-			$ref_objs[] = clone($ref_db);
-		$res[$ref] = ['rows' => $ref_objs, 'count' => count($ref_objs)];
-	}
-
-	return $res;
-}
-
-//-----------------------------------------------------------------------------
-
 $content = 'unknown';
 if (array_key_exists($ct, $g['content'])) {
 	$content = $g['content'][$ct];
@@ -256,7 +232,7 @@ else if (checkparams([
 			save_file($ct, $_GET['id'], $_FILES['image'], 'image');
 
 		$g['smarty']->assign($ct, $content);
-		$g['smarty']->assign("refrences", get_refrences($ct, $_GET['id']));
+		$g['smarty']->assign("refrences", $content->get_refrences($_GET['id']));
 	} else if ($r == 0) {
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
 	}
@@ -271,7 +247,7 @@ else if (checkparams([
 	$r = $content->get($id);
 	if ($r == 1) {
 		$g['smarty']->assign($ct, $content);
-		$g['smarty']->assign("refrences", get_refrences($ct, $id));
+		$g['smarty']->assign("refrences", $content->get_refrences($id));
 	} else if ($r == 0) {
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
 	}

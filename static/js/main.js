@@ -108,6 +108,7 @@ $(document).ready(function()
 //-----------------------------------------------------------------------------
 
 	var keypress_timeout = null
+    var suggest_max = 5;
 	$(".TTWForm .refrence").keypress(function(e) {
 		var input = $(this);
 		if (null != keypress_timeout)
@@ -120,17 +121,45 @@ $(document).ready(function()
             s.css('background', 'white');
             input.removeData('selected');
             input.attr('value', '');
-            // todo: if not inserted before insert to db and append to tiny-list
-            input.parent().children('.tiny-list').append(s);
+
+            // if not inserted before insert to db and append to reference-list
+            var v = new Object();
+            var frm = $(".TTWForm-container");
+            v.referer_type  = frm.data('type');
+            v.referer_id    = frm.data('id');
+            v.referred_type = s.data('type');
+            v.referred_id   = s.data('id');
+            $.post(weburl + 'ajax/refer', 'params=' + JSON.stringify(v), function(data){
+                data = $.parseJSON(data);
+                if('success' == data.status){
+                    // get referred teaser display and add to the teaser-list
+                    var d     = new Object();
+                    d.content = input.attr('name');
+                    d.id      = v.referred_id;
+                    d.display = 'teaser';
+                    v.list    = false;
+
+                    $.post(weburl + 'ajax/get', 'params=' + JSON.stringify(d), function(data){
+                        data = $.parseJSON(data);
+                        if('success' == data.status && 0 < data.count){
+                            var r = $(data.html);
+                            var tl = input.parent().children('.' + v.referred_type + '-teaser-list');
+                            tl.append(r);
+                            r.trigger("create");
+                        }
+                    });
+                }
+            });
             return;
         }
 
+        // on timeout show suggest list
 		keypress_timeout = setTimeout(function() {
 			var v = new Object();
-
 			v.content = input.attr('name');
 			v.name    = input.attr('value');
             v.display = 'tiny';
+            v.list    = true;
 
 			$.post(weburl + 'ajax/get', 'params=' + JSON.stringify(v), function(data){
                 input.parent().children('.suggest').remove();
@@ -138,6 +167,7 @@ $(document).ready(function()
 
 				data = $.parseJSON(data);
 				if('success' == data.status && 0 < data.count){
+                    suggest_max = data.count
                     var d = $('<div class="suggest">' + data.html + '</div>');
                     input.data('suggest', true);
 					input.parent().append(d);
@@ -162,22 +192,23 @@ $(document).ready(function()
 
     $(".TTWForm .refrence").keydown(function(e) {
         var input = $(this);
-        var max = 5;
         if (undefined != input.data('suggest') &&
             true      == input.data('suggest') &&
             (38 == e.keyCode || 40 == e.keyCode)) {
             var suggest = input.parent().children('.suggest');
             var s = suggest.data('selected');
-            suggest.children(s).css('background', 'white');
+            var child_rows = suggest.children().eq(0).children(s);
+            child_rows.eq(s).css('background', 'white');
             if (38 == e.keyCode) { // move up
-                ++s;
+                if (0 <= s)
+                    --s;
             } else if (40 == e.keyCode) { // move down
-                --s;
+                ++s;
             }
-            s = (s + max) % max;
+            s = (s + suggest_max) % suggest_max;
             suggest.data('selected', s);
-            input.data('selected', suggest.children(s));
-            suggest.children(s).css('background', 'rgb(209, 229, 223)');
+            input.data('selected', child_rows.eq(s));
+            child_rows.eq(s).css('background', 'rgb(209, 229, 223)');
         }
     });
 

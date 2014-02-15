@@ -342,7 +342,7 @@ input, textarea, select {
 	font-weight: bold;
 }
 
-.pubteaser {
+.publication-teaser {
 	margin: 10px 0 20px;
 }
 
@@ -351,41 +351,65 @@ input, textarea, select {
 	border: 0;
 }
 
-.resdefault {
+.people-teaser {
+
 }
 
-.resteaser {
+.people-default {
+
+}
+
+.people-teaser-list {
+
+}
+
+.research-default {
+}
+
+.research-teaser-list {
+
+}
+
+.research-teaser {
 	margin-bottom: 15px;
 }
 
-.resteaser .resleft {
+.research-teaser .left {
 	width: 53px;
 	float: left;
 }
 
-.research.tiny {
+.research-tiny {
 	padding: 5px;
 }
 
-.research.tiny .resleft {
+.research-tiny .left {
 	width: 27px;
 	float: left;
 }
 
-.research.tiny .resleft img {
+.research-tiny .left img {
 	width: 20px;
 	height: 20px;
 }
 
-.pubdefault {
-	margin-bottom: 12;
+.research-tiny-list {
+
 }
 
 .download {
 	margin: 6px 0 9px;
 }
 
-.pubteaser {
+.publication-default {
+	margin-bottom: 12;
+}
+
+.publication-teaser-list {
+
+}
+
+.publication-teaser {
 	margin-bottom: 12;
 }
 

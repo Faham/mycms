@@ -42,17 +42,24 @@ class db {
         global $g;
 
         $q = str_replace('!!!', $this->name . '_', $q);
-        $r = ['error' => false, 'rows' => [], 'count' => 0];
+        $r = ['error' => false, 'rows' => [], 'count' => 0, 'message' => ''];
 
         if ($g['runmode'] ==  'debug') {
             $g['error']->push($q);
         }
 
         $res =& $this->_db->query($q);
-        while ($res->fetchInto($row)) {
-            $r['rows'][] = $row;
+        if (\PEAR::isError($res)) {
+            $r['error'] = true;
+            $r['message'] = "{$res->message} ({$res->userinfo})";
+        } else if (gettype($res) == 'integer' && DB_OK == $res) {
+            // return simple empty result
+        } else if (gettype($res) == 'object') {
+            while ($res->fetchInto($row)) {
+                $r['rows'][] = $row;
+            }
+            $r['count'] = count($r['rows']);
         }
-        $r['count'] = count($r['rows']);
         return $r;
     }
 

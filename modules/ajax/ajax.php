@@ -17,33 +17,65 @@ if(isset($_POST['params']))
 	$params = json_decode($_POST['params']);
 
 $res = [
-	'status' => 'success',
+	'status' => 'success', // success, error
+	'message' => ''
 ];
 
 //-----------------------------------------------------------------------------
 
 if ('get' == $op && $params) {
-	$db = $g['content'][$params->content];
-
-	$fields = explode('\s', $db->title_format);
+	$ct = $params->content;
+	$db = $g['content'][$ct];
 	$w = '';
-	foreach ($fields as $f) {
-		if (!empty($w))
-			$w .= ' OR ';
-		$w .= " $f LIKE '%" . $db->escape($params->name) . "%' ";
+
+	if (isset($params->name)) {
+		$delim = ' ';
+		$fields = [];
+
+		if (strpos($db->title_format, $delim) !== FALSE)
+			$fields = explode($delim, $db->title_format);
+		else
+			$fields[] = $db->title_format;
+
+		foreach ($fields as $f) {
+			if (!empty($w))
+				$w .= ' OR ';
+			$w .= " $f LIKE '%" . $db->escape($params->name) . "%' ";
+		}
+
+	} else if (isset($params->id)) {
+		$w .= " {$ct}_id = {$params->id} ";
 	}
 
+
 	$r = $db->view($display = 'teaser', $w, '', $limit = '0,5', $get_referenced_data = true);
-	$g['smarty']->assign('research', $r);
 	$res['count'] = $r['count'];
-	$res['html'] = $g['smarty']->fetch('templates/snippets/research_tiny_list.tpl');
+	$res['html'] = '';
+
+	if (isset($params->list) && $params->list) {
+		$g['smarty']->assign($ct, $r);
+		$res['html'] = $g['smarty']->fetch("templates/snippets/{$ct}_{$params->display}_list.tpl");
+	} else if ($res['count'] > 0) {
+		$g['smarty']->assign($ct, $r['rows'][0]);
+		$res['html'] = $g['smarty']->fetch("templates/snippets/{$ct}_{$params->display}.tpl");
+	}
+
 }
 
 //-----------------------------------------------------------------------------
 
-//else if () {
-//
-//}
+else if ('refer'  == $op && $params) {
+	$db = $g['db'];
+	$q = "INSERT INTO !!!{$params->referer_type}_{$params->referred_type}
+		({$params->referer_type}_id, {$params->referred_type}_id )
+		VALUES ({$params->referer_id},  {$params->referred_id})";
+	$r = $db->query($q);
+	if ($r['error']) {
+		// made no change to references
+		$res['status'] = 'error';
+		$res['message'] = $r['message'];
+	}
+}
 
 //-----------------------------------------------------------------------------
 

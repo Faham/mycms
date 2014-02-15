@@ -1,7 +1,7 @@
 
 {*---------------------------------------------------------------------------*}
 
-<div class="people-teaser" data-type='people' data-id={$people.people_id}>
+<div class="people-tiny" data-type='people' data-id={$people.people_id}>
 	<div class="left">
 		{if isset($people.image_filename)}
 			<a href='{gl url="people/{$people.people_id}"}'><img class="thumbnail" src='{gl url="files/people/image/thumb/{$people.image_filename}"}'/></a>
@@ -11,9 +11,6 @@
 	</div>
 	<div class="textside">
 	<a href='{gl url="people/{$people.people_id}"}' class="person">{$people.people_firstname} {$people.people_middlename} {$people.people_lastname}</a>
-	{if isset($people.people_affiliation)}
-		<br/><span class="affiliation">{$people.people_affiliation}</span>
-	{/if}
 	</div>
 </div>
 

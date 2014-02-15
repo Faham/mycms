@@ -1,7 +1,7 @@
 
 {*---------------------------------------------------------------------------*}
 
-<div class="pubdefault">
+<div class="publication-default" data-type='publication' data-id={$publication.publication_id}>
 	<h2>
 		<span style="color: gray">{t s=Publication m=0}:</span>
 		{$publication.publication_title}
