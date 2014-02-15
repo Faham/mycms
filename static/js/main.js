@@ -120,6 +120,7 @@ $(document).ready(function()
             s.css('background', 'white');
             input.removeData('selected');
             input.attr('value', '');
+            // todo: if not inserted before insert to db and append to tiny-list
             input.parent().children('.tiny-list').append(s);
             return;
         }

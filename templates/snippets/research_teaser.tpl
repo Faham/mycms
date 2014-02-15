@@ -4,7 +4,7 @@
 <div class="resteaser">
 	<div class="resleft">
 	{if isset($val.image_filename)}
-		<a href='{gl url="research/{$val.research_id}"}'><img class="thumbnail" src='{gl url="files/research/thumb/{$val.image_filename}"}'></a>
+		<a href='{gl url="research/{$val.research_id}"}'><img class="thumbnail" src='{gl url="files/research/image/thumb/{$val.image_filename}"}'></a>
 	{else}
 		<a href='{gl url="research/{$val.research_id}"}'><img class="thumbnail" src='{gl url="static/images/noimage-thumb.gif"}'/></a>
 	{/if}

@@ -6,7 +6,7 @@
 		{for $i=0; $i<$imglist.count and $i<48 ; $i++}
 			{assign var=itm value=$imglist.rows[$i]}
 			<a href='{gl url="{$itm.type}/{$itm.id}"}' title="{$itm.title}">
-			<img class="thumbnail" src='{gl url="files/{$itm.type}/thumb/{$itm.image}"}'/>
+			<img class="thumbnail" src='{gl url="files/{$itm.type}/image/thumb/{$itm.image}"}'/>
 			</a>
 		{/for}
 	{/if}

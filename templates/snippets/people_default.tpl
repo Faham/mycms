@@ -8,17 +8,17 @@
 
 	<div class="profileleft">
 	{if isset($people.image) and $people.image.count > 0}
-		<img src="{$weburl}files/people/{$people.image.rows[0].image_filename}" class="imagewrap" align="left" />
+		<img src="{$weburl}files/people/image/{$people.image.rows[0].image_filename}" class="imagewrap" align="left" />
 	{/if}
 	</div>
 
 	<div class="profileright">
 		<p>{$people.people_bio}</p>
 		<img src="{txt2img text={$people.people_email}}" />
-		
+
 		{if isset($people.image) and $people.image.count > 1}
 			{for $i = 1; $i < $people.image.count; $i++}
-				<img src="{$weburl}files/people/{$people.image.rows[$i].image_filename}" class="imagewrap" align="left" />
+				<img src="{$weburl}files/people/image/{$people.image.rows[$i].image_filename}" class="imagewrap" align="left" />
 			{/for}
 		{/if}
 

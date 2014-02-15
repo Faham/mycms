@@ -11,21 +11,21 @@
 
 	{if isset($research.image) and $research.image.count > 0}
 		{for $i = 0; $i < $research.image.count; $i++}
-			<img src="{gl url="files/research/{$research.image.rows[$i].image_filename}"}" class="image" />
+			<img src="{gl url="files/research/image/{$research.image.rows[$i].image_filename}"}" class="image" />
 		{/for}
 	{/if}
-	
+
 	{if isset($research.video) and $research.video.count > 0}
-		{include "templates/snippets/section_title.tpl" title={t s=Downloads m=0}}	
+		{include "templates/snippets/section_title.tpl" title={t s=Downloads m=0}}
 		{for $i = 0; $i < $research.video.count; $i++}
 			<div class="download">
-			<a class="{if {$research.video.rows[$i].video_filename|substr:0:-3} == 'mov'}mov{else}wmv{/if}" 
-				href='{gl url="files/research/{$research.video.rows[$i].video_filename}"}'>
+			<a class="{if {$research.video.rows[$i].video_filename|substr:0:-3} == 'mov'}mov{else}wmv{/if}"
+				href='{gl url="files/research/video/{$research.video.rows[$i].video_filename}"}'>
 			Video
 			</a>
 			</div>
 		{/for}
-	{/if}	
+	{/if}
 
 	{if isset($research.people) and $research.people.count > 0}
 		{include "templates/snippets/section_title.tpl" title={t s=Participants m=0}}

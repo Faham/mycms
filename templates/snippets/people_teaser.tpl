@@ -3,7 +3,7 @@
 
 <td width="43">
 	{if isset($val.image_filename)}
-		<a href='{gl url="people/{$val.people_id}"}'><img class="thumbnail" src='{gl url="files/people/thumb/{$val.image_filename}"}'/></a>
+		<a href='{gl url="people/{$val.people_id}"}'><img class="thumbnail" src='{gl url="files/people/image/thumb/{$val.image_filename}"}'/></a>
 	{else}
 		<a href='{gl url="people/{$val.people_id}"}'><img class="thumbnail" src='{gl url="static/images/noimage-thumb.gif"}'/></a>
 	{/if}
