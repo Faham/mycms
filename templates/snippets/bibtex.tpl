@@ -25,13 +25,13 @@
 				</div>
 		</div>
 	{/if}
-	
+
 	{$fields = [
 		'title',
 		'journal',
 		'year',
-		'volumenum',
-		'issuenum',
+		'volume',
+		'number',
 		'series',
 		'address',
 		'technumber',
@@ -49,18 +49,16 @@
 		'type',
 		'url'
 	]}
-	
+
 	{assign var=count value=$fields|@count}
 	{for $i = 0; $i < $count; $i++}
-		{if $p.{'publication_'|cat:{$fields[$i]}}}
+		{assign var=f value={'publication_'|cat:{$fields[$i]}}}
+		{if isset($p.$f) and !empty($p.$f)}
 			<div class="bibtexentry">
 				<div class="bibtexleft">{$fields[$i]}</div>
 				<div class="bibtexmiddle">=</div>
 				<div class="bibtexright">
-					&nbsp;
-					{ldelim}
-						{$p.{'publication_'|cat:{$fields[$i]}}}
-					{rdelim},
+					{ldelim}{$p.$f}{rdelim},
 				</div>
 			</div>
 			<div class="cb"></div>

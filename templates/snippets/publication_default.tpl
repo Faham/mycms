@@ -40,7 +40,7 @@
 
 	{include "templates/snippets/section_title.tpl" title={t s=Participants m=0}}
 	<div class="persontable">
-		{include "templates/snippets/people_list.tpl" people=$publication.people group=false}
+		{include "templates/snippets/people_teaser_list.tpl" people=$publication.people group=false}
 	</div>
 
 	{include "templates/snippets/section_title.tpl" title={t s=Citation m=0}}
