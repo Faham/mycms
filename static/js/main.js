@@ -115,56 +115,72 @@ $(document).ready(function()
         sug.data('selected', id);
         child_rows.eq(id).addClass('focused');
 
-        input = sug.parent().children('.refrence');
+        if (sug.parent().children('.refrence').length > 0) {
+            input = sug.parent().children('.refrence');
+        } else if (sug.parent().children('.find').length > 0) {
+            input = sug.parent().children('.find');
+        };
+
         input.data('selected', child_rows.eq(id));
     };
 
 //-----------------------------------------------------------------------------
 
     function insertSuggest(sug) {
-        input = sug.parent().children('.refrence');
+        input = null;
+
+        if (sug.parent().children('.refrence').length > 0) {
+            input = sug.parent().children('.refrence');
+        } else if (sug.parent().children('.find').length > 0) {
+            input = sug.parent().children('.find');
+        };
+
         sug.remove();
         s = input.data('selected');
         input.removeData('selected');
         input.attr('value', '');
 
-        // if not inserted before insert to db and append to reference-list
-        var frm = $(".TTWForm-container");
-        var v = {
-            'referer_type'  : frm.data('type'),
-            'referer_id'    : frm.data('id'),
-            'referred_type' : s.data('type'),
-            'referred_id'   : s.data('id'),
-        };
-        $.post(weburl + 'ajax/refer', 'params=' + JSON.stringify(v), function(data){
-            data = $.parseJSON(data);
-            if('success' == data.status){
-                // get referred teaser display and add to the teaser-list
-                var d = {
-                    'content' : input.attr('name'),
-                    'id'      : v.referred_id,
-                    'display' : 'teaser',
-                };
-                v.list    = false;
+        if (input.hasClass('refrence')) {
+            // if not inserted before insert to db and append to reference-list
+            var frm = input.closest('.TTWForm-container');
+            var v = {
+                'referer_type'  : frm.data('type'),
+                'referer_id'    : frm.data('id'),
+                'referred_type' : s.data('type'),
+                'referred_id'   : s.data('id'),
+            };
+            $.post(weburl + 'ajax/refer', 'params=' + JSON.stringify(v), function(data){
+                data = $.parseJSON(data);
+                if('success' == data.status){
+                    // get referred teaser display and add to the teaser-list
+                    var d = {
+                        'content' : input.attr('name'),
+                        'id'      : v.referred_id,
+                        'display' : 'teaser',
+                    };
+                    v.list    = false;
 
-                $.post(weburl + 'ajax/get', 'params=' + JSON.stringify(d), function(data){
-                    data = $.parseJSON(data);
-                    if('success' == data.status && 0 < data.count){
-                        var r = $(data.html);
-                        var tl = input.parent().children('.' + v.referred_type + '-refrence-list');
-                        tl.append(r);
-                        r.trigger("create");
-                    }
-                });
-            }
-        });
+                    $.post(weburl + 'ajax/get', 'params=' + JSON.stringify(d), function(data){
+                        data = $.parseJSON(data);
+                        if('success' == data.status && 0 < data.count){
+                            var r = $(data.html);
+                            var tl = input.parent().children('.' + v.referred_type + '-refrence-list');
+                            tl.append(r);
+                            r.trigger("create");
+                        }
+                    });
+                }
+            });
+        } else if (input.hasClass('find')) {
+            window.location.href = weburl + 'admin/' + s.data('type') + '/view/' + s.data('id');
+        }
     }
 
 //-----------------------------------------------------------------------------
 
 	var keypress_timeout = null
     var suggest_max = 5;
-	$(".TTWForm .refrence").keypress(function(e) {
+	$(".TTWForm .refrence, .TTWForm .find").keypress(function(e) {
 		var input = $(this);
 		if (null != keypress_timeout)
 			clearTimeout(keypress_timeout);
@@ -211,14 +227,14 @@ $(document).ready(function()
 		}, 500);
 	});
 
-    $(".TTWForm .refrence").focusout(function() {
+    $(".TTWForm .refrence, .TTWForm .find").focusout(function() {
         //var input = $(this);
         //if (input.data('suggest')) {
         //    input.parent().children('.suggest').remove();
         //};
     });
 
-    $(".TTWForm .refrence").keyup(function(e) {
+    $(".TTWForm .refrence, .TTWForm .find").keyup(function(e) {
         if (8 == e.keyCode ||  // backspace
             46 == e.keyCode ) { // delete
             $(this).trigger('keypress');
@@ -227,22 +243,51 @@ $(document).ready(function()
 
 //-----------------------------------------------------------------------------
 
-    $(".TTWForm .refrence").keydown(function(e) {
+    $(".TTWForm .refrence, .TTWForm .find").keydown(function(e) {
         var input = $(this);
         if (undefined != input.data('suggest') &&
             true      == input.data('suggest') &&
-            (38 == e.keyCode || 40 == e.keyCode)) {
+            (38 == e.keyCode || 40 == e.keyCode || 27 == e.keyCode)) {
 
             var suggest = input.parent().children('.suggest');
-            var s = suggest.data('selected');
-            if (38 == e.keyCode) { // move up
-                if (0 <= s)
-                    --s;
-            } else if (40 == e.keyCode) { // move down
-                ++s;
+
+            if (27 == e.keyCode) { // escape
+                suggest.remove();
+                input.removeData('selected');
+                input.attr('value', '');
+            } else {
+                var s = suggest.data('selected');
+                if (38 == e.keyCode) { // move up
+                    if (0 <= s)
+                        --s;
+                } else if (40 == e.keyCode) { // move down
+                    ++s;
+                }
+                s = (s + suggest_max) % suggest_max;
+                selectSuggest(suggest, s);
             }
-            s = (s + suggest_max) % suggest_max;
-            selectSuggest(suggest, s);
+        }
+    });
+
+//-----------------------------------------------------------------------------
+
+    $(".yearpicker").each(function() {
+        var yp = $(this);
+        for (i = new Date().getFullYear() + 1; i > 1900; --i)
+        {
+            yp.append($('<option />').val(i).html(i));
+        }
+    });
+
+//-----------------------------------------------------------------------------
+
+    $(".monthpicker").each(function() {
+        var months = [ "January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December" ];
+        var mp = $(this);
+        for (i = 0; i < 12; ++i)
+        {
+            mp.append($('<option />').val(months[i]).html(months[i]));
         }
     });
 

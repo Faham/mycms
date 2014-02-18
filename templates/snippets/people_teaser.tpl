@@ -10,10 +10,10 @@
 		{/if}
 	</div>
 	<div class="textside">
-	<div class="title">{$people.people_firstname} {$people.people_middlename} {$people.people_lastname}</div>
-	{if isset($people.people_affiliation)}
-		<div class="affiliation">{$people.people_affiliation}</div>
-	{/if}
+		<div class="title">{$people.people_firstname} {$people.people_middlename} {$people.people_lastname}</div>
+		{if isset($people.people_affiliation)}
+			<div class="affiliation">{$people.people_affiliation}</div>
+		{/if}
 	</div>
 </a>
 

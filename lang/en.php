@@ -41,6 +41,7 @@
 @define('L_ADD_PUBLICATION', 'Add publication');
 @define('L_IMAGES', 'Images');
 @define('L_VIDEOS', 'Videos');
+@define('L_DOCUMENTS', 'Documents');
 @define('L_ACTIVE', 'Active');
 @define('L_FUTURE', 'Future');
 @define('L_ONHOLD', 'Onhold');
@@ -48,4 +49,18 @@
 @define('L_UNKNOWN', 'Unknown');
 @define('L_EDIT_PEOPLE', 'Edit people');
 @define('L_EDIT_RESEARCH', 'Edit research');
-@define('L_EDIT_RESEARCH', 'Edit publication');
+@define('L_EDIT_PUBLICATION', 'Edit publication');
+@define('L_ARTICLE', 'Article');
+@define('L_BOOK', 'Book');
+@define('L_BOOKLET', 'Booklet');
+@define('L_CONFERENCE', 'Conference');
+@define('L_INBOOK', 'In Book');
+@define('L_INCOLLECTION', 'In Collection');
+@define('L_INPROCEEDINGS', 'In Proceedings');
+@define('L_MANUAL', 'Manual');
+@define('L_MASTERSTHESIS', 'Masters Thesis');
+@define('L_MISC', 'Misc');
+@define('L_PHDTHESIS', 'PHD Thesis');
+@define('L_PROCEEDINGS', 'Proceedings');
+@define('L_TECHREPORT', 'Tech Report');
+@define('L_UNPUBLISHED', 'Unpublished');

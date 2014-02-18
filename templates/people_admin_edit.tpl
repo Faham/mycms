@@ -1,36 +1,36 @@
 
+
+{*---------------------------------------------------------------------------*}
+
+<form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
+		action='{gl url="admin/people/create"}'>
+	<div id="people-container" class="field f_100">
+		<label for="people">
+			Find people
+		</label>
+		<input class="find" autocomplete=off type="text" name="people" placeholder="search"/>
+	</div>
+</form>
+
 {*---------------------------------------------------------------------------*}
 
 {if isset($people)}
-{include "templates/snippets/section_title.tpl" title={t s='Edit people' m=0}}
-{else}
-{include "templates/snippets/section_title.tpl" title={t s='Add people' m=0}}
-{/if}
+	{include "templates/snippets/section_title.tpl" title={t s='Edit people' m=0}}
 
 <div class="TTWForm-container"
-			{if isset($people)}
 			data-type='people'
-			data-id='{$people->people_id}'
-			{/if}
+			data-id='{$people.people_id}'
 >
 
 	<form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
-			{if isset($people)}
-			action='{gl url="admin/people/edit"}/{$people->people_id}'
-			{else}
-			action='{gl url="admin/people/create"}'
-			{/if}
-	>
+			action='{gl url="admin/people/edit"}/{$people.people_id}'>
 
 		<div id="people_firstname-container" class="field f_100">
 			<label for="people_firstname">
 				First Name
 			</label>
 			<input type="text" name="people_firstname" id="people_firstname" required pattern="[a-zA-Zs]+"
-				{if isset($people)}
-				value="{$people->people_firstname}"
-				{/if}
-			>
+				value="{$people.people_firstname}">
 		</div>
 
 		<div id="people_middlename-container" class="field f_100">
@@ -38,10 +38,7 @@
 				Middle Name
 			</label>
 			<input type="text" name="people_middlename" id="people_middlename" pattern="[a-zA-Zs]*"
-				{if isset($people)}
-				value="{$people->people_middlename}"
-				{/if}
-			>
+				value="{$people.people_middlename}">
 		</div>
 
 		<div id="people_lastname-container" class="field f_100">
@@ -49,10 +46,7 @@
 				Last Name
 			</label>
 			<input type="text" name="people_lastname" id="people_lastname" required pattern="[a-zA-Zs]+"
-				{if isset($people)}
-				value="{$people->people_lastname}"
-				{/if}
-			>
+				value="{$people.people_lastname}">
 		</div>
 
 		<div id="people_affiliation-container" class="field f_100">
@@ -60,10 +54,7 @@
 				Affiliation
 			</label>
 			<input type="text" name="people_affiliation" id="people_affiliation"
-				{if isset($people)}
-				value="{$people->people_affiliation}"
-				{/if}
-			>
+				value="{$people.people_affiliation}">
 		</div>
 
 		<div id="people_email-container" class="field f_100">
@@ -71,10 +62,15 @@
 				Email Address
 			</label>
 			<input type="email" name="people_email" id="people_email"
-				{if isset($people)}
-				value="{$people->people_email}"
-				{/if}
-			>
+				value="{$people.people_email}">
+		</div>
+
+		<div id="people_nsid-container" class="field f_100">
+			<label for="people_nsid">
+				NSID
+			</label>
+			<input type="text" name="people_nsid" id="people_nsid"
+				value="{$people.people_nsid}">
 		</div>
 
 		<div id="field11-container" class="field f_100">
@@ -84,49 +80,49 @@
 
 			<select name="people_group" id="people_group" required>
 				<option id="people_group-1" value="faculty"
-				{if isset($people) and "faculty" == $people->people_group}
+				{if "faculty" == $people.people_group}
 					selected
 				{/if}
 				>
 					{t s='faculty' m=0}
 				</option>
 				<option id="people_group-2" value="adjunct_faculty"
-				{if isset($people) and "adjunct_faculty" == $people->people_group}
+				{if "adjunct_faculty" == $people.people_group}
 					selected
 				{/if}
 				>
 					{t s='adjunct_faculty' m=0}
 				</option>
 				<option id="people_group-3" value="researcher"
-				{if isset($people) and "researcher" == $people->people_group}
+				{if "researcher" == $people.people_group}
 					selected
 				{/if}
 				>
 					{t s='researcher' m=0}
 				</option>
 				<option id="people_group-4" value="graduate_student"
-				{if isset($people) and "graduate_student" == $people->people_group}
+				{if "graduate_student" == $people.people_group}
 					selected
 				{/if}
 				>
 					{t s='graduate_student' m=0}
 				</option>
 				<option id="people_group-5" value="undergraduate_student"
-				{if isset($people) and "undergraduate_student" == $people->people_group}
+				{if "undergraduate_student" == $people.people_group}
 					selected
 				{/if}
 				>
 					{t s='undergraduate_student' m=0}
 				</option>
 				<option id="people_group-6" value="alumni"
-				{if isset($people) and "alumni" == $people->people_group}
+				{if "alumni" == $people.people_group}
 					selected
 				{/if}
 				>
 					{t s='alumni' m=0}
 				</option>
 				<option id="people_group-7" value="recent_visitor"
-				{if isset($people) and "recent_visitor" == $people->people_group}
+				{if "recent_visitor" == $people.people_group}
 					selected
 				{/if}
 				>
@@ -142,10 +138,7 @@
 			</label>
 			<input class="ttw-date date" id="people_start" maxlength="524288" name="people_start"
 			size="20" tabindex="0" title=""
-				{if isset($people)}
-				value="{$people->people_start}"
-				{/if}
-			>
+				value="{$people.people_start}">
 		</div>
 
 		<div id="people_end-container" class="field f_100">
@@ -154,24 +147,19 @@
 			</label>
 			<input class="ttw-date date" id="people_end" maxlength="524288" name="people_end"
 			size="20" tabindex="0" title=""
-				{if isset($people)}
-				value="{$people->people_end}"
-				{/if}
-			>
+				value="{$people.people_end}">
 		</div>
 
 		<div id="people_bio-container" class="field f_100">
 			<label for="people_bio">
 				Bio
 			</label>
-			<textarea name="people_bio" id="people_bio">{if isset($people)}{$people->people_bio}{/if}</textarea>
+			<textarea name="people_bio" id="people_bio">{$people.people_bio}</textarea>
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
 			<input type="submit" value="Submit">
 		</div>
-
-		{if isset($people)}
 
 		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
@@ -180,9 +168,7 @@
 			</label>
 			<input type="file" name="image" accept="image/*"/>
 			<div class="image-list">
-			{if isset($refrences)}
-				{include "templates/snippets/image_thumb_list.tpl" image=$refrences.image content='people'}
-			{/if}
+			{include "templates/snippets/image_thumb_list.tpl" image=$people.image content='people'}
 			</div>
 		</div>
 
@@ -192,9 +178,7 @@
 				Add research
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="research" placeholder="search"/>
-			{if isset($refrences)}
-				{include "templates/snippets/research_teaser_list.tpl" research=$refrences.research}
-			{/if}
+			{include "templates/snippets/research_refrence_list.tpl" research=$people.research}
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Publication' m=0}}
@@ -203,30 +187,13 @@
 				Add publication
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="publication" placeholder="search"/>
-			{if isset($refrences)}
-				{include "templates/snippets/publication_teaser_list.tpl" publication=$refrences.publication}
-			{/if}
+			{include "templates/snippets/publication_refrence_list.tpl" publication=$people.publication}
 		</div>
-		{/if}
 	</form>
 </div>
 
 <br clear="all" />
 
-{*---------------------------------------------------------------------------*}
-
-{if isset($people_list)}
-	{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}
-	<ul class="admin">
-	{for $i=0; $i < $people_list.count; $i++}
-		<li>
-		{assign var=ppl value=$people_list.rows[$i]}
-		<span class="title">{$ppl->people_firstname} {$ppl->people_middlename} {$ppl->people_lastname}</span>
-		<span class="edit"><a href='{gl url="admin/people/view/{$ppl->people_id}"}'>edit</a></span>
-		<span class="remove"><a href='{gl url="admin/people/remove/{$ppl->people_id}"}'>remove</a></span>
-		</li>
-	{/for}
-	</ul>
 {/if}
 
 {*---------------------------------------------------------------------------*}

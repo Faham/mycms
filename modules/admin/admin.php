@@ -10,8 +10,8 @@ require_once('admin.class.php');
 
 global $g;
 if(!isset($_GET['content'])) $_GET['content'] = 'people';
-$g['template'] = 'people_admin';
 $ct = strtolower($_GET['content']);
+$g['template'] = $ct . '_admin_create';
 $err = false;
 
 //-----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ $err = false;
 $menu = [
 	['name' => 'people',       'url' => 'admin/people',       ],
 	['name' => 'research',     'url' => 'admin/research',     ],
-	['name' => 'publication', 'url' => 'admin/publication', ]
+	['name' => 'publication',  'url' => 'admin/publication', ]
 ];
 $g['smarty']->assign('menu', $menu);
 
@@ -180,6 +180,7 @@ if ('unknown' == $content) {
 else if (checkparams([
 	'operation' => 'create'])) {
 	$content->create();
+	$g['template'] = $ct . '_admin_edit';
 }
 
 //-----------------------------------------------------------------------------
@@ -193,6 +194,7 @@ else if (checkparams([
 		// todo: remove all related images videos and docs from filesystem
 		// other referenced types would be automatically dereferenced
 		$g['error']->push("1 $ct removed successfully");
+		$g['template'] = $ct . '_admin_create';
 	} else if ($r == 0) {
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
 	}
@@ -233,8 +235,14 @@ else if (checkparams([
 		if (!empty($_FILES['image']['name']))
 			save_file($ct, $_GET['id'], $_FILES['image'], 'image');
 
-		$g['smarty']->assign($ct, $content);
-		$g['smarty']->assign("refrences", $content->get_refrences($_GET['id']));
+		$id = $_GET['id'];
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
+		if (!$r['error'] && $r['count'] > 0) {
+			$g['smarty']->assign($ct, $r['rows'][0]);
+			$g['template'] = $ct . '_admin_edit';
+		} else {
+			$g['error']->push("No $ct found with id " . $id, 'error');
+		}
 	} else if ($r == 0) {
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
 	}
@@ -246,11 +254,11 @@ else if (checkparams([
 	'operation' => 'view',
 	'_isset'    => ['id']])) {
 	$id = $_GET['id'];
-	$r = $content->get($id);
-	if ($r == 1) {
-		$g['smarty']->assign($ct, $content);
-		$g['smarty']->assign("refrences", $content->get_refrences($id));
-	} else if ($r == 0) {
+	$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
+	if (!$r['error'] && $r['count'] > 0) {
+		$g['smarty']->assign($ct, $r['rows'][0]);
+		$g['template'] = $ct . '_admin_edit';
+	} else {
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
 	}
 }
@@ -265,10 +273,7 @@ if ($err) {
 //-----------------------------------------------------------------------------
 
 else {
-	$objs = $content->getall();
 	$g['smarty']->assign('selectedmenu', $ct);
-	$g['smarty']->assign($ct . '_list', $objs);
-	$g['template'] = $ct . '_admin';
 }
 
 //-----------------------------------------------------------------------------

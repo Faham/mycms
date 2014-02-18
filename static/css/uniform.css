@@ -36,15 +36,12 @@ div.uploader span.action {
 /* Select */
 
 div.selector, div.selector.focus, div.selector.hover {
-    background-position: right 1px;
-    line-height: 33px;
-    height: 33px;
+    background-position: right -5px;
+    height: 23px;
 }
 
 div.selector span {
-    height: 28px;
-    line-height: 29px;
-    padding: 3px 0 3px 3px;
+    padding: 1px 0 1px 3px;
 }
 
 div.selector select {
@@ -165,7 +162,7 @@ div.uploader span.action {
 }
 
 div.uploader span.filename {
-    color: #999999;
+    color: #666;
     width: 70%;
     border-right: solid 1px #bbb;
     font-size: 90%;
@@ -210,13 +207,13 @@ div.selector span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #999999;
+    color: #666;
 }
 
 div.selector select {
     position: absolute;
     opacity: 0;
-    height: 33px;
+    height: 100%;
     border: none;
     background: none;
 }
@@ -268,7 +265,7 @@ div.uploader {
     overflow: hidden;
     padding: 0 !important;
     font: 14px/20px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
-    color: #999999;
+    color: #666;
     border: 1px solid #d9d9d9;
     outline: none;
     display: inline-block;
@@ -328,10 +325,10 @@ div.checker input, div.radio input {
 }
 
 div.selector {
-    width: 208px;
+    width: 258px;
     font: 14px/20px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
     padding: 0px;
-    color: #999999;
+    color: #666;
     border: 1px solid #d9d9d9;
     outline: none;
     display: inline-block;
@@ -347,14 +344,15 @@ div.selector {
 /** IE Hacks **/
 
 div.selector {
-    background: transparent url(../images/select-bg-ie.jpg) no-repeat right 0px scroll\9;
+    background: transparent url(../images/select-bg-ie.jpg) no-repeat right -5px scroll\9;
 }
 
 input {
-    width: 200px;
+    width: 250px;
     font: 14px/20px Helvetica Neue, "Arial", Helvetica, Verdana, sans-serif;
-    padding: 3px 4px;
-    color: #999999;
+    padding: 1px 4px;
+    margin: 1px 0px;
+    color: #666;
     border: 1px solid #d9d9d9;
     outline: none;
     display: inline-block;
@@ -401,7 +399,7 @@ textarea {
 .suggest {
    position: absolute;
    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 6px;
-   z-index: 99;
+   z-index: 9999;
    background-color: white;
    border: 1px solid #E7E7E7;
 }

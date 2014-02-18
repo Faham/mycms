@@ -18,6 +18,7 @@ class Mycms_people extends DB_DataObject
     public $people_email;                    // string(50)  
     public $people_bio;                      // string(1000)  
     public $people_group;                    // string(21)  not_null enum
+    public $people_nsid;                     // string(6)  
     public $people_start;                    // date(10)  binary
     public $people_end;                      // date(10)  binary
 

@@ -10,8 +10,8 @@ class Mycms_publication_people extends DB_DataObject
     /* the code below is auto generated do not remove the above tag */
 
     public $__table = 'mycms_publication_people';    // table name
-    public $people_id;                       // int(11)  not_null
-    public $publication_id;                  // int(11)  not_null
+    public $people_id;                       // int(11)  not_null primary_key
+    public $publication_id;                  // int(11)  not_null primary_key
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

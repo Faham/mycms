@@ -15,7 +15,7 @@ class Mycms_research extends DB_DataObject
     public $research_summary;                // string(300)  
     public $research_description;            // string(1500)  
     public $research_status;                 // string(7)  not_null enum
-    public $research_priority;               // string(1)  not_null enum
+    public $research_priority;               // int(10)  unsigned
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

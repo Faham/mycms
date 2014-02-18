@@ -10,8 +10,8 @@ class Mycms_research_video extends DB_DataObject
     /* the code below is auto generated do not remove the above tag */
 
     public $__table = 'mycms_research_video';    // table name
-    public $video_id;                        // int(11)  not_null
-    public $research_id;                     // int(11)  not_null
+    public $video_id;                        // int(11)  not_null primary_key
+    public $research_id;                     // int(11)  not_null primary_key
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE
