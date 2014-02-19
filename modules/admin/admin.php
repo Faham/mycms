@@ -216,8 +216,8 @@ if ('unknown' == $content) {
 
 //-----------------------------------------------------------------------------
 
-else if (checkparams([
-	'operation' => 'create'])) {
+else if (checkparams(array(
+	'operation' => 'create'))) {
 	foreach ($_POST as $k => $v) {
 		if (property_exists("\\mycms\\$ct", $k)) {
 			if (validate($content->field_type[$k], $v))
