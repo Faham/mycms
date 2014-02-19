@@ -25,6 +25,8 @@
 		action='{gl url="admin/publication/edit"}/{$publication.publication_id}'
 	>
 
+		<a class="remove" href='{gl url="admin/publication/remove"}/{$publication.publication_id}'>remove</a>
+
 		<div id="publication_title-container" class="field f_100">
 			<label for="publication_title">
 				Title
@@ -260,11 +262,6 @@
 			<textarea name="publication_abstract" id="publication_abstract">{$publication.publication_note}</textarea>
 		</div>
 
-		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
-		</div>
-
-		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
@@ -273,7 +270,6 @@
 			{include "templates/snippets/image_thumb_list.tpl" image=$publication.image content='publication'}
 		</div>
 
-		{include "templates/snippets/section_title.tpl" title={t s='Videos' m=0}}
 		<div id="video-container" class="field f_100">
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
@@ -282,13 +278,16 @@
 			{include "templates/snippets/video_list.tpl" video=$publication.video content='publication'}
 		</div>
 
-		{include "templates/snippets/section_title.tpl" title={t s='Documents' m=0}}
 		<div id="doc-container" class="field f_100">
 			<label for="doc">
 				Upload document<div class="smalltext">(.pdf)</div>
 			</label>
 			<input type="file" name="doc"/>
 			{include "templates/snippets/doc_list.tpl" doc=$publication.doc content='publication'}
+		</div>
+
+		<div id="form-submit" class="field f_100 clearfix submit">
+			<input type="submit" value="Submit">
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}

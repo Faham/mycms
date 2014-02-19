@@ -25,6 +25,8 @@
 	<form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
 			action='{gl url="admin/people/edit"}/{$people.people_id}'>
 
+		<a class="remove" href='{gl url="admin/people/remove"}/{$people.people_id}'>remove</a>
+
 		<div id="people_firstname-container" class="field f_100">
 			<label for="people_firstname">
 				First Name
@@ -157,19 +159,16 @@
 			<textarea name="people_bio" id="people_bio">{$people.people_bio}</textarea>
 		</div>
 
-		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
-		</div>
-
-		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
 			<input type="file" name="image" accept="image/*"/>
-			<div class="image-list">
 			{include "templates/snippets/image_thumb_list.tpl" image=$people.image content='people'}
-			</div>
+		</div>
+
+		<div id="form-submit" class="field f_100 clearfix submit">
+			<input type="submit" value="Submit">
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Research' m=0}}

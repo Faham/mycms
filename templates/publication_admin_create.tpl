@@ -244,6 +244,33 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<textarea name="publication_abstract" id="publication_abstract"></textarea>
 		</div>
 
+		<div id="image-container" class="field f_100">
+			<label for="image">
+				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
+			</label>
+			<input type="file" name="image" accept="image/*"/>
+			<div class="image-list">
+			</div>
+		</div>
+
+		<div id="video-container" class="field f_100">
+			<label for="video">
+				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
+			</label>
+			<input type="file" name="video" accept="video/*"/>
+			<div class="video-list">
+			</div>
+		</div>
+
+		<div id="doc-container" class="field f_100">
+			<label for="doc">
+				Upload document<div class="smalltext">(.pdf)</div>
+			</label>
+			<input type="file" name="doc"/>
+			<div class="doc-list">
+			</div>
+		</div>
+
 		<div id="form-submit" class="field f_100 clearfix submit">
 			<input type="submit" value="Submit">
 		</div>

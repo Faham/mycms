@@ -102,6 +102,15 @@
 			<textarea name="people_bio" id="people_bio"></textarea>
 		</div>
 
+		<div id="image-container" class="field f_100">
+			<label for="image">
+				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
+			</label>
+			<input type="file" name="image" accept="image/*"/>
+			<div class="image-thumb-list">
+			</div>
+		</div>
+
 		<div id="form-submit" class="field f_100 clearfix submit">
 			<input type="submit" value="Submit">
 		</div>

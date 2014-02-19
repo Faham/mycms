@@ -7,9 +7,9 @@
 >
 	<div class="left">
 		{if isset($publication.image_filename)}
-			<img class="thumbnail" src='{gl url="files/publication/image/thumb/{$publication.image_filename}"}'/>
+			<img src='{gl url="files/publication/image/thumb/{$publication.image_filename}"}'/>
 		{else}
-			<img class="thumbnail" src='{gl url="static/images/noimage-thumb.gif"}'/>
+			<img src='{gl url="static/images/noimage-thumb.gif"}'/>
 		{/if}
 	</div>
 	<div class="textside">{$publication.publication_title}</div>

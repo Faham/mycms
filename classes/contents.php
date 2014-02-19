@@ -12,11 +12,11 @@ class image extends content {
 
 	public $ext	  = ["gif", "jpeg", "jpg", "png"];
 	public $mime	 = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
-	public $max_size = 409600; // 400 * 1024;
+	public $max_size = 1048576; // 1 * 1024 * 1024;
 
-	public $__table = 'mycms_image';		 // table name
-	public $image_id;						// int(11)  not_null primary_key unique_key auto_increment
-	public $image_filename;				  // string(250)  not_null
+	public $__table = 'mycms_image';	// table name
+	public $image_id;					// int(11)  not_null primary_key unique_key auto_increment
+	public $image_filename;				// string(250)  not_null
 
 	public $displays = [
 		'default' => [],
@@ -35,9 +35,13 @@ $g['content']['image'] = new image();
 
 class video extends content {
 
-	public $__table = 'mycms_video';		 // table name
-	public $video_id;						// int(11)  not_null primary_key unique_key auto_increment
-	public $video_filename;				  // string(250)  not_null
+    public $ext   = ["mp4", "webm", "ogg"];
+    public $mime     = ["video/mp4", "video/webm", "video/ogg"];
+    public $max_size = 10485760; // 10 * 1024 * 1024;
+
+	public $__table = 'mycms_video';	// table name
+	public $video_id;					// int(11)  not_null primary_key unique_key auto_increment
+	public $video_filename;				// string(250)  not_null
 
 	public $displays = [
 		'default' => [],
@@ -55,6 +59,10 @@ $g['content']['video'] = new video();
 //=============================================================================
 
 class doc extends content {
+
+    public $ext   = ["pdf"];
+    public $mime     = ["application/pdf"];
+    public $max_size = 1048576; // 1 * 1024 * 1024;
 
 	public $__table = 'mycms_doc';		   // table name
 	public $doc_id;						  // int(11)  not_null primary_key unique_key auto_increment

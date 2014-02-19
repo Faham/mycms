@@ -77,6 +77,23 @@
 			<textarea name="research_description" id="research_description"></textarea>
 		</div>
 
+		<div id="image-container" class="field f_100">
+			<label for="image">
+				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
+			</label>
+			<input type="file" name="image" accept="image/*"/>
+			<div class="image-thumb-list">
+			</div>
+		</div>
+
+		<div id="video-container" class="field f_100">
+			<label for="video">
+				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
+			</label>
+			<input type="file" name="video" accept="video/*"/>
+			<div class="video-list">
+			</div>
+		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
 			<input type="submit" value="Submit">

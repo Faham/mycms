@@ -228,10 +228,10 @@ $(document).ready(function()
 	});
 
     $(".TTWForm .refrence, .TTWForm .find").focusout(function() {
-        //var input = $(this);
-        //if (input.data('suggest')) {
-        //    input.parent().children('.suggest').remove();
-        //};
+        var input = $(this);
+        if (input.data('suggest')) {
+            input.parent().children('.suggest').remove();
+        };
     });
 
     $(".TTWForm .refrence, .TTWForm .find").keyup(function(e) {

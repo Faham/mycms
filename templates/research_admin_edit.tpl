@@ -25,6 +25,8 @@
 			action='{gl url="admin/research/edit"}/{$research.research_id}'
 	>
 
+		<a class="remove" href='{gl url="admin/research/remove"}/{$research.research_id}'>remove</a>
+
 		<div id="research_title-container" class="field f_100">
 			<label for="research_title">
 				Title
@@ -32,7 +34,6 @@
 			<input type="text" name="research_title" id="research_title" required
 				value="{$research.research_title}">
 		</div>
-
 
 		<div id="research_status-container" class="field f_100">
 			<label for="research_status">
@@ -101,12 +102,6 @@
 			<textarea name="research_description" id="research_description">{$research.research_description}</textarea>
 		</div>
 
-
-		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
-		</div>
-
-		{include "templates/snippets/section_title.tpl" title={t s='Images' m=0}}
 		<div id="image-container" class="field f_100">
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
@@ -115,13 +110,16 @@
 			{include "templates/snippets/image_thumb_list.tpl" image=$research.image content='research'}
 		</div>
 
-		{include "templates/snippets/section_title.tpl" title={t s='Videos' m=0}}
 		<div id="video-container" class="field f_100">
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
 			<input type="file" name="video" accept="video/*"/>
 			{include "templates/snippets/video_list.tpl" video=$research.video content='research'}
+		</div>
+
+		<div id="form-submit" class="field f_100 clearfix submit">
+			<input type="submit" value="Submit">
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}

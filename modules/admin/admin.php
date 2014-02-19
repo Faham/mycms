@@ -20,7 +20,7 @@ $err = false;
 $menu = [
 	['name' => 'people',       'url' => 'admin/people',       ],
 	['name' => 'research',     'url' => 'admin/research',     ],
-	['name' => 'publication',  'url' => 'admin/publication', ]
+	['name' => 'publication',  'url' => 'admin/publication',  ],
 ];
 $g['smarty']->assign('menu', $menu);
 
@@ -117,24 +117,46 @@ function make_thumb($src, $dest, $desired_width) {
 
 //-----------------------------------------------------------------------------
 
+function remove_file($ct, $id, $type) {
+	global $g;
+	$db = $g['db'];
+	$r = $db->query(
+		"SELECT t.{$type}_id, t.{$type}_filename FROM !!!$type AS t WHERE t.{$type}_id IN
+		(SELECT {$type}_id FROM !!!{$type}_$ct AS _ct WHERE _ct.{$ct}_id = $id)"
+	);
+	if (!$r['error'] && $r['count'] > 0) {
+		$resrc = $g['content'][$type];
+		foreach ($r['rows'] as $v) {
+			if (file_exists("files/$ct/$type/" . $v["{$type}_filename"]))
+				unlink("files/$ct/$type/" . $v["{$type}_filename"]);
+			if ('image' == $type && file_exists("files/$ct/$type/thumb/" . $v["{$type}_filename"]))
+				unlink("files/$ct/$type/thumb/" . $v["{$type}_filename"]);
+			$resrc->get($v["{$type}_id"]);
+			$resrc->delete();
+		}
+	}
+}
+
+//-----------------------------------------------------------------------------
+
 function save_file ($ct, $ct_id, $file, $type) {
 	if (empty($file['name']))
 		return;
 
 	global $g;
-	$db = $g['content'][$type];
+	$db_type = $g['content'][$type];
 	$ext = end(explode('.', $file['name']));
 
-	if (in_array($file["type"], $db->mime) &&
-		in_array($ext, $db->ext) &&
-		$file["size"] < $db->max_size) {
+	if (in_array($file["type"], $db_type->mime) &&
+		in_array($ext, $db_type->ext) &&
+		$file["size"] < $db_type->max_size) {
 
 		if ($file["error"] > 0) {
 			$g['error']->push($file["error"], 'error');
 		} else {
 			$type_filename = $type . '_filename';
-			$db->$type_filename = "temp.$ext";
-			$id = $db->insert();
+			$db_type->$type_filename = "temp.$ext";
+			$id = $db_type->insert();
 
 			if (!file_exists("files/$ct"))
 				mkdir("files/$ct");
@@ -144,11 +166,8 @@ function save_file ($ct, $ct_id, $file, $type) {
 
 			move_uploaded_file($file["tmp_name"], "files/$ct/$type/$id.$ext");
 
-			$db->get($id);
-			$db->image_filename = "$id.$ext";
-			$db->update();
-			$db_name = $db->database();
-			$db->query("INSERT INTO `$db_name`.`{$db_name}_{$ct}_$type` (`{$type}_id` , `{$ct}_id` ) VALUES ('$id',  '$ct_id')");
+			$g['db']->query("UPDATE !!!$type SET {$type}_filename = '$id.$ext' WHERE {$type}_id = $id");
+			$g['db']->query("INSERT INTO !!!{$ct}_$type ({$type}_id , {$ct}_id) VALUES ($id,  $ct_id)");
 
 			if ($type == 'image') {
 				if (!file_exists("files/$ct/$type/thumb"))
@@ -159,6 +178,26 @@ function save_file ($ct, $ct_id, $file, $type) {
 	} else {
 		$g['error']->push("{$file['name']} is not of supported types or exceeds max allowed size", 'error');
 	}
+}
+
+//-----------------------------------------------------------------------------
+
+function remove($ct, $id) {
+	global $g;
+	$db = $g['db'];
+	$ctdb = $g['content'][$ct];
+	foreach ($ctdb->references as $v) {
+		echo $v;
+		if ($v == 'image' || $v == 'video' || $v == 'doc')
+			remove_file($ct, $id, $v);
+	}
+	$i = $ctdb->get($id);
+
+	if ($i == 0)
+		return false;
+
+	$ctdb->delete();
+	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -179,7 +218,38 @@ if ('unknown' == $content) {
 
 else if (checkparams([
 	'operation' => 'create'])) {
-	$content->create();
+	foreach ($_POST as $k => $v) {
+		if (property_exists("\\mycms\\$ct", $k)) {
+			if (validate($content->field_type[$k], $v))
+				$content->$k = $v;
+			else
+				$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
+		}
+	}
+	$id = $content->insert();
+	$g['error']->push("$ct updated successfully.");
+
+	if (!empty($_FILES['image']['name'])) {
+		save_file($ct, $id, $_FILES['image'], 'image');
+	}
+
+	if (!empty($_FILES['video']['name'])) {
+		save_file($ct, $id, $_FILES['video'], 'video');
+	}
+
+	if (!empty($_FILES['doc']['name'])) {
+		save_file($ct, $id, $_FILES['doc'], 'doc');
+	}
+
+
+	$r = $content->view('default', "$ct.{$ct}_id = $id");
+	if (!$r['error'] && $r['count'] > 0) {
+		$g['smarty']->assign($ct, $r['rows'][0]);
+		$g['template'] = $ct . '_admin_edit';
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
+	}
+
 	$g['template'] = $ct . '_admin_edit';
 }
 
@@ -188,16 +258,15 @@ else if (checkparams([
 else if (checkparams([
 	'operation' => 'remove',
 	'_isset'    => ['id']])) {
-	$r = $content->get($_GET['id']);
-	if ($r == 1) {
-		$content->delete();
-		// todo: remove all related images videos and docs from filesystem
-		// other referenced types would be automatically dereferenced
+	$id = $_GET['id'];
+
+	if (remove($ct, $id)) {
 		$g['error']->push("1 $ct removed successfully");
-		$g['template'] = $ct . '_admin_create';
-	} else if ($r == 0) {
-		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
 	}
+
+	$g['template'] = $ct . '_admin_create';
 }
 
 //-----------------------------------------------------------------------------
@@ -232,8 +301,20 @@ else if (checkparams([
 				$g['error']->push("$ct updated successfully.");
 		}
 
-		if (!empty($_FILES['image']['name']))
+		if (!empty($_FILES['image']['name'])) {
+			remove_file($ct, $_GET['id'], 'image');
 			save_file($ct, $_GET['id'], $_FILES['image'], 'image');
+		}
+
+		if (!empty($_FILES['video']['name'])) {
+			remove_file($ct, $_GET['id'], 'video');
+			save_file($ct, $_GET['id'], $_FILES['video'], 'video');
+		}
+
+		if (!empty($_FILES['doc']['name'])) {
+			remove_file($ct, $_GET['id'], 'doc');
+			save_file($ct, $_GET['id'], $_FILES['doc'], 'doc');
+		}
 
 		$id = $_GET['id'];
 		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");

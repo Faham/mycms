@@ -18,12 +18,10 @@
 			</a>
 		{/if}
 	</div>
-	<div>
-		<a href='{gl url="publications/{$publication.publication_id}"}' class="pub">{$publication.publication_title}</a>
-		<br/>
+	<a href='{gl url="publications/{$publication.publication_id}"}' class='textside'>
+		<div class="title">{$publication.publication_title}</div>
 		{include "templates/snippets/citation.tpl" publication=$publication}
-	</div>
-	<div class="cb"></div>
+	</a>
 </div>
 
 {*---------------------------------------------------------------------------*}
