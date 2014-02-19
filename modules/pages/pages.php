@@ -69,7 +69,7 @@ case 'people': {
 	} else {
 		$g['smarty']->assign('page', 'People');
 		$g['smarty']->assign('selectedmenu', 'People');
-		$ppl = $g['content']['people']->view('teaser', '', 'people.people_group, people.people_firstname ASC');
+		$ppl = $g['content']['people']->view('teaser', '', 'people.people_group, people.people_firstname ASC', '0,200');
 
 		if (!$ppl['error'] && $ppl['count'] > 0)
 			$g['smarty']->assign('people', $ppl);

@@ -119,7 +119,7 @@ class people extends content {
 		'people_email'	     => 'email',
         'people_bio'         => 'string',
 		'people_nsid'		 => 'string',
-		'people_group'	     => 'enum:faculty,adjunct_faculty,researcher,graduate_student,undergraduate_student,alumni,recent_visitor',
+		'people_group'	     => 'enum:faculty,adjunct_faculty,researcher,graduate_student,staff,alumni,recent_visitor,undergraduate_student',
 		'people_start'	     => 'date:Y-m-d',
 		'people_end'		 => 'date:Y-m-d',
 	];

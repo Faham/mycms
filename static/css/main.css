@@ -367,6 +367,7 @@ input, textarea, select {
 
 .people-teaser {
 	width: 30%;
+	height: 50px;
 	padding: 5px;
 	float: left;
 }
@@ -461,7 +462,6 @@ input, textarea, select {
 .publication-teaser .textside {
 	width: 100%;
 	padding: 0;
-	display: inline;
 }
 
 .publeft {

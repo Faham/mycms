@@ -1,6 +1,7 @@
 
 {*---------------------------------------------------------------------------*}
 
+{strip}
 <div class="bibtex">
 	{assign var=p value=$publication}
 	<div>
@@ -12,7 +13,7 @@
 		<div>
 			<div class="bibtexleft">author</div><div class="bibtexmiddle">=</div>
 				<div class="bibtexright">
-					&nbsp;{ldelim}
+					{ldelim}
 					{for $i = 0; $i < $p.people.count; $i++}
 						{if $i > 0}&nbsp;and&nbsp;{/if}
 						{$p.people.rows[$i].people_firstname}&nbsp;
@@ -66,5 +67,6 @@
 	{/for}
 	{rdelim}
 </div>
+{/strip}
 
 {*---------------------------------------------------------------------------*}
