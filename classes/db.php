@@ -42,7 +42,7 @@ class db {
         global $g;
 
         $q = str_replace('!!!', $this->name . '_', $q);
-        $r = ['error' => false, 'rows' => [], 'count' => 0, 'message' => ''];
+        $r = array('error' => false, 'rows' => array(), 'count' => 0, 'message' => '');
 
         //if ($g['runmode'] ==  'debug') {
         //    $g['error']->push($q);

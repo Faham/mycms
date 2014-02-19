@@ -33,7 +33,7 @@ class error {
     {
         global $g;
 
-		if (in_array(gettype($msg), ['object', 'array'])) {
+		if (in_array(gettype($msg), array('object', 'array'))) {
 			ob_start();
 			var_dump($msg);
 			$msg = ob_get_clean();
