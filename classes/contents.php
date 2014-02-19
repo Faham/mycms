@@ -268,13 +268,13 @@ class publication extends content {
 
 	public $displays = array(
 		'default' => array(
-			'image'	=> 'all',
-			'video'	=> 'all',
-			'doc'	  => 'all',
+			'image'	   => 'all',
+			'video'	   => 'all',
+			'doc'	   => 'all',
 			'research' => 'all',
 			'people'   => 'all'),
 		'teaser' => array(
-			'doc'  => 'max',
+			'doc'    => 'max',
 			'video'  => 'max',
 			'people' => 'all'),
 	);
