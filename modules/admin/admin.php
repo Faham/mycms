@@ -17,11 +17,11 @@ $err = false;
 //-----------------------------------------------------------------------------
 
 // Set main menu options
-$menu = [
-	['name' => 'people',       'url' => 'admin/people',       ],
-	['name' => 'research',     'url' => 'admin/research',     ],
-	['name' => 'publication',  'url' => 'admin/publication',  ],
-];
+$menu = array(
+	array('name' => 'people',       'url' => 'admin/people',       ),
+	array('name' => 'research',     'url' => 'admin/research',     ),
+	array('name' => 'publication',  'url' => 'admin/publication',  ),
+);
 $g['smarty']->assign('menu', $menu);
 
 //-----------------------------------------------------------------------------
@@ -255,9 +255,9 @@ else if (checkparams([
 
 //-----------------------------------------------------------------------------
 
-else if (checkparams([
+else if (checkparams(array(
 	'operation' => 'remove',
-	'_isset'    => ['id']])) {
+	'_isset'    => array('id')))) {
 	$id = $_GET['id'];
 
 	if (remove($ct, $id)) {
@@ -271,9 +271,9 @@ else if (checkparams([
 
 //-----------------------------------------------------------------------------
 
-else if (checkparams([
+else if (checkparams(array(
 	'operation' => 'edit',
-	'_isset'    => ['id']])) {
+	'_isset'    => array('id')))) {
 	$r = $content->get($_GET['id']);
 	if ($r == 1) {
 
@@ -331,9 +331,9 @@ else if (checkparams([
 
 //-----------------------------------------------------------------------------
 
-else if (checkparams([
+else if (checkparams(array(
 	'operation' => 'view',
-	'_isset'    => ['id']])) {
+	'_isset'    => array('id')))) {
 	$id = $_GET['id'];
 	$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
 	if (!$r['error'] && $r['count'] > 0) {

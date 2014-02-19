@@ -110,7 +110,7 @@ class people extends content {
 	public $people_start;				// date(10)  binary
 	public $people_end;					// date(10)  binary
 
-	public $field_type = [
+	public $field_type = array(
 		'people_id'		     => 'int:0,',
 		'people_firstname'   => 'alphabetic',
 		'people_middlename'  => 'alphabetic',
@@ -122,22 +122,22 @@ class people extends content {
 		'people_group'	     => 'enum:faculty,adjunct_faculty,researcher,graduate_student,staff,alumni,recent_visitor,undergraduate_student',
 		'people_start'	     => 'date:Y-m-d',
 		'people_end'		 => 'date:Y-m-d',
-	];
+	);
 
-	public $references = [
+	public $references = array(
 		'image',
 		'research',
 		'publication',
-	];
+	);
 
-	public $displays = [
-		'default' => [
+	public $displays = array(
+		'default' => array(
 			'image'	   => 'all',
 			'research'	=> 'all',
-			'publication' => 'all'],
-		'teaser' => [
-			'image' => 'max'],
-	];
+			'publication' => 'all'),
+		'teaser' => array(
+			'image' => 'max'),
+	);
 
 	public $title_format = 'people_firstname people_middlename people_lastname';
 
@@ -159,34 +159,34 @@ class research extends content {
 	public $research_status;			 // string(7)  not_null enum
 	public $research_priority;			 // string(1)  not_null enum
 
-    public $field_type = [
+    public $field_type = array(
         'research_id'          => 'int:0,',
         'research_title'       => 'string',
         'research_summary'     => 'string',
         'research_description' => 'string',
         'research_status'      => 'enum:active,future,onhold,past,unknown',
         'research_priority'    => 'int:0,',
-    ];
+    );
 
-    public $references = [
+    public $references = array(
         'image',
         'video',
         'people',
         'publication',
-    ];
+    );
 
-	public $displays = [
-		'default' => [
+	public $displays = array(
+		'default' => array(
 			'image'	   => 'all',
 			'video'	   => 'all',
 			'people'	  => 'all',
-			'publication' => 'all'],
-		'teaser' => [
-			'image' => 'max'],
-		'tiny' => [
+			'publication' => 'all'),
+		'teaser' => array(
+			'image' => 'max'),
+		'tiny' => array(
 			'research_title',
-			'image' => 'max'],
-	];
+			'image' => 'max'),
+	);
 
     public $title_format = 'research_title';
 
@@ -230,7 +230,7 @@ class publication extends content {
     public $publication_temp_pdflink;          // string(300)
     public $publication_temp_secondarylink;    // string(300)
 
-    public $field_type = [
+    public $field_type = array(
         'publication_type'         => 'enum:article,book,booklet,conference,inbook,incollection,inproceedings,manual,mastersthesis,misc,phdthesis,proceedings,techreport,unpublished',
         'publication_title'        => 'string',
         'publication_booktitle'    => 'string',
@@ -256,28 +256,28 @@ class publication extends content {
         'publication_organization' => 'string',
         'publication_publisher'    => 'string',
         'publication_url'          => 'string',
-    ];
+    );
 
-    public $references = [
+    public $references = array(
         'image',
         'video',
         'doc',
         'research',
         'people',
-    ];
+    );
 
-	public $displays = [
-		'default' => [
+	public $displays = array(
+		'default' => array(
 			'image'	=> 'all',
 			'video'	=> 'all',
 			'doc'	  => 'all',
 			'research' => 'all',
-			'people'   => 'all'],
-		'teaser' => [
+			'people'   => 'all'),
+		'teaser' => array(
 			'doc'  => 'max',
 			'video'  => 'max',
-			'people' => 'all'],
-	];
+			'people' => 'all'),
+	);
 
     public $title_format = 'publication_title';
 
@@ -301,10 +301,10 @@ $g['content']['course'] = new course();
 
 class download extends content {
 
-	public $displays = [
-		'default' => [],
-		'teaser' => []
-	];
+	public $displays = array(
+		'default' => array(),
+		'teaser' => array()
+	);
 
 	public function __construct() {
 		parent::__construct('download');

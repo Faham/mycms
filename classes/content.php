@@ -36,7 +36,7 @@ abstract class content extends \DB_DataObject {
 		global $g;
 		$ct = $this->m_type;
 		$content = $g['content'][$ct];
-		$res = [];
+		$res = array();
 		$db = $g['db'];
 		foreach ($content->references as $ref) {
 			$res[$ref] = $db->query(
@@ -67,8 +67,8 @@ abstract class content extends \DB_DataObject {
 	        $rows[] = clone($data_obj);
 	    }
 
-	    return ['rows'  => $rows,
-	    		'count' => $count];
+	    return array('rows'  => $rows,
+	    	    	'count' => $count);
 	}
 
 //-----------------------------------------------------------------------------
@@ -77,7 +77,7 @@ abstract class content extends \DB_DataObject {
         global $g;
 
 		if (!array_key_exists($display, $this->displays)) {
-			$r = ['error' => true, 'count' => 0, 'rows' => array()];
+			$r = array('error' => true, 'count' => 0, 'rows' => array());
 			$g['error']->push("Content type " . $this->m_type . " does not support $display display.", 'error');
 			return $r;
 		}
@@ -155,7 +155,7 @@ abstract class content extends \DB_DataObject {
 					if (substr_count($row[$rt], ',') > 0)
 						$inds = explode(',', $row[$rt]);
 					else
-						$inds = [$row[$rt]];
+						$inds = array($row[$rt]);
 
 					$row[$rt] = array('rows' => array(), 'count' => 0);
 					if ($refdata[$rt]['count'] > 0)

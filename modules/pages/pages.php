@@ -14,15 +14,15 @@ $g['template'] = 'home';
 //-----------------------------------------------------------------------------
 
 // Set main menu options
-$menu = [
-	['name' => 'Home',         'url' => '',             ],
-	['name' => 'People',       'url' => 'people',       ],
-	['name' => 'Research',     'url' => 'research',     ],
-	['name' => 'Publications', 'url' => 'publications', ],
-	['name' => 'Courses',      'url' => 'courses',      ],
-	['name' => 'Download',     'url' => 'download',     ],
-	['name' => 'Contact',      'url' => 'contact',      ]
-];
+$menu = array(
+	array('name' => 'Home',         'url' => '',             ),
+	array('name' => 'People',       'url' => 'people',       ),
+	array('name' => 'Research',     'url' => 'research',     ),
+	array('name' => 'Publications', 'url' => 'publications', ),
+	array('name' => 'Courses',      'url' => 'courses',      ),
+	array('name' => 'Download',     'url' => 'download',     ),
+	array('name' => 'Contact',      'url' => 'contact',      ),
+);
 $g['smarty']->assign('menu', $menu);
 
 //-----------------------------------------------------------------------------

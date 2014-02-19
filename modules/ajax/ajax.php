@@ -23,10 +23,10 @@ $params = false;
 if(isset($_POST['params']))
 	$params = json_decode($_POST['params']);
 
-$res = [
+$res = array(
 	'status' => 'success', // success, error
 	'message' => ''
-];
+);
 
 //-----------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ if ('get' == $op && $params) {
 
 	if (isset($params->name)) {
 		$delim = ' ';
-		$fields = [];
+		$fields = array();
 
 		if (strpos($db->title_format, $delim) !== FALSE)
 			$fields = explode($delim, $db->title_format);
