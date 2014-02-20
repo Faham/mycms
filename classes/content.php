@@ -121,7 +121,8 @@ abstract class content extends \DB_DataObject {
 		if (!empty($sortby))
 			$q = "$q ORDER BY $sortby";
 
-		$q = "$q LIMIT $limit";
+		if (!empty($limit))
+			$q = "$q LIMIT $limit";
 
 		$r = $g['db']->query($q);
 
