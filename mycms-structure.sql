@@ -373,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `mycms_video_research` (
 --
 DROP TABLE IF EXISTS `mycms_people_image`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_people_image` AS (select `mycms_image_people`.`image_id` AS `image_id`,`mycms_image_people`.`people_id` AS `people_id` from `mycms_image_people`);
+CREATE VIEW `mycms_people_image` AS (select `mycms_image_people`.`image_id` AS `image_id`,`mycms_image_people`.`people_id` AS `people_id` from `mycms_image_people`);
 
 -- --------------------------------------------------------
 
@@ -382,7 +382,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_publication_doc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_publication_doc` AS (select `mycms_doc_publication`.`doc_id` AS `doc_id`,`mycms_doc_publication`.`publication_id` AS `publication_id` from `mycms_doc_publication`);
+CREATE VIEW `mycms_publication_doc` AS (select `mycms_doc_publication`.`doc_id` AS `doc_id`,`mycms_doc_publication`.`publication_id` AS `publication_id` from `mycms_doc_publication`);
 
 -- --------------------------------------------------------
 
@@ -391,7 +391,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_publication_image`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_publication_image` AS (select `mycms_image_publication`.`image_id` AS `image_id`,`mycms_image_publication`.`publication_id` AS `publication_id` from `mycms_image_publication`);
+CREATE VIEW `mycms_publication_image` AS (select `mycms_image_publication`.`image_id` AS `image_id`,`mycms_image_publication`.`publication_id` AS `publication_id` from `mycms_image_publication`);
 
 -- --------------------------------------------------------
 
@@ -400,7 +400,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_publication_people`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_publication_people` AS (select `mycms_people_publication`.`people_id` AS `people_id`,`mycms_people_publication`.`publication_id` AS `publication_id` from `mycms_people_publication`);
+CREATE VIEW `mycms_publication_people` AS (select `mycms_people_publication`.`people_id` AS `people_id`,`mycms_people_publication`.`publication_id` AS `publication_id` from `mycms_people_publication`);
 
 -- --------------------------------------------------------
 
@@ -409,7 +409,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_publication_video`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_publication_video` AS (select `mycms_video_publication`.`video_id` AS `video_id`,`mycms_video_publication`.`publication_id` AS `publication_id` from `mycms_video_publication`);
+CREATE VIEW `mycms_publication_video` AS (select `mycms_video_publication`.`video_id` AS `video_id`,`mycms_video_publication`.`publication_id` AS `publication_id` from `mycms_video_publication`);
 
 -- --------------------------------------------------------
 
@@ -418,7 +418,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_research_image`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_research_image` AS (select `mycms_image_research`.`image_id` AS `image_id`,`mycms_image_research`.`research_id` AS `research_id` from `mycms_image_research`);
+CREATE VIEW `mycms_research_image` AS (select `mycms_image_research`.`image_id` AS `image_id`,`mycms_image_research`.`research_id` AS `research_id` from `mycms_image_research`);
 
 -- --------------------------------------------------------
 
@@ -427,7 +427,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_research_people`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_research_people` AS (select `mycms_people_research`.`people_id` AS `people_id`,`mycms_people_research`.`research_id` AS `research_id` from `mycms_people_research`);
+CREATE VIEW `mycms_research_people` AS (select `mycms_people_research`.`people_id` AS `people_id`,`mycms_people_research`.`research_id` AS `research_id` from `mycms_people_research`);
 
 -- --------------------------------------------------------
 
@@ -436,7 +436,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_research_publication`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_research_publication` AS (select `mycms_publication_research`.`publication_id` AS `publication_id`,`mycms_publication_research`.`research_id` AS `research_id` from `mycms_publication_research`);
+CREATE VIEW `mycms_research_publication` AS (select `mycms_publication_research`.`publication_id` AS `publication_id`,`mycms_publication_research`.`research_id` AS `research_id` from `mycms_publication_research`);
 
 -- --------------------------------------------------------
 
@@ -445,7 +445,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mycms_research_video`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mycms_research_video` AS (select `mycms_video_research`.`video_id` AS `video_id`,`mycms_video_research`.`research_id` AS `research_id` from `mycms_video_research`);
+CREATE VIEW `mycms_research_video` AS (select `mycms_video_research`.`video_id` AS `video_id`,`mycms_video_research`.`research_id` AS `research_id` from `mycms_video_research`);
 
 --
 -- Constraints for dumped tables
