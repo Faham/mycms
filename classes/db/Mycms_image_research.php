@@ -11,7 +11,7 @@ class Mycms_image_research extends DB_DataObject
 
     public $__table = 'mycms_image_research';    // table name
     public $image_id;                        // int(11)  not_null primary_key
-    public $research_id;                     // int(11)  not_null primary_key
+    public $research_id;                     // int(11)  not_null primary_key multiple_key
     public $image_order;                     // int(11)  
     public $research_order;                  // int(11)  
 

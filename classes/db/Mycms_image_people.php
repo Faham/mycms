@@ -11,7 +11,7 @@ class Mycms_image_people extends DB_DataObject
 
     public $__table = 'mycms_image_people';    // table name
     public $image_id;                        // int(11)  not_null primary_key
-    public $people_id;                       // int(11)  not_null primary_key
+    public $people_id;                       // int(11)  not_null primary_key multiple_key
     public $image_order;                     // int(11)  
     public $people_order;                    // int(11)  
 
