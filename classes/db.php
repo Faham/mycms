@@ -44,9 +44,9 @@ class db {
         $q = str_replace('!!!', 'mycms_', $q);
         $r = array('error' => false, 'rows' => array(), 'count' => 0, 'message' => '');
 
-        //if ($g['runmode'] ==  'debug') {
-        //    $g['error']->push($q);
-        //}
+        if ($g['DB_DataObject']['debug'] >  0) {
+            $g['error']->push($q);
+        }
 
         $res =& $this->_db->query($q);
         if (\PEAR::isError($res)) {

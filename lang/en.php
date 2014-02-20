@@ -31,6 +31,7 @@
 @define('L_ALUMNI', 'Alumni');
 @define('L_RECENT_VISITOR', 'Recent Visitor');
 @define('L_STAFF', 'Staff');
+@define('L_OTHER', 'Other');
 @define('L_CURRENT_RESEARCH', 'Current Research');
 @define('L_RECENT_PUBLICATIONS', 'Recent Publications');
 @define('L_VIEW_ALL', 'View All');
