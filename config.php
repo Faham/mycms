@@ -42,21 +42,23 @@ if (get_magic_quotes_gpc()) {
 
 //-----------------------------------------------------------------------------
 
-$time_start           = microtime(true);
-
-$g['total_q']      = 0;
-$g['host']         = $config['GLOBAL']['host'];
-$g['user']         = $config['GLOBAL']['user'];
-$g['default_lang'] = $config['GLOBAL']['default_lang'];
-$g['rewrite']      = true;
-$g['homepage']     = $config['GLOBAL']['homepage'];
-$g['fullpath']     = dirname(__FILE__) . '/';
-$g['weburl']       = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
-$g['content']      = array ();
+$time_start                   = microtime(true);
+$g['total_q']                 = 0;
+$g['host']                    = $config['GLOBAL']['host'];
+$g['user']                    = $config['GLOBAL']['user'];
+$g['default_lang']            = $config['GLOBAL']['default_lang'];
+$g['rewrite']                 = true;
+$g['homepage']                = $config['GLOBAL']['homepage'];
+$g['fullpath']                = dirname(__FILE__) . '/';
+$g['weburl']                  = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
+$g['content']                 = array ();
 $g['default_page_to_display'] = "templates/index.tpl";
-$g['lang'] = $g['default_lang'];
+$g['lang']                    = $g['default_lang'];
+$g['DB_DataObject']           = $config['DB_DataObject'];
+
+//-----------------------------------------------------------------------------
+
 include_once("lang/{$g['lang']}.php");
-$g['DB_DataObject'] = $config['DB_DataObject'];
 
 //-----------------------------------------------------------------------------
 

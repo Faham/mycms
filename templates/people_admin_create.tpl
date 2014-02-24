@@ -24,21 +24,21 @@
 			<label for="people_firstname">
 				First Name
 			</label>
-			<input type="text" name="people_firstname" id="people_firstname" required pattern="[a-zA-Zs]+">
+			<input type="text" name="people_firstname" id="people_firstname" required pattern="[\u00C0-\u1FFF\u2C00-\uD7FF\w\s]+">
 		</div>
 
 		<div id="people_middlename-container" class="field f_100">
 			<label for="people_middlename">
 				Middle Name
 			</label>
-			<input type="text" name="people_middlename" id="people_middlename" pattern="[a-zA-Zs]*">
+			<input type="text" name="people_middlename" id="people_middlename" pattern="[\u00C0-\u1FFF\u2C00-\uD7FF\w\s]*">
 		</div>
 
 		<div id="people_lastname-container" class="field f_100">
 			<label for="people_lastname">
 				Last Name
 			</label>
-			<input type="text" name="people_lastname" id="people_lastname" required pattern="[a-zA-Zs]+">
+			<input type="text" name="people_lastname" id="people_lastname" required pattern="[\u00C0-\u1FFF\u2C00-\uD7FF\w\s]+">
 		</div>
 
 		<div id="people_affiliation-container" class="field f_100">
@@ -75,6 +75,7 @@
 				<option id="people_group-5" value="undergraduate_student" >{t s='undergraduate_student' m=0}</option>
 				<option id="people_group-6" value="alumni"                >{t s='alumni'                m=0}</option>
 				<option id="people_group-7" value="recent_visitor"        >{t s='recent_visitor'        m=0}</option>
+				<option id="people_group-7" value="other"                 >{t s='other'                 m=0}</option>
 			</select>
 
 		</div>

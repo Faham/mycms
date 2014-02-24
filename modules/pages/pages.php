@@ -106,6 +106,7 @@ case 'research': {
 
 //-----------------------------------------------------------------------------
 
+case 'publication':
 case 'publications': {
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
