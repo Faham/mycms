@@ -1,5 +1,7 @@
 *.sublime-project
 *.sublime-workspace
+files/*
+!files/_files_go_here_
 temp
 templates_c/*.*
 schema/*.*
