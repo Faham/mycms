@@ -132,8 +132,8 @@ class people extends content {
 
 	public $displays = array(
 		'default' => array(
-			'image'	   => 'all',
-			'research'	=> 'all',
+			'image'	      => 'all',
+			'research'	  => 'all',
 			'publication' => 'all'),
 		'teaser' => array(
 			'image' => 'max'),
@@ -177,8 +177,8 @@ class research extends content {
 
 	public $displays = array(
 		'default' => array(
-			'image'	   => 'all',
-			'video'	   => 'all',
+			'image'	      => 'all',
+			'video'	      => 'all',
 			'people'	  => 'all',
 			'publication' => 'all'),
 		'teaser' => array(
@@ -303,7 +303,7 @@ class download extends content {
 
 	public $displays = array(
 		'default' => array(),
-		'teaser' => array()
+		'teaser'  => array()
 	);
 
 	public function __construct() {
