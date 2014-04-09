@@ -167,7 +167,7 @@ function save_file ($ct, $ct_id, $file, $type) {
 			move_uploaded_file($file["tmp_name"], "files/$ct/$type/$id.$ext");
 
 			$g['db']->query("UPDATE !!!$type SET {$type}_filename = '$id.$ext' WHERE {$type}_id = $id");
-			$g['db']->query("INSERT INTO !!!{$ct}_$type ({$type}_id , {$ct}_id) VALUES ($id,  $ct_id)");
+			$g['db']->query("INSERT INTO !!!{$type}_$ct ({$type}_id , {$ct}_id) VALUES ($id,  $ct_id)");
 
 			if ($type == 'image') {
 				if (!file_exists("files/$ct/$type/thumb"))
