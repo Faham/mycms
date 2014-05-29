@@ -9,7 +9,7 @@ timezone     = 'America/Regina'
 runmode      = 'debug'
 
 [DB_DataObject]
-database          = mysql://root:@localhost/mycms
+database          = mysql://root:pass@localhost/mycms
 schema_location   = schema
 class_location    = schema
 require_prefix    = schema
