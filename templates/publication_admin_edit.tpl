@@ -288,6 +288,8 @@
 			</label>
 			<input type="file" name="image" accept="image/*"/>
 			{include "templates/snippets/image_thumb_list.tpl" image=$publication.image content='publication'}
+			<!--remove image link-->
+			<a class="remove" href='{gl url="admin/publication/removeImage"}/{$publication.publication_id}'>remove image</a>
 		</div>
 
 		<div id="video-container" class="field f_100">
@@ -296,6 +298,8 @@
 			</label>
 			<input type="file" name="video" accept="video/*"/>
 			{include "templates/snippets/video_list.tpl" video=$publication.video content='publication'}
+			<!--remove video link-->
+			<a class="remove" href='{gl url="admin/publication/removeVideo"}/{$publication.publication_id}'>remove video</a>
 		</div>
 
 		<div id="doc-container" class="field f_100">
@@ -304,6 +308,8 @@
 			</label>
 			<input type="file" name="doc"/>
 			{include "templates/snippets/doc_list.tpl" doc=$publication.doc content='publication'}
+			<!--remove doc link-->
+			<a class="remove" href='{gl url="admin/publication/removeDoc"}/{$publication.publication_id}'>remove document</a>
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">

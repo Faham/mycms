@@ -183,8 +183,20 @@ $(document).ready(function()
                     error(data.message);
                 }
             });
-        } else if (input.hasClass('find')) {
+        }/* else if (input.hasClass('find')) {
             window.location.href = weburl + 'admin/' + s.data('type') + '/view/' + s.data('id');
+        }*/
+        /******************************************************************************************/
+        //modify redirect of URL, implement for search boxes those are in normal user pages -- people/research/publications
+        else if (input.hasClass('find')) {
+            if(window.location.href.indexOf("admin") > -1){
+                window.location.href = weburl + 'admin/' + s.data('type') + '/view/' + s.data('id');
+            }else if(window.location.href.indexOf("publication") > -1){
+                window.location.href = weburl + s.data('type') + 's/' + s.data('id');
+            }else {
+                window.location.href = weburl + s.data('type') + '/' + s.data('id');
+            }
+
         }
     }
 
@@ -380,4 +392,39 @@ $(document).ready(function()
 });
 
 //-----------------------------------------------------------------------------
+/*add on show/hide js code*/
+$(document).ready(function () {
+    research_count = $(".research_list li").size();
+    x=3;
+    $('.research_list li:lt('+x+')').show();
+    $('#loadAllResearch').click(function () {
+        x=research_count;
+        $('.research_list li:lt('+x+')').show();
+        $('#showLessResearch').show();
+        $('#loadAllResearch').hide();
+    });
 
+    $('#showLessResearch').click(function () {
+        x=3;
+        $('.research_list li').not(':lt('+x+')').hide();
+        $('#loadAllResearch').show();
+        $('#showLessResearch').hide();
+    });
+    publication_count = $(".publication_list li").size();
+    x=3;
+    $('.publication_list li:lt('+x+')').show();
+    $('#loadAllPublication').click(function () {
+        x=publication_count;
+        $('.publication_list li:lt('+x+')').show();
+        $('#showLessPublication').show();
+        $('#loadAllPublication').hide();
+    });
+
+    $('#showLessPublication').click(function () {
+        x=3;
+        $('.publication_list li').not(':lt('+x+')').hide();
+        $('#loadAllPublication').show();
+        $('#showLessPublication').hide();
+    });
+});
+/***************************************************************************/

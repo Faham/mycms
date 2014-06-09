@@ -1,6 +1,15 @@
 
 {*---------------------------------------------------------------------------*}
-
+<!--search box-->
+<form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
+		action='{gl url="people"}'>
+	<div id="people-container" class="field f_100">
+		<label for="people">
+			Find people
+		</label>
+		<input class="find" autocomplete=off type="text" name="people" placeholder="search"/>
+	</div>
+</form>
 <h2>{t s=People m=0}</h2>
 <img id="peoplephoto" src="{$weburl}static/images/people2012.jpg"/>
 {if isset($people)}

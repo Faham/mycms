@@ -74,10 +74,14 @@ function validate ($type, &$v) {
 	  case 'int': {
 	  	if (is_int($val))
 	  		$val = intval($val);
+	  	//*********
+	  	//This part of codes I tried to comment them then the priority part in research admin interface would work.
+	  	//Harvey
 		$format = preg_split("/,/", $format);
 		if ((count($format) >= 1 && $val < $format[0]) ||
 			(count($format) >= 2 && $val > $format[1]))
 			$val = false;
+		//*********
 		break;
 	} case 'alphabetic': {
 		break;
@@ -221,7 +225,45 @@ $content = 'unknown';
 if (array_key_exists($ct, $g['content'])) {
 	$content = $g['content'][$ct];
 }
-
+//******************************************
+//This part is added on for remove image/video/document feature.  --Harvey
+//remove image from edit interface
+function removeImage($ct, $id) {
+	global $g;
+	$db = $g['db'];
+	$ctdb = $g['content'][$ct];
+	foreach ($ctdb->references as $v) {//$v - validate type 
+		echo $v;
+		if ($v == 'image')
+			remove_file($ct, $id, $v);
+	}
+	return true;
+}
+//remove video from edit interface
+function removeVideo($ct, $id) {
+	global $g;
+	$db = $g['db'];
+	$ctdb = $g['content'][$ct];
+	foreach ($ctdb->references as $v) {//$v - validate type 
+		echo $v;
+		if ($v == 'video')
+			remove_file($ct, $id, $v);
+	}
+	return true;
+}
+//remove doc from edit interface
+function removeDoc($ct, $id) {
+	global $g;
+	$db = $g['db'];
+	$ctdb = $g['content'][$ct];
+	foreach ($ctdb->references as $v) {//$v - validate type 
+		echo $v;
+		if ($v == 'doc')
+			remove_file($ct, $id, $v);
+	}
+	return true;
+}
+//******************************************
 //-----------------------------------------------------------------------------
 
 if ('unknown' == $content) {
@@ -283,6 +325,141 @@ else if (checkparams(array(
 
 	$g['template'] = $ct . '_admin_create';
 }
+
+//******************************************
+//This parts are modified from functions of operation remove and edit. --Harvey
+//remove image
+else if (checkparams(array(
+	'operation' => 'removeImage',
+	'_isset'    => array('id')))) {
+	$id = $_GET['id'];
+
+	if (removeImage($ct, $id)) {
+		$g['error']->push("Image of 1 $ct removed successfully");
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
+	}
+	$r = $content->get($_GET['id']);
+	if ($r == 1) {
+
+		foreach ($_POST as $k => $v) {
+			if (property_exists("\\mycms\\$ct", $k)) {
+				if (validate($content->field_type[$k], $v))
+					$content->$k = $v;
+				else
+					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
+			}
+		}
+
+		{
+			$res = $content->update();
+			if (false === $res)
+				$g['error']->push("An error occured while trying to update a $ct.", 'error');
+			else
+				$g['error']->push("$ct updated successfully.");
+		}
+
+		$id = $_GET['id'];
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
+		if (!$r['error'] && $r['count'] > 0) {
+			$g['smarty']->assign($ct, $r['rows'][0]);
+			$g['template'] = $ct . '_admin_edit';
+		} else {
+			$g['error']->push("No $ct found with id " . $id, 'error');
+		}
+	} else if ($r == 0) {
+		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
+	}
+}
+
+//remove video
+else if (checkparams(array(
+	'operation' => 'removeVideo',
+	'_isset'    => array('id')))) {
+	$id = $_GET['id'];
+
+	if (removeVideo($ct, $id)) {
+		$g['error']->push("Video of 1 $ct removed successfully");
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
+	}
+	$r = $content->get($_GET['id']);
+	if ($r == 1) {
+
+		foreach ($_POST as $k => $v) {
+			if (property_exists("\\mycms\\$ct", $k)) {
+				if (validate($content->field_type[$k], $v))
+					$content->$k = $v;
+				else
+					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
+			}
+		}
+
+		{
+			$res = $content->update();
+			if (false === $res)
+				$g['error']->push("An error occured while trying to update a $ct.", 'error');
+			else
+				$g['error']->push("$ct updated successfully.");
+		}
+
+		$id = $_GET['id'];
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
+		if (!$r['error'] && $r['count'] > 0) {
+			$g['smarty']->assign($ct, $r['rows'][0]);
+			$g['template'] = $ct . '_admin_edit';
+		} else {
+			$g['error']->push("No $ct found with id " . $id, 'error');
+		}
+	} else if ($r == 0) {
+		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
+	}
+}
+
+//remove document
+else if (checkparams(array(
+	'operation' => 'removeDoc',
+	'_isset'    => array('id')))) {
+	$id = $_GET['id'];
+
+	if (removeDoc($ct, $id)) {
+		$g['error']->push("Video of 1 $ct removed successfully");
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
+	}
+	$r = $content->get($_GET['id']);
+	if ($r == 1) {
+
+		foreach ($_POST as $k => $v) {
+			if (property_exists("\\mycms\\$ct", $k)) {
+				if (validate($content->field_type[$k], $v))
+					$content->$k = $v;
+				else
+					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
+			}
+		}
+
+		{
+			$res = $content->update();
+			if (false === $res)
+				$g['error']->push("An error occured while trying to update a $ct.", 'error');
+			else
+				$g['error']->push("$ct updated successfully.");
+		}
+
+		$id = $_GET['id'];
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
+		if (!$r['error'] && $r['count'] > 0) {
+			$g['smarty']->assign($ct, $r['rows'][0]);
+			$g['template'] = $ct . '_admin_edit';
+		} else {
+			$g['error']->push("No $ct found with id " . $id, 'error');
+		}
+	} else if ($r == 0) {
+		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
+	}
+}
+//******************************************
 
 //-----------------------------------------------------------------------------
 
