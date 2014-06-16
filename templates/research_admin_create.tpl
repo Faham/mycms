@@ -82,9 +82,19 @@
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
 			<div id="image_div">
-			<input type="file" name="image[]" accept="image/*"/>
-			<input type="file" name="image[]" accept="image/*"/>
+				<input type="file" name="image[]" accept="image/*"/>
+				<!--<div class="image_list"><input type="file" name="image[]" accept="image/*"/></div>-->
+				<button id="addMoreImage">Add More Images</button>
 			</div>
+			<div id="addtionalImages">
+				<ol class="image_list">
+					
+				</ol>
+			</div>
+			
+
+			<!--<p><a href="#" id="addMoreImage">add more images</a></p>-->
+			
 			<!--AddFormField-->
 			
 			<!--<button id="add_image" >more image</button>-->

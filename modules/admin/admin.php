@@ -23,6 +23,7 @@ if(!isset($_GET['content'])) $_GET['content'] = 'people';
 $ct = strtolower($_GET['content']);
 $g['template'] = $ct . '_admin_create';
 $err = false;
+//-----------------------------------------------------------------------------
 
 // Set main menu options
 $menu = array(
@@ -149,22 +150,21 @@ function remove_file($ct, $id, $type) {
 		//delete files loop
 		foreach ($r['rows'] as $v) {
 			if (file_exists("files/$ct/$type/" . $v["{$type}_filename"]))
-				unlink("files/$ct/$type/" . $v["{$type}_filename"]);
+				unlink("files/$ct/$type/" . $v["{$type}_filename"]);//delete this file if it is existed
 			if ('image' == $type && file_exists("files/$ct/$type/thumb/" . $v["{$type}_filename"]))
-				unlink("files/$ct/$type/thumb/" . $v["{$type}_filename"]);
-			$resrc->get($v["{$type}_id"]);
-			$resrc->delete();
+				unlink("files/$ct/$type/thumb/" . $v["{$type}_filename"]);//delete thumb if it is existed
+			$resrc->get($v["{$type}_id"]);//get mysql's record of this file
+			$resrc->delete();//delete it
 		}
 	}
 }
 //*********************************************************************************
 //remove specific file
-function remove_file_specific($ct, $id, $type, $filename) {
+function remove_file_specific($ct, $id, $type) {
 	global $g;
 	$db = $g['db'];
 	$r = $db->query(
-		"SELECT t.{$type}_id, t.{$type}_filename FROM !!!$type AS t WHERE t.{$type}_id IN
-		(SELECT {$type}_id FROM !!!{$type}_$ct AS _ct WHERE _ct.{$ct}_id = $id)"
+		"SELECT t.{$type}_id, t.{$type}_filename FROM !!!$type AS t WHERE t.{$type}_id={$id}"
 	);
 	if (!$r['error'] && $r['count'] > 0) {
 		$resrc = $g['content'][$type];
@@ -230,6 +230,7 @@ function remove($ct, $id) {
 	$db = $g['db'];
 	$ctdb = $g['content'][$ct];
 	foreach ($ctdb->references as $v) {
+		//echo $v;
 		if ($v == 'image' || $v == 'video' || $v == 'doc')
 			remove_file($ct, $id, $v);
 	}
@@ -249,14 +250,39 @@ if (array_key_exists($ct, $g['content'])) {
 	$content = $g['content'][$ct];
 }
 //******************************************
-function removeImage($ct, $id, $filename) {
+//remove image whose id is $id
+function removeImage($ct, $id) {
 	global $g;
 	$db = $g['db'];
 	$ctdb = $g['content'][$ct];
-	foreach ($ctdb->references as $v) {//$v - validate type 
-		echo $v;
+	foreach ($ctdb->references as $v) {//$v - validate type
+		//echo $v;
 		if ($v == 'image')
-			remove_file_specific($ct, $id, $v, $filename);
+			remove_file_specific($ct, $id, $v);
+	}
+	return true;
+}
+//remove video whose id is $id
+function removeVideo($ct, $id) {
+	global $g;
+	$db = $g['db'];
+	$ctdb = $g['content'][$ct];
+	foreach ($ctdb->references as $v) {//$v - validate type
+		//echo $v;
+		if ($v == 'video')
+			remove_file_specific($ct, $id, $v);
+	}
+	return true;
+}
+//remove document whose id is $id
+function removeDoc($ct, $id) {
+	global $g;
+	$db = $g['db'];
+	$ctdb = $g['content'][$ct];
+	foreach ($ctdb->references as $v) {//$v - validate type
+		//echo $v;
+		if ($v == 'doc')
+			remove_file_specific($ct, $id, $v);
 	}
 	return true;
 }
@@ -269,8 +295,8 @@ function removeAllImages($ct, $id) {
 	global $g;
 	$db = $g['db'];
 	$ctdb = $g['content'][$ct];
-	foreach ($ctdb->references as $v) {//$v - validate type 
-		echo $v;
+	foreach ($ctdb->references as $v) {//$v - validate type
+		//echo $v;
 		if ($v == 'image')
 			remove_file($ct, $id, $v);
 	}
@@ -281,8 +307,8 @@ function removeAllVideos($ct, $id) {
 	global $g;
 	$db = $g['db'];
 	$ctdb = $g['content'][$ct];
-	foreach ($ctdb->references as $v) {//$v - validate type 
-		echo $v;
+	foreach ($ctdb->references as $v) {//$v - validate type
+		//echo $v;
 		if ($v == 'video')
 			remove_file($ct, $id, $v);
 	}
@@ -293,8 +319,8 @@ function removeAllDocs($ct, $id) {
 	global $g;
 	$db = $g['db'];
 	$ctdb = $g['content'][$ct];
-	foreach ($ctdb->references as $v) {//$v - validate type 
-		echo $v;
+	foreach ($ctdb->references as $v) {//$v - validate type
+		//echo $v;
 		if ($v == 'doc')
 			remove_file($ct, $id, $v);
 	}
@@ -453,15 +479,19 @@ else if (checkparams(array(
 else if (checkparams(array(
 	'operation' => 'removeImage',
 	'_isset'    => array('id')))) {
-	$id = $_GET['id'];
-	$filename = $_GET['filename'];
-	echo $filename;
-	if (removeImage($ct, $id, $filename)) {
+	$id = explode("--",$_GET['id'])[0];
+	$contentId = explode("--",$_GET['id'])[1];
+	//$filename = $_GET['name'];
+	//echo $_GET['id'];
+	//echo $id;
+	//echo $researchId;
+
+	if (removeImage($ct, $id)) {
 		$g['error']->push("Image of 1 $ct removed successfully");
 	} else {
 		$g['error']->push("No $ct found with id " . $id, 'error');
 	}
-	$r = $content->get($_GET['id']);
+	$r = $content->get($contentId);
 	if ($r == 1) {
 
 		foreach ($_POST as $k => $v) {
@@ -482,15 +512,111 @@ else if (checkparams(array(
 		}
 
 		$id = $_GET['id'];
-		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $id");
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $contentId");
 		if (!$r['error'] && $r['count'] > 0) {
 			$g['smarty']->assign($ct, $r['rows'][0]);
 			$g['template'] = $ct . '_admin_edit';
 		} else {
-			$g['error']->push("No $ct found with id " . $id, 'error');
+			$g['error']->push("No $ct found with id " . $contentId, 'error');
 		}
 	} else if ($r == 0) {
-		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
+		$g['error']->push("No $ct found with id " . $contentId, 'error');
+	}
+}
+//remove specific video
+else if (checkparams(array(
+	'operation' => 'removeVideo',
+	'_isset'    => array('id')))) {
+	$id = explode("--",$_GET['id'])[0];
+	$contentId = explode("--",$_GET['id'])[1];
+	//$filename = $_GET['name'];
+	//echo $_GET['id'];
+	//echo $id;
+	//echo $researchId;
+
+	if (removeVideo($ct, $id)) {
+		$g['error']->push("Video of 1 $ct removed successfully");
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
+	}
+	$r = $content->get($contentId);
+	if ($r == 1) {
+
+		foreach ($_POST as $k => $v) {
+			if (property_exists("\\mycms\\$ct", $k)) {
+				if (validate($content->field_type[$k], $v))
+					$content->$k = $v;
+				else
+					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
+			}
+		}
+
+		{
+			$res = $content->update();
+			if (false === $res)
+				$g['error']->push("An error occured while trying to update a $ct.", 'error');
+			else
+				$g['error']->push("$ct updated successfully.");
+		}
+
+		$id = $_GET['id'];
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $contentId");
+		if (!$r['error'] && $r['count'] > 0) {
+			$g['smarty']->assign($ct, $r['rows'][0]);
+			$g['template'] = $ct . '_admin_edit';
+		} else {
+			$g['error']->push("No $ct found with id " . $contentId, 'error');
+		}
+	} else if ($r == 0) {
+		$g['error']->push("No $ct found with id " . $contentId, 'error');
+	}
+}
+//remove specific document
+else if (checkparams(array(
+	'operation' => 'removeDoc',
+	'_isset'    => array('id')))) {
+	$id = explode("--",$_GET['id'])[0];
+	$contentId = explode("--",$_GET['id'])[1];
+	//$filename = $_GET['name'];
+	//echo $_GET['id'];
+	//echo $id;
+	//echo $researchId;
+
+	if (removeDoc($ct, $id)) {
+		$g['error']->push("Document of 1 $ct removed successfully");
+	} else {
+		$g['error']->push("No $ct found with id " . $id, 'error');
+	}
+	$r = $content->get($contentId);
+	if ($r == 1) {
+
+		foreach ($_POST as $k => $v) {
+			if (property_exists("\\mycms\\$ct", $k)) {
+				if (validate($content->field_type[$k], $v))
+					$content->$k = $v;
+				else
+					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
+			}
+		}
+
+		{
+			$res = $content->update();
+			if (false === $res)
+				$g['error']->push("An error occured while trying to update a $ct.", 'error');
+			else
+				$g['error']->push("$ct updated successfully.");
+		}
+
+		$id = $_GET['id'];
+		$r = $g['content'][$ct]->view('default', "$ct.{$ct}_id = $contentId");
+		if (!$r['error'] && $r['count'] > 0) {
+			$g['smarty']->assign($ct, $r['rows'][0]);
+			$g['template'] = $ct . '_admin_edit';
+		} else {
+			$g['error']->push("No $ct found with id " . $contentId, 'error');
+		}
+	} else if ($r == 0) {
+		$g['error']->push("No $ct found with id " . $contentId, 'error');
 	}
 }
 //************************************************************************************

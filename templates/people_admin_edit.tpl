@@ -200,7 +200,7 @@
 			</label>
 			<input type="file" name="image[]" accept="image/*"/>
 			<input type="file" name="image[]" accept="image/*"/>
-			{include "templates/snippets/image_thumb_list.tpl" image=$people.image content='people'}
+			{include "templates/snippets/image_thumb_list.tpl" image=$people.image content='people' contentId=$people.people_id}
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/people/removeAllImages"}/{$people.people_id}'>remove all images</a>
 		</div>

@@ -389,12 +389,7 @@ $(document).ready(function()
 
 //-----------------------------------------------------------------------------
 
-});
-
-//-----------------------------------------------------------------------------
-/***************************************************************************/
 /*add on show/hide js code*/
-$(document).ready(function () {
     research_count = $(".research_list li").size();
     x=3;
     $('.research_list li:lt('+x+')').show();
@@ -427,18 +422,16 @@ $(document).ready(function () {
         $('#loadAllPublication').show();
         $('#showLessPublication').hide();
     });
-});
-/***************************************************************************/
+//-----------------------------------------------------------------------------
 //insert form element input on demand
-$(document).ready(function(){
-    image_count=0;
-    $("button#add_image").click(function(){
-        image_count = image_count + 1;
-        $("div.uploader#uniform-image").clone().attr("id", "uniform-image"+image_count).appendTo("div#image_div");
+    $('#addMoreImage').click(function (){
+        $('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
     });
-    /*video_count=0;
-    $("button#add_video").click(function(){
-        video_count = video_count + 1;
-        $("div.uploader#uniform-video").clone().attr("id", "video_upload"+video_count).appendTo("div#image_div");
-    });*/
+    $("#addtionalImages").on("click", "#remove", function () {
+        $(this).parent('li').remove();
+    });   
+    $('#testrm').click(function(){
+        $(this).parent("li").remove();
+    });
+//-----------------------------------------------------------------------------
 });

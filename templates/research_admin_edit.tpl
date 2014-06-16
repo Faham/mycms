@@ -112,7 +112,7 @@
 			</label>
 			<input type="file" name="image[]" accept="image/*"/>
 			<input type="file" name="image[]" accept="image/*"/>
-			{include "templates/snippets/image_thumb_list.tpl" image=$research.image content='research'}
+			{include "templates/snippets/image_thumb_list.tpl" image=$research.image content='research' contentId=$research.research_id}
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/research/removeAllImages"}/{$research.research_id}'>remove all images</a>
 		</div>
@@ -123,7 +123,7 @@
 			</label>
 			<input type="file" name="video[]" accept="video/*"/>
 			<input type="file" name="video[]" accept="video/*"/>
-			{include "templates/snippets/video_list.tpl" video=$research.video content='research'}
+			{include "templates/snippets/video_list.tpl" video=$research.video content='research' contentId=$research.research_id}
 			<!--remove video link-->
 			<a class="remove" href='{gl url="admin/research/removeAllVideos"}/{$research.research_id}'>remove all videos</a>
 		</div>

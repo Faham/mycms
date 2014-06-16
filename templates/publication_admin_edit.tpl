@@ -288,7 +288,7 @@
 			</label>
 			<input type="file" name="image[]" accept="image/*"/>
 			<input type="file" name="image[]" accept="image/*"/>
-			{include "templates/snippets/image_thumb_list.tpl" image=$publication.image content='publication'}
+			{include "templates/snippets/image_thumb_list.tpl" image=$publication.image content='publication' contentId=$publication.publication_id}
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/publication/removeAllImages"}/{$publication.publication_id}'>remove all images</a>
 		</div>
@@ -299,7 +299,7 @@
 			</label>
 			<input type="file" name="video[]" accept="video/*"/>
 			<input type="file" name="video[]" accept="video/*"/>
-			{include "templates/snippets/video_list.tpl" video=$publication.video content='publication'}
+			{include "templates/snippets/video_list.tpl" video=$publication.video content='publication' contentId=$publication.publication_id}
 			<!--remove video link-->
 			<a class="remove" href='{gl url="admin/publication/removeAllVideos"}/{$publication.publication_id}'>remove all videos</a>
 		</div>
@@ -310,7 +310,7 @@
 			</label>
 			<input type="file" name="doc[]"/>
 			<input type="file" name="doc[]"/>
-			{include "templates/snippets/doc_list.tpl" doc=$publication.doc content='publication'}
+			{include "templates/snippets/doc_list.tpl" doc=$publication.doc content='publication' contentId=$publication.publication_id}
 			<!--remove doc link-->
 			<a class="remove" href='{gl url="admin/publication/removeAllDocs"}/{$publication.publication_id}'>remove all documents</a>
 		</div>
