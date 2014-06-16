@@ -110,20 +110,22 @@
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
 			{include "templates/snippets/image_thumb_list.tpl" image=$research.image content='research'}
 			<!--remove image link-->
-			<a class="remove" href='{gl url="admin/research/removeImage"}/{$research.research_id}'>remove image</a>
+			<a class="remove" href='{gl url="admin/research/removeAllImages"}/{$research.research_id}'>remove all images</a>
 		</div>
 
 		<div id="video-container" class="field f_100">
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<input type="file" name="video" accept="video/*"/>
+			<input type="file" name="video[]" accept="video/*"/>
+			<input type="file" name="video[]" accept="video/*"/>
 			{include "templates/snippets/video_list.tpl" video=$research.video content='research'}
 			<!--remove video link-->
-			<a class="remove" href='{gl url="admin/research/removeVideo"}/{$research.research_id}'>remove video</a>
+			<a class="remove" href='{gl url="admin/research/removeAllVideos"}/{$research.research_id}'>remove all videos</a>
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">

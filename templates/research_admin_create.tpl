@@ -81,7 +81,13 @@
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image" accept="image/*"/>
+			<div id="image_div">
+			<input type="file" name="image[]" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
+			</div>
+			<!--AddFormField-->
+			
+			<!--<button id="add_image" >more image</button>-->
 			<div class="image-thumb-list">
 			</div>
 		</div>
@@ -90,7 +96,11 @@
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<input type="file" name="video" accept="video/*"/>
+			<div id="video_div">
+			<input type="file" name="video[]" accept="video/*"/>
+			<input type="file" name="video[]" accept="video/*"/>
+			</div>
+			<!--<button id="add_video">more video</button>-->
 			<div class="video-list">
 			</div>
 		</div>

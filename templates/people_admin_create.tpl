@@ -120,7 +120,8 @@
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
 			<div class="image-thumb-list">
 			</div>
 		</div>

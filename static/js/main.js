@@ -392,6 +392,7 @@ $(document).ready(function()
 });
 
 //-----------------------------------------------------------------------------
+/***************************************************************************/
 /*add on show/hide js code*/
 $(document).ready(function () {
     research_count = $(".research_list li").size();
@@ -428,3 +429,16 @@ $(document).ready(function () {
     });
 });
 /***************************************************************************/
+//insert form element input on demand
+$(document).ready(function(){
+    image_count=0;
+    $("button#add_image").click(function(){
+        image_count = image_count + 1;
+        $("div.uploader#uniform-image").clone().attr("id", "uniform-image"+image_count).appendTo("div#image_div");
+    });
+    /*video_count=0;
+    $("button#add_video").click(function(){
+        video_count = video_count + 1;
+        $("div.uploader#uniform-video").clone().attr("id", "video_upload"+video_count).appendTo("div#image_div");
+    });*/
+});

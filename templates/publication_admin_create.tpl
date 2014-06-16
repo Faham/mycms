@@ -265,7 +265,8 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
+			<input type="file" name="image[]" accept="image/*"/>
 			<div class="image-list">
 			</div>
 		</div>
@@ -274,7 +275,8 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<input type="file" name="video" accept="video/*"/>
+			<input type="file" name="video[]" accept="video/*"/>
+			<input type="file" name="video[]" accept="video/*"/>
 			<div class="video-list">
 			</div>
 		</div>
@@ -283,7 +285,8 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<label for="doc">
 				Upload document<div class="smalltext">(.pdf)</div>
 			</label>
-			<input type="file" name="doc"/>
+			<input type="file" name="doc[]"/>
+			<input type="file" name="doc[]"/>
 			<div class="doc-list">
 			</div>
 		</div>
