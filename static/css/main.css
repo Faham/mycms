@@ -524,7 +524,6 @@ input.refrence, input.find {
 }
 
 .doc-list, .video-list, .image-thumb-list {
-	position: relative;
 	float: left;
 	padding: 0px 10px;
 }
@@ -583,6 +582,6 @@ a.view-all {
     color:black;
 }
 /*************************/
-.image_list{
+.image_list .video_list .doc_list{
 	float: left;
 }

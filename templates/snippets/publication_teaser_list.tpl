@@ -5,7 +5,7 @@
 	<ul class="publication_list"><!--use ul-li to implement show/hide-->
 		{if not isset($group) or not $group}
 		{for $i=0; $i < $publication.count; $i++}
-			<li>{include "templates/snippets/publication_teaser.tpl" publication=$publication.rows[$i]}</li>
+			<li class="publication_li">{include "templates/snippets/publication_teaser.tpl" publication=$publication.rows[$i]}</li>
 		{/for}
 		{else}
 			{assign var=curgrp value=-1}
@@ -16,14 +16,14 @@
 					{$curgrp = $pub.publication_year}
 				{/if}
 				{if isset($pub.publication_year) and !empty($pub.publication_year)}
-					<li>{include "templates/snippets/publication_teaser.tpl" publication=$pub}</li>
+					<li class="publication_li">{include "templates/snippets/publication_teaser.tpl" publication=$pub}</li>
 				{/if}
 			{/for}
 			{include "templates/snippets/section_title.tpl" title={t s='unknown' m=0}}
 			{for $i=0; $i < $publication.count; $i++}
 				{assign var=pub value=$publication.rows[$i]}
 				{if !isset($pub.publication_year) or empty($pub.publication_year)}
-					<li>{include "templates/snippets/publication_teaser.tpl" publication=$pub}</li>
+					<li class="publication_li">{include "templates/snippets/publication_teaser.tpl" publication=$pub}</li>
 				{/if}
 			{/for}
 		{/if}

@@ -26,7 +26,6 @@
 				<img src="{$weburl}files/people/image/{$people.image.rows[$i].image_filename}" class="imagewrap" align="left" />
 			{/for}
 		{/if}
-
 		{if isset($people.publication) and $people.publication.count > 0}
 			{include "templates/snippets/section_title.tpl" title={t s=Publications m=0}}
 			{include "templates/snippets/publication_teaser_list.tpl" publication=$people.publication}

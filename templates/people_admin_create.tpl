@@ -117,12 +117,12 @@
 		</div>
 
 		<div id="image-container" class="field f_100">
-			<label for="image">
+			<label for="image" class="label">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<div id="image_div">
+			<div class="original_div">
 				<input type="file" name="image[]" accept="image/*"/>
-				<a class="addImage"><font size="3">Add More Images</font></a>
+				<a class="addImage"><font size="2">Add More Images</font></a>
 			</div>
 			<div class="addtionalImages">
 				<ol class="image_list">

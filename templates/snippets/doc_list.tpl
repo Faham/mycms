@@ -9,7 +9,7 @@
 		<a  id="doc-{$i}" href='{gl url="files/{$content}/doc/{$dc.doc_filename}"}'/>
 			<li>
 				<img class="docimage" src='{gl url="static/images/pdf.png"}'/>
-				<p><a class="remove" href='{gl url="admin/{$content}/removeDoc"}/{$dc.doc_id}--{$contentId}'><font size="3">remove document</font></a></p>
+				<p><a class="remove" href='{gl url="admin/{$content}/removeDoc"}/{$dc.doc_id}--{$contentId}'><font size="2">remove document</font></a></p>
 			</li>
 		</a>
 	{/for}

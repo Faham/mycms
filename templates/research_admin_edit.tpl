@@ -107,32 +107,31 @@
 		</div>
 
 		<div id="image-container" class="field f_100">
-			<label for="image">
+			<label for="image" class="label">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<div id="image_div">
+			<div class="original_div">
 				<input type="file" name="image[]" accept="image/*"/>
-				<a class="addImage"><font size="3">Add More Images</font></a>
+				<a class="addImage"><font size="2">Add More Images</font></a>
 			</div>
 			<div class="addtionalImages">
+				<!--<span class="info"></span>-->
 				<ol class="image_list">
 					
 				</ol>
 			</div>
-			<div class="show_thumb">
 			{include "templates/snippets/image_thumb_list.tpl" image=$research.image content='research' contentId=$research.research_id}
-			</div>
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/research/removeAllImages"}/{$research.research_id}'>remove all images</a>
 		</div>
 
 		<div id="video-container" class="field f_100">
-			<label for="video">
+			<label for="video" class="label">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<div id="video_div">
+			<div class="original_div">
 				<input type="file" name="video[]" accept="video/*"/>
-				<a class="addVideo"><font size="3">Add More Videos</font></a>
+				<a class="addVideo"><font size="2">Add More Videos</font></a>
 			</div>
 			<div class="addtionalVideos">
 				<ol class="video_list">

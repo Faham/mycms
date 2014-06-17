@@ -390,60 +390,105 @@ $(document).ready(function()
 //-----------------------------------------------------------------------------
 
 /*add on show/hide js code*/
-    research_count = $(".research_list li").size();
-    x=3;
-    $('.research_list li:lt('+x+')').show();
+    //research
+    var research_count = $(".research_list li.research_li").length;//count the number of research
+    var x=3;//number of originally show
+    $('.research_list li.research_li:lt('+x+')').show();//the originally display
+    //$('.test').text(research_count+" of research.");
+    if(research_count<=3)//if the number of research is less than this number
+        $('#loadAllResearch').hide();//then hide the load all link
+    //load all rest research
     $('#loadAllResearch').click(function () {
-        x=research_count;
-        $('.research_list li:lt('+x+')').show();
-        $('#showLessResearch').show();
-        $('#loadAllResearch').hide();
+        x=research_count;//set the number of displaying to the number of researches
+        $('.research_list li.research_li:lt('+x+')').show();//show content
+        $('#showLessResearch').show();//show the show less link
+        $('#loadAllResearch').hide();//hide the load all link
     });
-
+    //show less/change to orignal display
     $('#showLessResearch').click(function () {
-        x=3;
-        $('.research_list li').not(':lt('+x+')').hide();
-        $('#loadAllResearch').show();
-        $('#showLessResearch').hide();
+        x=3;//set the number to orignal one
+        $('.research_list li.research_li').not(':lt('+x+')').hide();//hide the overflow contents
+        $('#loadAllResearch').show();//show the load all link
+        $('#showLessResearch').hide();//hide the show less link
     });
-    publication_count = $(".publication_list li").size();
-    x=3;
-    $('.publication_list li:lt('+x+')').show();
+    //publication
+    var publication_count = $(".publication_list li.publication_li").length;//count the number of publication
+    var x=3;//number of originally show
+    $('.publication_list li.publication_li:lt('+x+')').show();//the originally display
+    if(publication_count<=3)//if the number of publication is less than this number
+        $('#loadAllPublication').hide();//then hide the load all link
+    //load all rest research
     $('#loadAllPublication').click(function () {
-        x=publication_count;
-        $('.publication_list li:lt('+x+')').show();
-        $('#showLessPublication').show();
-        $('#loadAllPublication').hide();
+        x=publication_count;//set the number of displaying to the number of publications
+        $('.publication_list li.publication_li:lt('+x+')').show();//show content
+        $('#showLessPublication').show();//show the show less link
+        $('#loadAllPublication').hide();//hide the load all link
     });
-
+    //show less/change to orignal display
     $('#showLessPublication').click(function () {
-        x=3;
-        $('.publication_list li').not(':lt('+x+')').hide();
-        $('#loadAllPublication').show();
-        $('#showLessPublication').hide();
+        x=3;//set the number to orignal one
+        $('.publication_list li.publication_li').not(':lt('+x+')').hide();//hide the overflow contents
+        $('#loadAllPublication').show();//show the load all link
+        $('#showLessPublication').hide();//hide the show less link
     });
 //-----------------------------------------------------------------------------
 //insert form element input on demand
     $('.addImage').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
-        $('.image_list').append('<li class="addtional_image"><input type="file" name="image[]" accept="image/*"/><a class="rmImage"><font size="3">Remove<font></a></li>');
+        $('.image_list').append('<li class="addtional_image"><input type="file" name="image[]" accept="image/*"/><a class="rmImage"><font size="2">Remove<font></a></li>');
+        var number = $('.addtional_image').length;
+        //$('.info').text(number+" li.");
+        //limit number of addtional images
+        if(number>=5){
+            $('.addImage').hide();//hide add link
+        }
     });
     $(".image_list").on("click", ".rmImage", function () {
         $(this).parent("li").remove();
+        var number = $('.addtional_image').length;
+        //limit number of addtional images
+        if(number<5){
+            $('.addImage').show();//show add link
+        }
+        //$('.info').text(number+" li.");
     });
     $('.addVideo').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
-        $('.video_list').append('<li class="addtional_video"><input type="file" name="video[]" accept="video/*"/><a class="rmVideo"><font size="3">Remove<font></a></li>');
+        $('.video_list').append('<li class="addtional_video"><input type="file" name="video[]" accept="video/*"/><a class="rmVideo"><font size="2">Remove<font></a></li>');
+        var number = $('.addtional_video').length;
+        //$('.info').text(number+" li.");
+        //limit number of addtional videos
+        if(number>=5){
+            $('.addVideo').hide();//hide add link
+        }
     });
     $(".video_list").on("click", ".rmVideo", function () {
         $(this).parent("li").remove();
+        var number = $('.addtional_video').length;
+        //$('.info').text(number+" li.");
+        //limit number of addtional videos
+        if(number<5){
+            $('.addVideo').show();//show add link
+        }
     });
     $('.addDoc').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
-        $('.doc_list').append('<li class="addtional_doc"><input type="file" name="video[]" accept="video/*"/><a class="rmDoc"><font size="3">Remove<font></a></li>');
+        $('.doc_list').append('<li class="addtional_doc"><input type="file" name="video[]" accept="video/*"/><a class="rmDoc"><font size="2">Remove<font></a></li>');
+        var number = $('.addtional_doc').length;
+        //$('.info').text(number+" li.");
+        //limit number of addtional docs
+        if(number>=5){
+            $('.addDoc').hide();//hide add link
+        }
     });
     $(".doc_list").on("click", ".rmDoc", function () {
         $(this).parent("li").remove();
+        var number = $('.addtional_doc').length;
+        //$('.info').text(number+" li.");
+        //limit number of addtional docs
+        if(number<5){
+            $('.addDoc').show();//show add link
+        }
     });
 //-----------------------------------------------------------------------------
 });

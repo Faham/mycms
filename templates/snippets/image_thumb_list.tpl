@@ -8,7 +8,7 @@
 		{assign var=img value=$image.rows[$i]}
 		<li>
 			<img id="image-{$i}" src="{$weburl}files/{$content}/image/thumb/{$img.image_filename}"/>
-			<p><a class="remove" href='{gl url="admin/{$content}/removeImage"}/{$img.image_id}--{$contentId}'><font size="3">remove image</font></a></p>
+			<p><a class="remove" href='{gl url="admin/{$content}/removeImage"}/{$img.image_id}--{$contentId}'><font size="2">remove image</font></a></p>
 		</li>
 	{/for}
 {/if}

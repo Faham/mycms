@@ -10,12 +10,12 @@
 		{if {$publication.video|substr:0:-3} == 'mov'}
 			<li>
 				<img src='{gl url="static/images/mov.png"}' class="movie"/>
-				<p><a class="remove" href='{gl url="admin/{$content}/removeVideo"}/{$vid.video_id}--{$contentId}'><font size="3">remove video</font></a></p>
+				<p><a class="remove" href='{gl url="admin/{$content}/removeVideo"}/{$vid.video_id}--{$contentId}'><font size="2">remove video</font></a></p>
 			</li>
 		{else if {$publication.video|substr:0:-3} != 'mov'}
 			<li>
 				<img src='{gl url="static/images/wmv.png"}' class="movie"/>
-				<p><a class="remove" href='{gl url="admin/{$content}/removeVideo"}/{$vid.video_id}--{$contentId}'><font size="3">remove video</font></a></p>
+				<p><a class="remove" href='{gl url="admin/{$content}/removeVideo"}/{$vid.video_id}--{$contentId}'><font size="2">remove video</font></a></p>
 			</li>
 		{/if}
 		</a>
