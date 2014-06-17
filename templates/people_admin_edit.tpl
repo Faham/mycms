@@ -198,8 +198,15 @@
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image[]" accept="image/*"/>
-			<input type="file" name="image[]" accept="image/*"/>
+			<div id="image_div">
+				<input type="file" name="image[]" accept="image/*"/>
+				<a class="addImage"><font size="3">Add More Images</font></a>
+			</div>
+			<div class="addtionalImages">
+				<ol class="image_list">
+					
+				</ol>
+			</div>
 			{include "templates/snippets/image_thumb_list.tpl" image=$people.image content='people' contentId=$people.people_id}
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/people/removeAllImages"}/{$people.people_id}'>remove all images</a>

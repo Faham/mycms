@@ -110,9 +110,18 @@
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image[]" accept="image/*"/>
-			<input type="file" name="image[]" accept="image/*"/>
+			<div id="image_div">
+				<input type="file" name="image[]" accept="image/*"/>
+				<a class="addImage"><font size="3">Add More Images</font></a>
+			</div>
+			<div class="addtionalImages">
+				<ol class="image_list">
+					
+				</ol>
+			</div>
+			<div class="show_thumb">
 			{include "templates/snippets/image_thumb_list.tpl" image=$research.image content='research' contentId=$research.research_id}
+			</div>
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/research/removeAllImages"}/{$research.research_id}'>remove all images</a>
 		</div>
@@ -121,8 +130,15 @@
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<input type="file" name="video[]" accept="video/*"/>
-			<input type="file" name="video[]" accept="video/*"/>
+			<div id="video_div">
+				<input type="file" name="video[]" accept="video/*"/>
+				<a class="addVideo"><font size="3">Add More Videos</font></a>
+			</div>
+			<div class="addtionalVideos">
+				<ol class="video_list">
+					
+				</ol>
+			</div>
 			{include "templates/snippets/video_list.tpl" video=$research.video content='research' contentId=$research.research_id}
 			<!--remove video link-->
 			<a class="remove" href='{gl url="admin/research/removeAllVideos"}/{$research.research_id}'>remove all videos</a>

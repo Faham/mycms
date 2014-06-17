@@ -83,21 +83,14 @@
 			</label>
 			<div id="image_div">
 				<input type="file" name="image[]" accept="image/*"/>
-				<!--<div class="image_list"><input type="file" name="image[]" accept="image/*"/></div>-->
-				<button id="addMoreImage">Add More Images</button>
+				<a class="addImage"><font size="3">Add More Images</font></a>
 			</div>
-			<div id="addtionalImages">
+			<div class="addtionalImages">
 				<ol class="image_list">
 					
 				</ol>
 			</div>
 			
-
-			<!--<p><a href="#" id="addMoreImage">add more images</a></p>-->
-			
-			<!--AddFormField-->
-			
-			<!--<button id="add_image" >more image</button>-->
 			<div class="image-thumb-list">
 			</div>
 		</div>
@@ -107,11 +100,14 @@
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
 			<div id="video_div">
-			<input type="file" name="video[]" accept="video/*"/>
-			<input type="file" name="video[]" accept="video/*"/>
+				<input type="file" name="video[]" accept="video/*"/>
+				<a class="addVideo"><font size="3">Add More Videos</font></a>
 			</div>
 			<!--<button id="add_video">more video</button>-->
-			<div class="video-list">
+			<div class="addtionalVideos">
+				<ol class="video_list">
+					
+				</ol>
 			</div>
 		</div>
 

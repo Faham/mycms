@@ -7,7 +7,7 @@ $(document).ready(function()
 //-----------------------------------------------------------------------------
 
 	//Style selects, checkboxes, etc
-	$("select, input:checkbox, input:radio, input:file").uniform();
+	//$("select, input:checkbox, input:radio, input:file").uniform();
 
 	//Date and Range Inputs
 	$("input.date").dateinput();
@@ -424,13 +424,25 @@ $(document).ready(function()
     });
 //-----------------------------------------------------------------------------
 //insert form element input on demand
-    $('#addMoreImage').click(function (){
-        $('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
+    $('.addImage').click(function (){
+        //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
+        $('.image_list').append('<li class="addtional_image"><input type="file" name="image[]" accept="image/*"/><a class="rmImage"><font size="3">Remove<font></a></li>');
     });
-    $("#addtionalImages").on("click", "#remove", function () {
-        $(this).parent('li').remove();
-    });   
-    $('#testrm').click(function(){
+    $(".image_list").on("click", ".rmImage", function () {
+        $(this).parent("li").remove();
+    });
+    $('.addVideo').click(function (){
+        //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
+        $('.video_list').append('<li class="addtional_video"><input type="file" name="video[]" accept="video/*"/><a class="rmVideo"><font size="3">Remove<font></a></li>');
+    });
+    $(".video_list").on("click", ".rmVideo", function () {
+        $(this).parent("li").remove();
+    });
+    $('.addDoc').click(function (){
+        //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
+        $('.doc_list').append('<li class="addtional_doc"><input type="file" name="video[]" accept="video/*"/><a class="rmDoc"><font size="3">Remove<font></a></li>');
+    });
+    $(".doc_list").on("click", ".rmDoc", function () {
         $(this).parent("li").remove();
     });
 //-----------------------------------------------------------------------------

@@ -265,9 +265,14 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image[]" accept="image/*"/>
-			<input type="file" name="image[]" accept="image/*"/>
-			<div class="image-list">
+			<div id="image_div">
+				<input type="file" name="image[]" accept="image/*"/>
+				<a class="addImage"><font size="3">Add More Images</font></a>
+			</div>
+			<div class="addtionalImages">
+				<ol class="image_list">
+					
+				</ol>
 			</div>
 		</div>
 
@@ -275,9 +280,14 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<input type="file" name="video[]" accept="video/*"/>
-			<input type="file" name="video[]" accept="video/*"/>
-			<div class="video-list">
+			<div id="video_div">
+				<input type="file" name="video[]" accept="video/*"/>
+				<a class="addVideo"><font size="3">Add More Videos</font></a>
+			</div>
+			<div class="addtionalVideos">
+				<ol class="video_list">
+					
+				</ol>
 			</div>
 		</div>
 
@@ -285,9 +295,14 @@ year:         The year of publication (or, if unpublished, the year of creation)
 			<label for="doc">
 				Upload document<div class="smalltext">(.pdf)</div>
 			</label>
-			<input type="file" name="doc[]"/>
-			<input type="file" name="doc[]"/>
-			<div class="doc-list">
+			<div id="doc_div">
+				<input type="file" name="doc[]"/>
+				<a class="addDoc"><font size="3">Add More Documents</font></a>
+			</div>
+			<div class="addtionalDocs">
+				<ol class="doc_list">
+					
+				</ol>
 			</div>
 		</div>
 

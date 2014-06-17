@@ -286,8 +286,15 @@
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
-			<input type="file" name="image[]" accept="image/*"/>
-			<input type="file" name="image[]" accept="image/*"/>
+			<div id="image_div">
+				<input type="file" name="image[]" accept="image/*"/>
+				<a class="addImage"><font size="3">Add More Images</font></a>
+			</div>
+			<div class="addtionalImages">
+				<ol class="image_list">
+					
+				</ol>
+			</div>
 			{include "templates/snippets/image_thumb_list.tpl" image=$publication.image content='publication' contentId=$publication.publication_id}
 			<!--remove image link-->
 			<a class="remove" href='{gl url="admin/publication/removeAllImages"}/{$publication.publication_id}'>remove all images</a>
@@ -297,8 +304,15 @@
 			<label for="video">
 				Upload video<div class="smalltext">(.mp4, .webm, .ogg)</div>
 			</label>
-			<input type="file" name="video[]" accept="video/*"/>
-			<input type="file" name="video[]" accept="video/*"/>
+			<div id="video_div">
+				<input type="file" name="video[]" accept="video/*"/>
+				<a class="addVideo"><font size="3">Add More Videos</font></a>
+			</div>
+			<div class="addtionalVideos">
+				<ol class="video_list">
+					
+				</ol>
+			</div>
 			{include "templates/snippets/video_list.tpl" video=$publication.video content='publication' contentId=$publication.publication_id}
 			<!--remove video link-->
 			<a class="remove" href='{gl url="admin/publication/removeAllVideos"}/{$publication.publication_id}'>remove all videos</a>
@@ -308,8 +322,15 @@
 			<label for="doc">
 				Upload document<div class="smalltext">(.pdf)</div>
 			</label>
-			<input type="file" name="doc[]"/>
-			<input type="file" name="doc[]"/>
+			<div id="doc_div">
+				<input type="file" name="doc[]"/>
+				<a class="addDoc"><font size="3">Add More Documents</font></a>
+			</div>
+			<div class="addtionalDocs">
+				<ol class="doc_list">
+					
+				</ol>
+			</div>
 			{include "templates/snippets/doc_list.tpl" doc=$publication.doc content='publication' contentId=$publication.publication_id}
 			<!--remove doc link-->
 			<a class="remove" href='{gl url="admin/publication/removeAllDocs"}/{$publication.publication_id}'>remove all documents</a>

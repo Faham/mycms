@@ -524,6 +524,7 @@ input.refrence, input.find {
 }
 
 .doc-list, .video-list, .image-thumb-list {
+	position: relative;
 	float: left;
 	padding: 0px 10px;
 }
@@ -544,4 +545,44 @@ input.refrence, input.find {
 a.view-all {
 	margin: 5px 0px 15px;
 	display: inline-block;
+}
+
+#loadAllResearch {
+    color:green;
+    cursor:pointer;
+}
+#loadAllResearch:hover {
+    color:black;
+}
+#showLessResearch {
+    color:red;
+    cursor:pointer;
+    display:none;
+}
+#showLessResearch:hover {
+    color:black;
+}
+/*publication*/
+.publication_list li{
+	display: none;
+}
+
+#loadAllPublication {
+    color:green;
+    cursor:pointer;
+}
+#loadAllPublication:hover {
+    color:black;
+}
+#showLessPublication {
+    color:red;
+    cursor:pointer;
+    display:none;
+}
+#showLessPublication:hover {
+    color:black;
+}
+/*************************/
+.image_list{
+	float: left;
 }
