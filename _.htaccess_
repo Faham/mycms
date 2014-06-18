@@ -1,0 +1,30 @@
+RewriteEngine On
+
+# Set base url address depending on your current installation setting
+# ex: if installing at /var/www/webapps/mycms, and the web server is looking at /var/www/ directory
+# therefor all addresses would be like http://domain/webapps/mycms/index.php then you need to do the
+# following to remove the unwanted /webapps/mycms/ from the url:
+#RewriteBase /webapps/mycms/
+
+#no-www
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+#others
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*) index.php?rewrite=&params=$1 [L]
+
+#RewriteRule ^admin/([^/]+)(/(.*))?  index.php?m=admin&do=$1&params=$3 [NC,L]
+
+Options -indexes
+
+<Files *.tpl>
+    Deny from all
+    Order allow,deny
+</Files>
+
+<IfModule mod_php5.c>
+  php_value magic_quotes_gpc "0"
+</IfModule>
+
