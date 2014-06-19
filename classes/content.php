@@ -95,7 +95,7 @@ abstract class content extends \DB_DataObject {
 		foreach ($this->displays[$display] as $reftype => $func){
 			if ($func == 'all') {
 				$q = "$q LEFT JOIN (
-						SELECT pt.{$t}_id, GROUP_CONCAT(DISTINCT pt.{$reftype}_id ORDER BY pt.{$reftype}_id ASC SEPARATOR ',') as $reftype
+						SELECT pt.{$t}_id, GROUP_CONCAT(DISTINCT pt.{$reftype}_id ORDER BY pt.{$reftype}_order ASC SEPARATOR ',') as $reftype
 						FROM !!!{$reftype}_{$t} as pt
 						GROUP BY pt.{$t}_id) as ref_{$reftype}
 						ON $t.{$t}_id = ref_{$reftype}.{$t}_id
@@ -126,7 +126,8 @@ abstract class content extends \DB_DataObject {
 
 		$r = $g['db']->query($q);
 
-		// Query referenced data types and replace referenced node indices with actual referenced node data;
+		// dereferencing referenced data in the results and replacing
+		// the referenced node indices with actual node data;
 		if ($get_referenced_data) {
 
 			$refdata = array();
@@ -160,6 +161,20 @@ abstract class content extends \DB_DataObject {
 
 					$row[$rt] = array('rows' => array(), 'count' => 0);
 					if ($refdata[$rt]['count'] > 0)
+
+						//*/
+						// It is important to preserve the index orders in the output
+						foreach ($inds as &$index) {
+							foreach ($refdata[$rt]['rows'] as &$rw) {
+								if ($index === $rw["{$rt}_id"]) {
+									$row[$rt]['rows'][] = &$rw;
+									$row[$rt]['count']++;
+									break;
+								}
+							}
+						}
+						/*/
+						// the following won't preserve the index orders
 						foreach ($refdata[$rt]['rows'] as &$rw) {
 							$v = array_search($rw["{$rt}_id"], $inds);
 
@@ -168,6 +183,7 @@ abstract class content extends \DB_DataObject {
 								$row[$rt]['count']++;
 							}
 						}
+						//*/
 				}
 			}
 		}
