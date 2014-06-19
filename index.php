@@ -37,7 +37,6 @@ $g['smarty']->assign('error', $g['error']->get_all());
 // finalize template
 $g['smarty']->assign('g', $g);
 $g['smarty']->assign('weburl', $g['weburl']);
-$g['smarty']->assign('role', $g['user']->role);
 $g['smarty']->assign('module', $_GET['module']);
 
 if(isset($_GET['action'])) $g['smarty']->assign('action', $_GET['action']);

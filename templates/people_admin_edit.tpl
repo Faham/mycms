@@ -75,8 +75,8 @@
 				value="{$people.people_nsid}">
 		</div>
 
-		<div id="field11-container" class="field f_100">
-			<label for="field11">
+		<div id="people_group-container" class="field f_100">
+			<label for="people_group">
 				Group
 			</label>
 
@@ -136,6 +136,30 @@
 				{/if}
 				>
 					{t s='other' m=0}
+				</option>
+			</select>
+
+		</div>
+
+		<div id="people_role-container" class="field f_100">
+			<label for="people_role">
+				Role
+			</label>
+
+			<select name="people_role" id="people_role" required>
+				<option id="people_role-1" value="authenticated"
+				{if "authenticated" == $people.people_role}
+					selected
+				{/if}
+				>
+					{t s='authenticated' m=0}
+				</option>
+				<option id="people_role-2" value="administrator"
+				{if "administrator" == $people.people_role}
+					selected
+				{/if}
+				>
+					{t s='administrator' m=0}
 				</option>
 			</select>
 

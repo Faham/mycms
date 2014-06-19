@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `mycms_people` (
   `people_email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `people_bio` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `people_group` enum('faculty','adjunct_faculty','researcher','graduate_student','staff','alumni','recent_visitor','undergraduate_student','other') COLLATE utf8_unicode_ci NOT NULL,
+  `people_role` enum('administrator','authenticated') COLLATE utf8_unicode_ci NOT NULL,
   `people_nsid` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
   `people_start` date DEFAULT NULL,
   `people_end` date DEFAULT NULL,

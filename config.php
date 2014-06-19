@@ -7,15 +7,18 @@
 //-----------------------------------------------------------------------------
 
 // session init
-//session_set_cookie_params(0, dirname($_SERVER['PHP_SELF']));
-//session_start();
-//ini_set('use_only_cookies', '1');
+session_set_cookie_params(0, dirname($_SERVER['PHP_SELF']));
+session_start();
+ini_set('use_only_cookies', '1');
 
 //-----------------------------------------------------------------------------
 
 set_time_limit(0);
 
 //-----------------------------------------------------------------------------
+
+if (!file_exists('config.ini'))
+    die('<b>Error</b>: <b>config.ini</b> not found!');
 
 $config = parse_ini_file('config.ini',TRUE);
 
@@ -45,16 +48,20 @@ if (get_magic_quotes_gpc()) {
 $time_start                   = microtime(true);
 $g['total_q']                 = 0;
 $g['host']                    = $config['GLOBAL']['host'];
-$g['user']                    = $config['GLOBAL']['user'];
+$g['admin']                   = $config['GLOBAL']['admin'];
 $g['default_lang']            = $config['GLOBAL']['default_lang'];
 $g['rewrite']                 = true;
 $g['homepage']                = $config['GLOBAL']['homepage'];
+$g['auth_method']             = $config['GLOBAL']['auth_method'];
+$g['trac_url']                = $config['GLOBAL']['trac_url'];
+
 $g['fullpath']                = dirname(__FILE__) . '/';
 $g['weburl']                  = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
 $g['content']                 = array ();
 $g['default_page_to_display'] = "templates/index.tpl";
 $g['lang']                    = $g['default_lang'];
 $g['DB_DataObject']           = $config['DB_DataObject'];
+
 
 //-----------------------------------------------------------------------------
 
@@ -70,6 +77,19 @@ foreach(glob('classes/*.php') as $c){
 $g['db']     = new mycms\db();
 $g['error']  = new mycms\error();
 $g['smarty'] = new mysmarty();
+
+//-----------------------------------------------------------------------------
+
+switch ($g['auth_method']) {
+    case 'cas':
+        $g['cas'] = $config['CAS'];
+        $g['cas']['cas_server_port']     = (int)($g['cas']['cas_server_port']);
+        $g['cas']['cas_server_version']  = CAS_VERSION_1_0; //$g['cas']['cas_server_version'];
+        break;
+
+    default:
+        break;
+}
 
 //-----------------------------------------------------------------------------
 
@@ -92,9 +112,13 @@ require_once("modules/settings/settings.class.php");
 //__autoload('settings');
 mycms\settings::get_all();
 
-require_once("modules/users/users.class.php");
+//  require_once("modules/users/users.class.php");
 //__autoload('users');
-$g['user']   = new mycms\users();
+$g['auth'] = new mycms\auth();
+$g['auth']->init();
+// functionally there is no benefit for authenticating anywhere except the admin page
+$g['user']   = $g['auth']->is_authenticated() ? $g['auth']->get_user_id() : false;
+//$g['user']   = false;
 
 // set ajax
 //$g['ajax'] = isset($_SERVER["HTTP_AJAX_REQUEST"]) ? true : false;

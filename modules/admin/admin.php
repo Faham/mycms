@@ -9,12 +9,20 @@ require_once('admin.class.php');
 //-----------------------------------------------------------------------------
 
 global $g;
+
+// This page is only loaded for authenticated users
+if (!$g['auth']->is_authenticated())
+	$g['auth']->authenticate();
+
+if (!admin::is_admin($g['user'])) {
+	$g['error']->push('This account has no administration privilage', 'error', true);
+	system::redirect(system::genlink(''));
+}
+
 if(!isset($_GET['content'])) $_GET['content'] = 'people';
 $ct = strtolower($_GET['content']);
 $g['template'] = $ct . '_admin_create';
 $err = false;
-
-//-----------------------------------------------------------------------------
 
 // Set main menu options
 $menu = array(
@@ -23,6 +31,13 @@ $menu = array(
 	array('name' => 'publication',  'url' => 'admin/publication',  ),
 );
 $g['smarty']->assign('menu', $menu);
+
+// Set secondary menu options
+$menu = array(
+	array('name' => 'trac',       'url' => 'https://papyrus.usask.ca/trac/hci/',  ),
+	array('name' => 'logout',     'url' => 'logout', 'user_id' => $g['user'],     ),
+);
+$g['smarty']->assign('menu_2', $menu);
 
 //-----------------------------------------------------------------------------
 

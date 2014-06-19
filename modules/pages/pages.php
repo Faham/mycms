@@ -25,12 +25,33 @@ $menu = array(
 );
 $g['smarty']->assign('menu', $menu);
 
+$auth_menu_state = $g['user'] === false ? 'login' : 'logout';
+
+// Set secondary menu options
+$menu = array(
+	array('name' => 'trac',           'url' => $g['trac_url'],                          ),
+	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
+);
+
+$g['smarty']->assign('menu_2', $menu);
+
 //-----------------------------------------------------------------------------
 
 switch($_GET['action']){
 
 //-----------------------------------------------------------------------------
 
+//TODO: after login it should continue on the current page not the homepage
+case 'login':
+	$g['auth']->authenticate();
+	goto HOME;
+case 'logout':
+	$g['auth']->logout(system::genlink(''));
+	goto HOME;
+
+//-----------------------------------------------------------------------------
+
+HOME:
 case 'home': {
 	$imglist = pages::get_imagelist(true);
 	if (!$imglist['error'] && $imglist['count'] > 0)

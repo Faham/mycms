@@ -106,6 +106,7 @@ class people extends content {
 	public $people_email;				// string(50)
 	public $people_bio;					// string(1000)
     public $people_group;               // string(21)  not_null enum
+	public $people_role;				// string(21)  not_null enum
 	public $people_nsid;				// string(6)
 	public $people_start;				// date(10)  binary
 	public $people_end;					// date(10)  binary
@@ -120,6 +121,7 @@ class people extends content {
         'people_bio'         => 'string',
 		'people_nsid'		 => 'string',
 		'people_group'	     => 'enum:faculty,adjunct_faculty,researcher,graduate_student,staff,alumni,recent_visitor,undergraduate_student,other',
+		'people_role'        => 'enum:administrator,authenticated',
 		'people_start'	     => 'date:Y-m-d',
 		'people_end'		 => 'date:Y-m-d',
 	);

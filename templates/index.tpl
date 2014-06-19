@@ -70,7 +70,9 @@
 			{foreach from=$menu item=m}
 				<li><a href="{gl url=$m.url}" {if isset($selectedmenu) and $selectedmenu == $m.name} class="selected" {/if}>{t s={$m.name} m=0}</a></li>
 			{/foreach}
-			<li style="margin-left: 281px"><a href="https://papyrus.usask.ca/trac/hci/">Trac</a></li>
+			{foreach from=$menu_2 item=m}
+				<li style="float: right;"><a href="{gl url=$m.url}">{t s={$m.name} m=0} {if isset($m.user_id) and $m.user_id != false}({$m.user_id}){/if}</a></li>
+			{/foreach}
 		</ul>
 
 {*---------------------------------------------------------------------------*}

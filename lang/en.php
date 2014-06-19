@@ -32,6 +32,8 @@
 @define('L_RECENT_VISITOR', 'Recent Visitor');
 @define('L_STAFF', 'Staff');
 @define('L_OTHER', 'Other');
+@define('L_ADMINISTRATOR', 'Administrator');
+@define('L_AUTHENTICATED', 'Authenticated');
 @define('L_CURRENT_RESEARCH', 'Current Research');
 @define('L_RECENT_PUBLICATIONS', 'Recent Publications');
 @define('L_VIEW_ALL', 'View All');
@@ -65,3 +67,6 @@
 @define('L_PROCEEDINGS', 'Proceedings');
 @define('L_TECHREPORT', 'Tech Report');
 @define('L_UNPUBLISHED', 'Unpublished');
+@define('L_TRAC', 'Trac');
+@define('L_LOGIN', 'Login');
+@define('L_LOGOUT', 'Logout');

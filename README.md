@@ -8,6 +8,7 @@ Installation Requirements
 =========================
 
 - PHP
+- php_curl extension
 - MySQL
 - Pear (packages needed: DB, DB_DataObject)
 - Apache, Rewrite Module

@@ -62,8 +62,8 @@
 			<input type="text" name="people_nsid" id="people_nsid">
 		</div>
 
-		<div id="field11-container" class="field f_100">
-			<label for="field11">
+		<div id="people_group-container" class="field f_100">
+			<label for="people_group">
 				Group
 			</label>
 
@@ -76,6 +76,18 @@
 				<option id="people_group-6" value="alumni"                >{t s='alumni'                m=0}</option>
 				<option id="people_group-7" value="recent_visitor"        >{t s='recent_visitor'        m=0}</option>
 				<option id="people_group-7" value="other"                 >{t s='other'                 m=0}</option>
+			</select>
+
+		</div>
+
+		<div id="people_role-container" class="field f_100">
+			<label for="people_role">
+				Role
+			</label>
+
+			<select name="people_role" id="people_role" required>
+				<option id="people_role-1" value="authenticated" >{t s='authenticated' m=0}</option>
+				<option id="people_role-2" value="administrator" >{t s='administrator' m=0}</option>
 			</select>
 
 		</div>
