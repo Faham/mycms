@@ -27,6 +27,9 @@ class auth {
         if ('cas' == $g['auth_method']) {
             return cas::authenticate();
         }
+        else if ('shibboleth' == $g['auth_method']) {
+            return true;
+        }
     }
 
 //-----------------------------------------------------------------------------
@@ -36,6 +39,9 @@ class auth {
 
         if ('cas' == $g['auth_method']) {
             return cas::is_authenticated();
+        }
+        else if ('shibboleth' == $g['auth_method']) {
+            return true;
         }
     }
 
@@ -47,6 +53,9 @@ class auth {
         if ('cas' == $g['auth_method']) {
             return cas::get_user_id();
         }
+        else if ('shibboleth' == $g['auth_method']) {
+            return "scottb";
+        }
     }
 
 //-----------------------------------------------------------------------------
@@ -57,6 +66,9 @@ class auth {
 
         if ('cas' == $g['auth_method']) {
             return cas::logout($url);
+        }
+        else if ('shibboleth' == $g['auth_method']) {
+            return "http://localhost/mycms";
         }
     }
 
