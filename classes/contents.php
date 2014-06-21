@@ -104,7 +104,7 @@ class people extends content {
 	public $people_lastname;			// string(50)  not_null
 	public $people_affiliation;			// string(100)
 	public $people_email;				// string(50)
-	public $people_bio;					// string(1000)
+	public $people_bio;					// string(3000)
     public $people_group;               // string(21)  not_null enum
 	public $people_role;				// string(21)  not_null enum
 	public $people_nsid;				// string(6)
