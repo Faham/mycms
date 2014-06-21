@@ -22,7 +22,7 @@ class admin {
 			if ($r === 0)
 				return false;
 
-			return $ppl->role === 'administrator';
+			return $ppl->people_role === 'administrator';
 		}
 
 		return false;
