@@ -88,8 +88,9 @@ function validate ($type, &$v) {
 	} case 'email': {
 		break;
 	} case 'enum': {
+		// todo: '' should be allowed only for null allowed fields
 		$format = preg_split("/,/", $format);
-		if (!in_array(strtolower($val), $format))
+		if (!in_array(strtolower($val), $format) && '' !== $val)
 			$val = false;
 		break;
 	} case 'date': {
@@ -291,7 +292,7 @@ else if (checkparams(array(
 	'_isset'    => array('id')))) {
 	$r = $content->get($_GET['id']);
 	if ($r == 1) {
-
+		var_dump($_POST);
 		foreach ($_POST as $k => $v) {
 			if (property_exists("\\mycms\\$ct", $k)) {
 				if (validate($content->field_type[$k], $v))

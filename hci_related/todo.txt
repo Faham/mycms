@@ -1,0 +1,11 @@
+- publication edit page toappear checkbox doesn't work properly
+- check research and people edit pages too
+- refrence removal hover button
+- refrence ordering
+- fix peoples page bug
+- replace � with :space: in entire database
+- in people page first show top 5 publications by priority and then researchs by priority
+- view all for people's publications, it should be grouped by year
+- view all for people's researches
+- in research page, show related publications, grouped by year
+- in publication page, show related research

@@ -22,6 +22,39 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+-- Drop all tables
+
+DROP VIEW IF EXISTS
+  `mycms_publication_video`,
+  `mycms_research_video`,
+  `mycms_people_image`,
+  `mycms_publication_doc`,
+  `mycms_publication_image`,
+  `mycms_publication_people`,
+  `mycms_research_image`,
+  `mycms_research_people`,
+  `mycms_research_publication`;
+
+DROP TABLE IF EXISTS
+  `mycms_video_publication`,
+  `mycms_video_research`,
+  `mycms_image_people`,
+  `mycms_doc_publication`,
+  `mycms_image_publication`,
+  `mycms_people_publication`,
+  `mycms_image_research`,
+  `mycms_people_research`,
+  `mycms_publication_research`,
+  `mycms_settings`,
+  `mycms_doc`,
+  `mycms_image`,
+  `mycms_video`,
+  `mycms_people`,
+  `mycms_publication`,
+  `mycms_research`;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `mycms_settings`
 --
@@ -81,9 +114,9 @@ CREATE TABLE IF NOT EXISTS `mycms_people` (
   `people_firstname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `people_middlename` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `people_lastname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `people_affiliation` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `people_affiliation` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `people_email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `people_bio` varchar(3000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `people_bio` varchar(10000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `people_group` enum('faculty','adjunct_faculty','researcher','graduate_student','staff','alumni','recent_visitor','undergraduate_student','other') COLLATE utf8_unicode_ci NOT NULL,
   `people_role` enum('administrator','authenticated') COLLATE utf8_unicode_ci NOT NULL,
   `people_nsid` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -104,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `mycms_publication` (
   `publication_type` enum('article','book','booklet','conference','inbook','incollection','inproceedings','manual','mastersthesis','misc','phdthesis','proceedings','techreport','unpublished') COLLATE utf8_unicode_ci NOT NULL,
   `publication_title` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `publication_booktitle` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `publication_abstract` varchar(4000) COLLATE utf8_unicode_ci NOT NULL,
+  `publication_abstract` varchar(10000) COLLATE utf8_unicode_ci NOT NULL,
   `publication_year` year(4) NOT NULL,
   `publication_month` enum('january','february','march','april','may','june','july','august','september','october','november','december') COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_toappear` tinyint(1) NOT NULL,
@@ -113,10 +146,10 @@ CREATE TABLE IF NOT EXISTS `mycms_publication` (
   `publication_series` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_pages` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `publication_doi_number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `publication_doi_number` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_note` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_journal` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `publication_isbn` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `publication_isbn` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_edition` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_chapter` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_technumber` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -126,8 +159,6 @@ CREATE TABLE IF NOT EXISTS `mycms_publication` (
   `publication_organization` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_publisher` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publication_url` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `publication_temp_pdflink` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `publication_temp_secondarylink` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`publication_id`),
   UNIQUE KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -141,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `mycms_publication` (
 CREATE TABLE IF NOT EXISTS `mycms_research` (
   `research_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `research_title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `research_summary` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `research_description` varchar(8000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `research_summary` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `research_description` varchar(10000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `research_status` enum('active','future','onhold','past','unknown') COLLATE utf8_unicode_ci NOT NULL,
   `research_priority` int(10) DEFAULT NULL,
   PRIMARY KEY (`research_id`),

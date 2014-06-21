@@ -271,25 +271,25 @@ $(document).ready(function()
 
 //-----------------------------------------------------------------------------
 
-    $(".yearpicker").each(function() {
-        var yp = $(this);
-        for (i = new Date().getFullYear() + 1; i > 1900; --i)
-        {
-            yp.append($('<option />').val(i).html(i));
-        }
-    });
+    //$(".yearpicker").each(function() {
+    //    var yp = $(this);
+    //    for (i = new Date().getFullYear() + 1; i > 1900; --i)
+    //    {
+    //        yp.append($('<option />').val(i).html(i));
+    //    }
+    //});
 
 //-----------------------------------------------------------------------------
 
-    $(".monthpicker").each(function() {
-        var months = [ "January", "February", "March", "April", "May", "June",
-                       "July", "August", "September", "October", "November", "December" ];
-        var mp = $(this);
-        for (i = 0; i < 12; ++i)
-        {
-            mp.append($('<option />').val(months[i]).html(months[i]));
-        }
-    });
+    //$(".monthpicker").each(function() {
+    //    var months = [ "January", "February", "March", "April", "May", "June",
+    //                   "July", "August", "September", "October", "November", "December" ];
+    //    var mp = $(this);
+    //    for (i = 0; i < 12; ++i)
+    //    {
+    //        mp.append($('<option />').val(months[i]).html(months[i]));
+    //    }
+    //});
 
 //-----------------------------------------------------------------------------
 

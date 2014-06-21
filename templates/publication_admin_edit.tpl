@@ -39,7 +39,7 @@
 			<label for="publication_type">
 				Type
 			</label>
-				<select name="publication_type" id="publication_type" required>
+			<select name="publication_type" id="publication_type" required>
 				<option id="publication_type-1"   value="article"       {if "article"       == $publication.publication_type}selected{/if} >{t s='article'       m=0}</option>
 				<option id="publication_type-2"   value="book"          {if "book"          == $publication.publication_type}selected{/if} >{t s='book'          m=0}</option>
 				<option id="publication_type-3"   value="booklet"       {if "booklet"       == $publication.publication_type}selected{/if} >{t s='booklet'       m=0}</option>
@@ -62,6 +62,9 @@
 				Year
 			</label>
 			<select name="publication_year" id="publication_year" class="yearpicker" required>
+				{for $i=1985 to $year}
+					<option value="{$i}" {if $i == $publication.publication_year}selected{/if}>{$i}</option>
+				{/for}
 			</select>
 		</div>
 
@@ -70,6 +73,19 @@
 				Month
 			</label>
 			<select name="publication_month" id="publication_month" class="monthpicker">
+				<option value=""          {if ""          == $publication.publication_month}selected{/if}>Unknown</option>
+				<option value="january"   {if "january"   == $publication.publication_month}selected{/if}>January</option>
+				<option value="february"  {if "february"  == $publication.publication_month}selected{/if}>February</option>
+				<option value="march"     {if "march"     == $publication.publication_month}selected{/if}>March</option>
+				<option value="april"     {if "april"     == $publication.publication_month}selected{/if}>April</option>
+				<option value="may"       {if "may"       == $publication.publication_month}selected{/if}>May</option>
+				<option value="june"      {if "june"      == $publication.publication_month}selected{/if}>June</option>,
+				<option value="july"      {if "july"      == $publication.publication_month}selected{/if}>July</option>
+				<option value="august"    {if "august"    == $publication.publication_month}selected{/if}>August</option>
+				<option value="september" {if "september" == $publication.publication_month}selected{/if}>September</option>
+				<option value="october"   {if "october"   == $publication.publication_month}selected{/if}>October</option>
+				<option value="november"  {if "november"  == $publication.publication_month}selected{/if}>November</option>
+				<option value="december"  {if "december"  == $publication.publication_month}selected{/if}>December</option>
 			</select>
 		</div>
 
@@ -78,6 +94,7 @@
 				To appear
 			</label>
 			<input type="checkbox" name="publication_toappear" id="publication_toappear"
+				{if 1  == $publication.publication_toappear}checked{/if}
 				value="{$publication.publication_toappear}"
 			>
 		</div>
@@ -259,7 +276,7 @@
 			<label for="publication_abstract">
 				Abstract
 			</label>
-			<textarea name="publication_abstract" id="publication_abstract">{$publication.publication_note}</textarea>
+			<textarea name="publication_abstract" id="publication_abstract">{$publication.publication_abstract}</textarea>
 		</div>
 
 		<div id="image-container" class="field f_100">
