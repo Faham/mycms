@@ -59,7 +59,8 @@
 			<label for="people_nsid">
 				NSID
 			</label>
-			<input type="text" name="people_nsid" id="people_nsid">
+			<input type="text" name="people_nsid" id="people_nsid" pattern="[a-zA-Z][a-zA-Z][a-zA-Z][0-9][0-9][0-9]">
+			<!-- I don't know why pattern="[a-zA-Z]{3}[0-9]{3} doesn't work" -->
 		</div>
 
 		<div id="people_group-container" class="field f_100">
@@ -125,7 +126,7 @@
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Save">
 		</div>
 	</form>
 </div>

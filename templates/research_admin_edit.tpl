@@ -1,6 +1,10 @@
 
 {*---------------------------------------------------------------------------*}
 
+<img id='remove-refrence-button' src='{gl url="static/images/recyclebin.png"}'/>
+
+{*---------------------------------------------------------------------------*}
+
 <form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
 		action='{gl url="admin/research/create"}'>
 	<div id="research-container" class="field f_100">
@@ -119,7 +123,7 @@
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Save">
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}
@@ -128,7 +132,9 @@
 				Add people
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="people" placeholder="search"/>
-			{include "templates/snippets/people_refrence_list.tpl" people=$research.people}
+			<div class="removable-refrence-list">
+				{include "templates/snippets/people_refrence_list.tpl" people=$research.people}
+			</div>
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Publication' m=0}}
@@ -137,7 +143,9 @@
 				Add publication
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="publication" placeholder="search"/>
-			{include "templates/snippets/publication_teaser_list.tpl" publication=$research.publication}
+			<div class="removable-refrence-list">
+				{include "templates/snippets/publication_teaser_list.tpl" publication=$research.publication}
+			</div>
 		</div>
 
 	</form>

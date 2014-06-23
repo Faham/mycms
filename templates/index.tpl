@@ -32,7 +32,8 @@
     <link rel="stylesheet" href="{$weburl}static/css/admin.css"   type="text/css" media="all"/>
 	<link rel="stylesheet" href="{$weburl}static/css/print.css"   type="text/css" media="print">
 
-    <script type="text/javascript" src="{$weburl}static/js/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript" src="{$weburl}static/js/jquery.tools.js"></script>
     <script type="text/javascript" src="{$weburl}static/js/jquery.uniform.min.js"></script>
     <script type="text/javascript">var weburl = '{$weburl}';</script>

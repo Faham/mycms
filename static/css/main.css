@@ -504,6 +504,7 @@ input, textarea, select {
 	display: block;
 	cursor: pointer;
 	font-size: 12px;
+	position: relative;
 }
 
 .tiny:hover, .tiny *:hover, .teaser *:hover, .teaser:hover {
@@ -526,4 +527,13 @@ input.refrence, input.find {
 
 .TTWForm .remove {
 	float: right;
+}
+
+#remove-refrence-button {
+	opacity: 0.3;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	z-index: 99;
+	display: hidden;
 }

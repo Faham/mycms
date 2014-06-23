@@ -96,7 +96,7 @@
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Save">
 		</div>
 
 	</form>

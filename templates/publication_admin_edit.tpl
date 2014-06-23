@@ -1,6 +1,10 @@
 
 {*---------------------------------------------------------------------------*}
 
+<img id='remove-refrence-button' src='{gl url="static/images/recyclebin.png"}'/>
+
+{*---------------------------------------------------------------------------*}
+
 <form class="TTWForm" method="post" enctype="multipart/form-data" novalidate
 		action='{gl url="admin/publication/create"}'>
 	<div id="publication-container" class="field f_100">
@@ -95,7 +99,6 @@
 			</label>
 			<input type="checkbox" name="publication_toappear" id="publication_toappear"
 				{if 1  == $publication.publication_toappear}checked{/if}
-				value="{$publication.publication_toappear}"
 			>
 		</div>
 
@@ -304,7 +307,7 @@
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Save">
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='People' m=0}}
@@ -313,7 +316,9 @@
 				Add people
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="people" placeholder="search"/>
-			{include "templates/snippets/people_refrence_list.tpl" people=$publication.people}
+			<div class="removable-refrence-list">
+				{include "templates/snippets/people_refrence_list.tpl" people=$publication.people}
+			</div>
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Research' m=0}}
@@ -322,7 +327,9 @@
 				Add research
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="research" placeholder="search"/>
-			{include "templates/snippets/research_teaser_list.tpl" research=$publication.research}
+			<div class="removable-refrence-list">
+				{include "templates/snippets/research_teaser_list.tpl" research=$publication.research}
+			</div>
 		</div>
 
 	</form>

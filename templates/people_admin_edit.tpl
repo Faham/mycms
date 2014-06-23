@@ -1,4 +1,7 @@
 
+{*---------------------------------------------------------------------------*}
+
+<img id='remove-refrence-button' src='{gl url="static/images/recyclebin.png"}'/>
 
 {*---------------------------------------------------------------------------*}
 
@@ -72,7 +75,8 @@
 				NSID
 			</label>
 			<input type="text" name="people_nsid" id="people_nsid"
-				value="{$people.people_nsid}">
+				value="{$people.people_nsid}" pattern="[a-zA-Z][a-zA-Z][a-zA-Z][0-9][0-9][0-9]">
+				<!-- I don't know why pattern="[a-zA-Z]{3}[0-9]{3} doesn't work" -->
 		</div>
 
 		<div id="people_group-container" class="field f_100">
@@ -199,7 +203,7 @@
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Save">
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Research' m=0}}
@@ -208,7 +212,9 @@
 				Add research
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="research" placeholder="search"/>
-			{include "templates/snippets/research_refrence_list.tpl" research=$people.research}
+			<div class="removable-refrence-list">
+				{include "templates/snippets/research_refrence_list.tpl" research=$people.research}
+			</div>
 		</div>
 
 		{include "templates/snippets/section_title.tpl" title={t s='Publication' m=0}}
@@ -217,7 +223,9 @@
 				Add publication
 			</label>
 			<input class="refrence" autocomplete=off type="text" name="publication" placeholder="search"/>
-			{include "templates/snippets/publication_refrence_list.tpl" publication=$people.publication}
+			<div class="removable-refrence-list">
+				{include "templates/snippets/publication_refrence_list.tpl" publication=$people.publication}
+			</div>
 		</div>
 	</form>
 </div>

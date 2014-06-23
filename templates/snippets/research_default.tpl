@@ -7,13 +7,13 @@
 		{$research.research_title}
 	</h2>
 
-	<p>{$research.research_description}</p>
-
 	{if isset($research.image) and $research.image.count > 0}
 		{for $i = 0; $i < $research.image.count; $i++}
 			<img src="{gl url="files/research/image/{$research.image.rows[$i].image_filename}"}" class="image" />
 		{/for}
 	{/if}
+
+	<p>{$research.research_description}</p>
 
 	{if isset($research.video) and $research.video.count > 0}
 		{include "templates/snippets/section_title.tpl" title={t s=Downloads m=0}}
@@ -32,6 +32,10 @@
 		<div class="persontable">
 			{include "templates/snippets/people_teaser_list.tpl" people=$research.people group=false}
 		</div>
+	{/if}
+	{if isset($research.publication) and $research.publication.count > 0}
+		{include "templates/snippets/section_title.tpl" title={t s=Publications m=0}}
+		{include "templates/snippets/publication_teaser_list.tpl" publication=$research.publication group=false}
 	{/if}
 </div>
 

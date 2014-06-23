@@ -84,6 +84,10 @@ year:         The year of publication (or, if unpublished, the year of creation)
 				Year
 			</label>
 			<select name="publication_year" id="publication_year" class="yearpicker" required>
+				{for $i=1985 to $year - 1}
+					<option value="{$i}">{$i}</option>
+				{/for}
+					<option value="{$year}" selected>{$year}</option>
 			</select>
 		</div>
 
@@ -92,6 +96,19 @@ year:         The year of publication (or, if unpublished, the year of creation)
 				Month
 			</label>
 			<select name="publication_month" id="publication_month" class="monthpicker">
+				<option value=""         >Unknown</option>
+				<option value="january"  >January</option>
+				<option value="february" >February</option>
+				<option value="march"    >March</option>
+				<option value="april"    >April</option>
+				<option value="may"      >May</option>
+				<option value="june"     >June</option>,
+				<option value="july"     >July</option>
+				<option value="august"   >August</option>
+				<option value="september">September</option>
+				<option value="october"  >October</option>
+				<option value="november" >November</option>
+				<option value="december" >December</option>
 			</select>
 		</div>
 
@@ -272,7 +289,7 @@ year:         The year of publication (or, if unpublished, the year of creation)
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Save">
 		</div>
 
 	</form>

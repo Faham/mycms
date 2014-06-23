@@ -1,11 +1,14 @@
-- publication edit page toappear checkbox doesn't work properly
-- check research and people edit pages too
-- refrence removal hover button
-- refrence ordering
-- fix peoples page bug
-- replace � with :space: in entire database
-- in people page first show top 5 publications by priority and then researchs by priority
+- replace � with :space: or é in entire database
 - view all for people's publications, it should be grouped by year
 - view all for people's researches
-- in research page, show related publications, grouped by year
-- in publication page, show related research
+- reference suggest list shouldn't bring up entries that are already referenced
+- some times when adding from the suggest list, the item whon show up but is added in the database
+
+harvey has worked on the followings, check for their integration:
+- _view all_ for publications and researches of people
+- removing video/doc/image
+- set a maximum for number of images/video/doc
+- revise thumbnail generation code
+
+
+- publication edit page toappear checkbox doesn't work properly

@@ -292,7 +292,6 @@ else if (checkparams(array(
 	'_isset'    => array('id')))) {
 	$r = $content->get($_GET['id']);
 	if ($r == 1) {
-		var_dump($_POST);
 		foreach ($_POST as $k => $v) {
 			if (property_exists("\\mycms\\$ct", $k)) {
 				if (validate($content->field_type[$k], $v))
@@ -301,6 +300,12 @@ else if (checkparams(array(
 					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
 			}
 		}
+
+		// publication_toappear checkbox is only sent if it is checked
+		if (!array_key_exists("publication_toappear", $_POST))
+			$content->publication_toappear = 0;
+		else
+			$content->publication_toappear = 1;
 
 		//$r = $content->validate();
 		//if (true !== $r) {

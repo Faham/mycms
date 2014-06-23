@@ -71,7 +71,7 @@ if ('get' == $op && $params) {
 
 //-----------------------------------------------------------------------------
 
-else if ('refer'  == $op && $params) {
+else if ('add-reference'  == $op && $params) {
 	$db = $g['db'];
 	$q = "INSERT INTO !!!{$params->referer_type}_{$params->referred_type}
 		({$params->referer_type}_id, {$params->referred_type}_id )
@@ -81,6 +81,46 @@ else if ('refer'  == $op && $params) {
 		// made no change to references
 		$res['status'] = 'error';
 		$res['message'] = $r['message'];
+	} else
+		$res['status'] = 'success';
+}
+
+//-----------------------------------------------------------------------------
+
+else if ('remove-reference'  == $op && $params) {
+	$db = $g['db'];
+	$q = "DELETE FROM !!!{$params->referer_type}_{$params->referred_type}
+		WHERE {$params->referer_type}_id = {$params->referer_id} AND
+		{$params->referred_type}_id = {$params->referred_id}";
+	$r = $db->query($q);
+	if ($r['error']) {
+		// made no change to references
+		$res['status'] = 'error';
+		$res['message'] = $r['message'];
+	} else
+		$res['status'] = 'success';
+}
+
+//-----------------------------------------------------------------------------
+
+else if ('order-reference'  == $op && $params) {
+	$db = $g['db'];
+	foreach ($params->referred_orders as $referred_id => $referred_order) {
+		$q = "UPDATE !!!{$params->referer_type}_{$params->referred_type}
+			SET {$params->referred_type}_order = $referred_order
+			WHERE {$params->referred_type}_id = $referred_id
+			AND {$params->referer_type}_id = {$params->referer_id};";
+		$r = $db->query($q);
+		if ($r['error'])
+			break;
+	}
+
+	if ($r['error']) {
+		$res['status'] = 'error';
+		$res['message'] = $r['message'];
+	} else {
+		$res['status'] = 'success';
+		$res['message'] = $q;
 	}
 }
 

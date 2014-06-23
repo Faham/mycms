@@ -38,10 +38,17 @@
 		{/if}
 	{/if}
 
+	{if isset($publication.people) and $publication.people.count > 0}
 	{include "templates/snippets/section_title.tpl" title={t s=Participants m=0}}
 	<div class="persontable">
 		{include "templates/snippets/people_teaser_list.tpl" people=$publication.people group=false}
 	</div>
+	{/if}
+
+	{if isset($publication.research) and $publication.research.count > 0}
+		{include "templates/snippets/section_title.tpl" title={t s=Projects m=0}}
+		{include "templates/snippets/research_teaser_list.tpl" research=$publication.research group=false}
+	{/if}
 
 	{include "templates/snippets/section_title.tpl" title={t s=Citation m=0}}
 	{include "templates/snippets/citation.tpl" publication=$publication}

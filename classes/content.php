@@ -73,7 +73,13 @@ abstract class content extends \DB_DataObject {
 
 //-----------------------------------------------------------------------------
 
-    public function view($display = 'teaser', $where = '', $sortby = '', $limit = '0,99', $get_referenced_data = true) {
+    public function view($display = 'teaser'
+    	, $where = ''
+    	, $sortby = ''
+    	, $limit = '0,99'
+    	, $get_referenced_data = true
+    	, $refrence_limit = array()) {
+
         global $g;
 
 		if (!array_key_exists($display, $this->displays)) {
@@ -94,8 +100,15 @@ abstract class content extends \DB_DataObject {
 
 		foreach ($this->displays[$display] as $reftype => $func){
 			if ($func == 'all') {
+				// if return all references
+
+				$ref_list_concat = "GROUP_CONCAT(DISTINCT pt.{$reftype}_id ORDER BY pt.{$reftype}_order ASC SEPARATOR ',')";
+				if (array_key_exists($reftype, $refrence_limit)) {
+					$ref_list_concat = 'SUBSTRING_INDEX(' . $ref_list_concat . ", ',', {$refrence_limit[$reftype]})";
+				}
+
 				$q = "$q LEFT JOIN (
-						SELECT pt.{$t}_id, GROUP_CONCAT(DISTINCT pt.{$reftype}_id ORDER BY pt.{$reftype}_order ASC SEPARATOR ',') as $reftype
+						SELECT pt.{$t}_id, $ref_list_concat as $reftype
 						FROM !!!{$reftype}_{$t} as pt
 						GROUP BY pt.{$t}_id) as ref_{$reftype}
 						ON $t.{$t}_id = ref_{$reftype}.{$t}_id
@@ -145,7 +158,7 @@ abstract class content extends \DB_DataObject {
 						$refindices[$rt] .= (empty($refindices[$rt])?'':',') . $row[$rt];
 
 				if (!empty($refindices[$rt]))
-					$rd = $g['content'][$rt]->view('teaser', "$rt.{$rt}_id IN (" . $refindices[$rt] . ")", "$rt.{$rt}_id ASC", '0,99', $display == 'teaser'? false: true);
+					$rd = $g['content'][$rt]->view('teaser', "$rt.{$rt}_id IN (" . $refindices[$rt] . ")", '', '', $display == 'teaser'? false: true);
 			}
 
 			// Find and put each records data from $refdata into $r;
@@ -160,30 +173,30 @@ abstract class content extends \DB_DataObject {
 						$inds = array($row[$rt]);
 
 					$row[$rt] = array('rows' => array(), 'count' => 0);
-					if ($refdata[$rt]['count'] > 0)
-
+					if ($refdata[$rt]['count'] > 0) {
 						//*/
-						// It is important to preserve the index orders in the output
-						foreach ($inds as &$index) {
-							foreach ($refdata[$rt]['rows'] as &$rw) {
-								if ($index === $rw["{$rt}_id"]) {
-									$row[$rt]['rows'][] = &$rw;
-									$row[$rt]['count']++;
-									break;
+							// It is important to preserve the index orders in the output
+							foreach ($inds as &$index) {
+								foreach ($refdata[$rt]['rows'] as &$rw) {
+									if ($index === $rw["{$rt}_id"]) {
+										$row[$rt]['rows'][] = &$rw;
+										$row[$rt]['count']++;
+										break;
+									}
 								}
 							}
-						}
 						/*/
-						// the following won't preserve the index orders
-						foreach ($refdata[$rt]['rows'] as &$rw) {
-							$v = array_search($rw["{$rt}_id"], $inds);
+							// the following won't preserve the index orders
+							foreach ($refdata[$rt]['rows'] as &$rw) {
+								$v = array_search($rw["{$rt}_id"], $inds);
 
-							if ($v !== false) {
-								$row[$rt]['rows'][] = &$rw;
-								$row[$rt]['count']++;
+								if ($v !== false) {
+									$row[$rt]['rows'][] = &$rw;
+									$row[$rt]['count']++;
+								}
 							}
-						}
 						//*/
+					}
 				}
 			}
 		}

@@ -79,7 +79,12 @@ case 'people': {
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 		$g['smarty']->assign('selectedmenu', 'People');
-		$ppl = $g['content']['people']->view('default', "people.people_id = $id");
+		$ppl = $g['content']['people']->view('default'
+			, "people.people_id = $id"
+			, ''
+			, '0,99'
+			, true
+			, array('research' => 5, 'publication' => 5));
 
 		if (!$ppl['error'] && $ppl['count'] > 0)
 			$p = $ppl['rows'][0];
@@ -116,7 +121,7 @@ case 'research': {
 	} else {
 		$g['smarty']->assign('page', 'Research');
 		$g['smarty']->assign('selectedmenu', 'Research');
-		$research = $g['content']['research']->view('teaser', '', 'research.research_priority DESC, research.research_status');
+		$research = $g['content']['research']->view('teaser', '', 'research.research_priority ASC, research.research_status');
 
 		if (!$research['error'] && $research['count'] > 0)
 			$g['smarty']->assign('research', $research);

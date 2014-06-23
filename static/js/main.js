@@ -107,6 +107,12 @@ $(document).ready(function()
 
 //-----------------------------------------------------------------------------
 
+    function error(message) {
+        alert(message);
+    }
+
+//-----------------------------------------------------------------------------
+
     function selectSuggest(sug, id) {
         var s = sug.data('selected');
         var child_rows = sug.children().eq(0).children(s);
@@ -149,7 +155,7 @@ $(document).ready(function()
                 'referred_type' : s.data('type'),
                 'referred_id'   : s.data('id'),
             };
-            $.post(weburl + 'ajax/refer', 'params=' + JSON.stringify(v), function(data){
+            $.post(weburl + 'ajax/add-reference', 'params=' + JSON.stringify(v), function(data){
                 data = $.parseJSON(data);
                 if('success' == data.status){
                     // get referred teaser display and add to the teaser-list
@@ -164,11 +170,17 @@ $(document).ready(function()
                         data = $.parseJSON(data);
                         if('success' == data.status && 0 < data.count){
                             var r = $(data.html);
-                            var tl = input.parent().children('.' + v.referred_type + '-refrence-list');
+                            var tl = input.parent().find('.' + v.referred_type + '-refrence-list');
                             tl.append(r);
+                            r.hover(on_hover_of_removable_refrence_teaser);
+                            r.mouseleave(on_mouseleave_of_removable_refrence_teaser);
                             r.trigger("create");
+                        } else if('error' == data.status){
+                            error(data.message);
                         }
                     });
+                } else if('error' == data.status){
+                    error(data.message);
                 }
             });
         } else if (input.hasClass('find')) {
@@ -179,6 +191,7 @@ $(document).ready(function()
 //-----------------------------------------------------------------------------
 
 	var keypress_timeout = null
+    var keypress_timeout_ms = 500;
     var suggest_max = 5;
 	$(".TTWForm .refrence, .TTWForm .find").keypress(function(e) {
 		var input = $(this);
@@ -222,9 +235,11 @@ $(document).ready(function()
                             if (1 == e.which)
                                 insertSuggest(d);
                         });
-				}
+                } else if('error' == data.status){
+                    error(data.message);
+                }
 			});
-		}, 500);
+		}, keypress_timeout_ms);
 	});
 
     $(".TTWForm .refrence, .TTWForm .find").focusout(function() {
@@ -290,6 +305,91 @@ $(document).ready(function()
     //        mp.append($('<option />').val(months[i]).html(months[i]));
     //    }
     //});
+
+//-----------------------------------------------------------------------------
+
+    $(".removable-refrence-list").children().sortable({
+        stop: function(event, ui) {
+
+            var frm = ui.item.closest('.TTWForm-container');
+            var v = {
+                'referer_type'    : frm.data('type'),
+                'referer_id'      : frm.data('id'),
+                'referred_type'   : ui.item.data('type'),
+                'referred_orders' : {},
+            };
+
+            ui.item.parent().children().each(function() {
+                v.referred_orders[$(this).data('id')] = $(this).index();
+            });
+
+            $.post(weburl + 'ajax/order-reference', 'params=' + JSON.stringify(v), function(data){
+                data = $.parseJSON(data);
+                if('success' == data.status){
+                    // don't do any thing
+                } else if('error' == data.status){
+                    error(data.message);
+                }
+            });
+
+        }
+    });
+    $(".removable-refrence-list").children().disableSelection();
+
+    function on_hover_of_removable_refrence_teaser() {
+        var elm = $(this);
+        var img = $('#remove-refrence-button');
+        elm.append(img);
+        img.show();
+    }
+    $(".removable-refrence-list .teaser").hover(on_hover_of_removable_refrence_teaser);
+
+    function on_mouseleave_of_removable_refrence_teaser() {
+        var elm = $(this);
+        var img = $('#remove-refrence-button');
+        img.hide();
+    }
+    $(".removable-refrence-list .teaser").mouseleave(on_mouseleave_of_removable_refrence_teaser);
+
+//-----------------------------------------------------------------------------
+
+    $("#remove-refrence-button").hover(function(event) {
+        var elm = $(this);
+        elm.css('opacity', 1);
+    });
+
+    $("#remove-refrence-button").mouseleave(function(event) {
+        var elm = $(this);
+        elm.css('opacity', 0.3);
+    });
+
+    $("#remove-refrence-button").click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var elm = $(this);
+        var frm = elm.closest('.TTWForm-container');
+        var s = elm.closest('.teaser');
+        var v = {
+            'referer_type'  : frm.data('type'),
+            'referer_id'    : frm.data('id'),
+            'referred_type' : s.data('type'),
+            'referred_id'   : s.data('id'),
+        };
+
+        s.hide();
+
+        $.post(weburl + 'ajax/remove-reference', 'params=' + JSON.stringify(v), function(data){
+            data = $.parseJSON(data);
+            if('success' == data.status){
+                // remove referred node teaser from the teaser-list
+                s.remove();
+            } else if('error' == data.status){
+                s.show();
+                error(data.message);
+            }
+        });
+    });
 
 //-----------------------------------------------------------------------------
 

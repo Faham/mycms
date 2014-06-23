@@ -102,23 +102,18 @@ INSERT `mycms_people` SELECT * FROM `person`;
 -- 2 Adjunct Faculty          2 adjunct_faculty
 -- 3 Researchers              3 researcher
 -- 4 Graduate Students        4 graduate_student
--- 6 Staff                    5 staff
--- 7 Alumni                   6 alumni
--- 8 Recent visitors          7 recent_visitor
--- 5 Undergraduate Students   8 undergraduate_student
+-- 5 Staff                    5 staff
+-- 6 Alumni                   6 alumni
+-- 7 Recent visitors          7 recent_visitor
+-- 8 Undergraduate Students   8 undergraduate_student
 -- NULL or 0                  9 other
 
-UPDATE `mycms_people` SET `GroupId` = 9  WHERE `GroupId` = 0 OR `GroupId` = NULL;
-UPDATE `mycms_people` SET `GroupId` = 10 WHERE `GroupId` = 5;
-UPDATE `mycms_people` SET `GroupId` = 5  WHERE `GroupId` = 6;
-UPDATE `mycms_people` SET `GroupId` = 6  WHERE `GroupId` = 7;
-UPDATE `mycms_people` SET `GroupId` = 7  WHERE `GroupId` = 8;
-UPDATE `mycms_people` SET `GroupId` = 8  WHERE `GroupId` = 10;
+UPDATE `mycms_people` SET `GroupId` = 9  WHERE `GroupId` = 0 OR `GroupId` IS NULL;
 
 -- 1 IsAsmin                  1 administrator
 -- NULL or 0                  2 authenticated
 
-UPDATE `mycms_people` SET `GroupId` = 2  WHERE `IsAdmin` = 0 OR `IsAdmin` = NULL;
+UPDATE `mycms_people` SET `IsAdmin` = 2  WHERE `IsAdmin` = 0 OR `IsAdmin` = NULL;
 
 ALTER TABLE `mycms_people`
 CHANGE `Id`              `people_id`          int(11) UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
