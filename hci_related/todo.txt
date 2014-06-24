@@ -1,6 +1,6 @@
 - replace � with :space: or é in entire database
 - view all for people's publications, it should be grouped by year
-- view all for people's researches
+- a way to easily set research orders
 - reference suggest list shouldn't bring up entries that are already referenced
 - some times when adding from the suggest list, the item whon show up but is added in the database
 

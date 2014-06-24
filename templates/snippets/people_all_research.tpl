@@ -14,26 +14,10 @@
 	</div>
 
 	<div class="profileright">
-		<p>{$people.people_bio}</p>
-		<img src="{txt2img text={$people.people_email}}" />
-
-		{if isset($people.image) and $people.image.count > 1}
-			{for $i = 1; $i < $people.image.count; $i++}
-				<img src="{$weburl}files/people/image/{$people.image.rows[$i].image_filename}" class="imagewrap" align="left" />
-			{/for}
-		{/if}
-
-		{if isset($people.publication) and $people.publication.count > 0}
-			{include "templates/snippets/section_title.tpl" title={t s=Publications m=0}}
-			{include "templates/snippets/publication_teaser_list.tpl" publication=$people.publication}
-		{/if}
-		<a href="{$weburl}people/{$people.people_id}/publication">View All &gt;&gt;</a>
-
+		<a href="{$weburl}people/{$people.people_id}">&lt;&lt; Back to Profile</a>
 		{if isset($people.research) and $people.research.count > 0}
-			{include "templates/snippets/section_title.tpl" title={t s=Research m=0}}
 			{include "templates/snippets/research_teaser_list.tpl" research=$people.research}
 		{/if}
-		<a href="{$weburl}people/{$people.people_id}/research">View All &gt;&gt;</a>
 	</div>
 {/if}
 </div>

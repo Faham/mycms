@@ -73,12 +73,13 @@ abstract class content extends \DB_DataObject {
 
 //-----------------------------------------------------------------------------
 
-    public function view($display = 'teaser'
-    	, $where = ''
-    	, $sortby = ''
-    	, $limit = '0,99'
-    	, $get_referenced_data = true
-    	, $refrence_limit = array()) {
+    public function view($display = 'teaser',
+    	$where = '',
+    	$sortby = '',
+    	$limit = '0,99',
+    	$get_referenced_data = true,
+    	$refrence_limit = array(),
+    	$refrence_order = array()) {
 
         global $g;
 
@@ -86,6 +87,16 @@ abstract class content extends \DB_DataObject {
 			$r = array('error' => true, 'count' => 0, 'rows' => array());
 			$g['error']->push("Content type " . $this->m_type . " does not support $display display.", 'error');
 			return $r;
+		}
+
+		foreach ($this->displays[$display] as $ref => $func) {
+			if (!array_key_exists($ref, $refrence_limit)) {
+				$refrence_limit[$ref] = -1; // returning all refrences;
+			}
+
+			if (!array_key_exists($ref, $refrence_order)) {
+				$refrence_order[$ref] = '';
+			}
 		}
 
 		$t = $this->m_type;
@@ -103,9 +114,10 @@ abstract class content extends \DB_DataObject {
 				// if return all references
 
 				$ref_list_concat = "GROUP_CONCAT(DISTINCT pt.{$reftype}_id ORDER BY pt.{$reftype}_order ASC SEPARATOR ',')";
-				if (array_key_exists($reftype, $refrence_limit)) {
+				if (0 === $refrence_limit[$reftype])
+					continue;
+				else if (0 < $refrence_limit[$reftype])
 					$ref_list_concat = 'SUBSTRING_INDEX(' . $ref_list_concat . ", ',', {$refrence_limit[$reftype]})";
-				}
 
 				$q = "$q LEFT JOIN (
 						SELECT pt.{$t}_id, $ref_list_concat as $reftype
@@ -146,35 +158,50 @@ abstract class content extends \DB_DataObject {
 			$refdata = array();
 			$refindices = array();
 
-			foreach ($this->displays[$display] as $ref => $func)
-				if ($func == 'all') {
+			foreach ($this->displays[$display] as $ref => $func) {
+				if ($func == 'all' && $refrence_limit[$ref] !== 0) {
 					$refdata[$ref] = null;
 					$refindices[$ref] = '';
 				}
+			}
 
 			foreach ($refdata as $rt => &$rd) {
-				foreach ($r['rows'] as &$row)
-					if ($row[$rt] != null)
-						$refindices[$rt] .= (empty($refindices[$rt])?'':',') . $row[$rt];
 
-				if (!empty($refindices[$rt]))
-					$rd = $g['content'][$rt]->view('teaser', "$rt.{$rt}_id IN (" . $refindices[$rt] . ")", '', '', $display == 'teaser'? false: true);
+				if ($func == 'all' && 0 === $refrence_limit[$rt]) {
+					continue;
+				}
+
+				foreach ($r['rows'] as &$row) {
+					if ($row[$rt] != null) {
+						$refindices[$rt] .= (empty($refindices[$rt])?'':',') . $row[$rt];
+					}
+				}
+
+				if (!empty($refindices[$rt])) {
+					$refindices[$rt] = implode(',', array_unique(explode(',', $refindices[$rt])));
+					$rd = $g['content'][$rt]->view('teaser',
+						"$rt.{$rt}_id IN (" . $refindices[$rt] . ")",
+						$refrence_order[$rt], '', $display == 'teaser' ? false : true);
+				}
 			}
 
 			// Find and put each records data from $refdata into $r;
 			foreach ($r['rows'] as &$row) {
 				foreach ($this->displays[$display] as $rt => $func) {
-					if (empty($row[$rt]) || $func != 'all')
+					if (empty($row[$rt]) || $func != 'all' || ($func == 'all' && 0 == $refrence_limit[$rt])) {
 						continue;
+					}
 
-					if (substr_count($row[$rt], ',') > 0)
+					if (substr_count($row[$rt], ',') > 0) {
 						$inds = explode(',', $row[$rt]);
-					else
+					} else {
 						$inds = array($row[$rt]);
+					}
 
 					$row[$rt] = array('rows' => array(), 'count' => 0);
 					if ($refdata[$rt]['count'] > 0) {
 						//*/
+						if (empty($refrence_order[$rt]))
 							// It is important to preserve the index orders in the output
 							foreach ($inds as &$index) {
 								foreach ($refdata[$rt]['rows'] as &$rw) {
@@ -185,7 +212,8 @@ abstract class content extends \DB_DataObject {
 									}
 								}
 							}
-						/*/
+						//*/
+						else
 							// the following won't preserve the index orders
 							foreach ($refdata[$rt]['rows'] as &$rw) {
 								$v = array_search($rw["{$rt}_id"], $inds);

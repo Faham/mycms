@@ -76,15 +76,53 @@ case 'home': {
 //-----------------------------------------------------------------------------
 
 case 'people': {
-	if (isset($_GET['id'])) {
+	if (isset($_GET['id']) && isset($_GET['details'])) {
+
+		$id = $_GET['id'];
+		$details = strtolower($_GET['details']);
+		$g['smarty']->assign('selectedmenu', 'People');
+		$refs = $g['content']['people']->displays['default'];
+
+		if (array_key_exists($details, $refs)) {
+			$ref_limits = $refs;
+
+			// setting zero for the limit of all other referenced types
+			// except for the $details
+			foreach ($ref_limits as $r => &$v) {
+				$v = 0;
+			}
+			unset($ref_limits[$details]);
+
+
+			$ref_order = array();
+			// todo: kind of hard coding
+			if ('publication' == $details)
+				$ref_order[$details] = $details . '_year DESC';
+
+			$ppl = $g['content']['people']->view('default',
+				"people.people_id = $id", '', '', true, $ref_limits, $ref_order);
+
+			if (!$ppl['error'] && $ppl['count'] > 0)
+				$p = $ppl['rows'][0];
+				$g['smarty']->assign('page_l', implode(' ', array(
+					$p['people_firstname'],
+					$p['people_middlename'],
+					$p['people_lastname'])));
+				$g['smarty']->assign('people', $p);
+
+			$g['template'] = 'snippets/people_all_' . $details;
+		} else {
+			// error
+		}
+	} else if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 		$g['smarty']->assign('selectedmenu', 'People');
-		$ppl = $g['content']['people']->view('default'
-			, "people.people_id = $id"
-			, ''
-			, '0,99'
-			, true
-			, array('research' => 5, 'publication' => 5));
+		$ppl = $g['content']['people']->view('default',
+			"people.people_id = $id",
+			'',
+			'0,99',
+			true,
+			array('research' => 5, 'publication' => 5));
 
 		if (!$ppl['error'] && $ppl['count'] > 0)
 			$p = $ppl['rows'][0];
