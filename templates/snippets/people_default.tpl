@@ -26,14 +26,14 @@
 		{if isset($people.publication) and $people.publication.count > 0}
 			{include "templates/snippets/section_title.tpl" title={t s=Publications m=0}}
 			{include "templates/snippets/publication_teaser_list.tpl" publication=$people.publication}
+			<a href="{$weburl}people/{$people.people_id}/publication">View All &gt;&gt;</a>
 		{/if}
-		<a href="{$weburl}people/{$people.people_id}/publication">View All &gt;&gt;</a>
 
 		{if isset($people.research) and $people.research.count > 0}
 			{include "templates/snippets/section_title.tpl" title={t s=Research m=0}}
 			{include "templates/snippets/research_teaser_list.tpl" research=$people.research}
+			<a href="{$weburl}people/{$people.people_id}/research">View All &gt;&gt;</a>
 		{/if}
-		<a href="{$weburl}people/{$people.people_id}/research">View All &gt;&gt;</a>
 	</div>
 {/if}
 </div>

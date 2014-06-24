@@ -1,7 +1,7 @@
 
 [GLOBAL]
 host             = localhost
-user             = root
+admin            = root
 default_lang     = en
 homepage         = home
 timezone         = America/Regina

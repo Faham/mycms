@@ -133,9 +133,6 @@ DROP   `PublicationPref`,
 DROP PRIMARY KEY,
 ADD PRIMARY KEY (`people_id`);
 
--- todo: still two columns not imported: ProjectPref and PublicationPref
--- todo: update mycms base on the change in people_bio length from 1000 to 3000
-
 -- -------------------------------------------------------------
 
 -- converting old `publication` to new `mycms_publication`.

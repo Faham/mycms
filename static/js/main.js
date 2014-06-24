@@ -382,6 +382,12 @@ $(document).ready(function()
         $.post(weburl + 'ajax/remove-reference', 'params=' + JSON.stringify(v), function(data){
             data = $.parseJSON(data);
             if('success' == data.status){
+                // detach the remove-button from this teaser
+                var img = $('#remove-refrence-button');
+                img.css('opacity', 0.3);
+                img.hide();
+                img.detach().appendTo(frm);
+
                 // remove referred node teaser from the teaser-list
                 s.remove();
             } else if('error' == data.status){
