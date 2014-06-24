@@ -7,8 +7,9 @@ homepage         = home
 timezone         = America/Regina
 ; it can be [debug, release]
 runmode          = debug
-; set CAS server certificate ex: /etc/certs/CAS_Cert_Chain.pem
-cas_server_cert  =
+; choose authentication method: [cas, default]  (NOTE: implemented of default not finished yet)
+auth_method      = cas
+trac_url         = https://papyrus.usask.ca/trac/hci/
 
 [DB_DataObject]
 database          = mysql://root:pass@localhost/mycms
@@ -29,3 +30,11 @@ display_errors = On
 ;   Development Value: E_ALL | E_STRICT
 ;   Production Value: E_ALL & ~E_DEPRECATED
 error_reporting = E_ALL & ~E_STRICT
+
+[CAS]
+; set CAS server certificate ex: /etc/certs/CAS_Cert_Chain.pem
+cas_server_cert     =
+cas_server_version  = CAS_VERSION_1_0
+cas_server_hostname = cas.usask.ca
+cas_server_port     = 443
+cas_server_uri      = /cas
