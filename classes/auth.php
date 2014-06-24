@@ -54,7 +54,7 @@ class auth {
             return cas::get_user_id();
         }
         else if ('shibboleth' == $g['auth_method']) {
-            return "scottb";
+            return "ssb001";
         }
     }
 
