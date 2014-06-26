@@ -1,7 +1,12 @@
 
 {*---------------------------------------------------------------------------*}
 
+{if isset($publication)}
 <div class="publication-default" data-type='publication' data-id={$publication.publication_id}>
+	{if isset($user) and $user.is_admin}
+		<a class="edit-node" href='{gl url="admin/publication/view"}/{$publication.publication_id}'>edit</a>
+	{/if}
+
 	<h2>
 		<span style="color: gray">{t s=Publication m=0}:</span>
 		{$publication.publication_title}
@@ -56,5 +61,6 @@
 	{include "templates/snippets/section_title.tpl" title=BibTeX}
 	{include "templates/snippets/bibtex.tpl" publication=$publication}
 </div>
+{/if}
 
 {*---------------------------------------------------------------------------*}

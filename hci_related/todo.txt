@@ -1,13 +1,19 @@
-- replace � with :space: or é in entire database
-- a way to easily set research orders
+- remove unknown from the bottom of http://localhost/mycms/people/1/publication
+- publications filter and pagination
+- make nsid unique
+- add support for png
+- when save people page, adds start and end dates instead of null
 - reference suggest list shouldn't bring up entries that are already referenced
-- some times when adding from the suggest list, the item whon show up but is added in the database
+- people pages headers only shown if people in there
+- authenticated users should be able to edit their own page, and the papers they are the first author.
+- though they shouldn't be able to create any new node or change their own referenced research or publications
+- publication edit page toappear checkbox doesn't work properly
+- a way to easily set research orders
+- replace � with :space: or é in entire database
 
 harvey has worked on the followings, check for their integration:
-- _view all_ for publications and researches of people
 - removing video/doc/image
 - set a maximum for number of images/video/doc
 - revise thumbnail generation code
 
 
-- publication edit page toappear checkbox doesn't work properly

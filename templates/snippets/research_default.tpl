@@ -1,7 +1,12 @@
 
 {*---------------------------------------------------------------------------*}
 
+{if isset($research)}
 <div class="research-default" data-type='research' data-id={$research.research_id}>
+	{if isset($user) and $user.is_admin}
+		<a class="edit-node" href='{gl url="admin/research/view"}/{$research.research_id}'>edit</a>
+	{/if}
+
 	<h2>
 		<span style="color: gray">{t s=Project m=0}:</span>
 		{$research.research_title}
@@ -38,5 +43,6 @@
 		{include "templates/snippets/publication_teaser_list.tpl" publication=$research.publication group=false}
 	{/if}
 </div>
+{/if}
 
 {*---------------------------------------------------------------------------*}

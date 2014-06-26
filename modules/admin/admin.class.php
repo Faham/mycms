@@ -10,23 +10,6 @@ class admin {
 
 //-----------------------------------------------------------------------------
 
-	public static function is_admin($user_id) {
-		global $g;
-
-		if ($user_id === $g['admin']) {
-			return true;
-		} else {
-			$ppl = $g['content']['people'];
-			$r = $ppl->get('people_nsid', $user_id);
-
-			if ($r === 0)
-				return false;
-
-			return $ppl->people_role === 'administrator';
-		}
-
-		return false;
-	}
 
 //-----------------------------------------------------------------------------
 

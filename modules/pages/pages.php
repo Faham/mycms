@@ -25,12 +25,12 @@ $menu = array(
 );
 $g['smarty']->assign('menu', $menu);
 
-$auth_menu_state = $g['user'] === false ? 'login' : 'logout';
+$auth_menu_state = $g['user']['is_authenticated'] ? 'logout' : 'login';
 
 // Set secondary menu options
 $menu = array(
 	array('name' => 'trac',           'url' => $g['trac_url'],                          ),
-	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
+	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']['id']),
 );
 
 $g['smarty']->assign('menu_2', $menu);

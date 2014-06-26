@@ -16,11 +16,11 @@ class error {
 
     public function __construct()
     {
-        if(!isset($_SESSION['error'])){
-            $_SESSION['error'] = array();
+        if(!isset($g['session']['error'])){
+            $g['session']['error'] = array();
         } else {
-            $this->errors = array_merge($this->errors, $_SESSION['error']);
-            $_SESSION['error'] = array();
+            $this->errors = array_merge($this->errors, $g['session']['error']);
+            $g['session']['error'] = array();
         }
     }
 
@@ -42,7 +42,7 @@ class error {
 		}
 
         if($future){
-            $_SESSION['error'][] = array('msg' => $msg, 'level' => $level);
+            $g['session']['error'][] = array('msg' => $msg, 'level' => $level);
         }else{
             $this->errors[] = array('msg' => $msg, 'level' => $level);
         }

@@ -33,13 +33,13 @@ h2, h4 {
 }
 h2 {
 	font-size: 15px;
-	margin: 0 0 15px;
+	margin: 0 0 10px;
 	border-bottom: 1px solid rgb(200, 200, 200);
 	padding-bottom: 1px;
 }
 h4 {
 	font-size: 13px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 p {
@@ -205,8 +205,8 @@ input, textarea, select {
 
 .strike {
 	height: 28px;
-	margin-top: 17px;
-	margin-bottom: 4px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .strike .line {
@@ -349,7 +349,8 @@ input, textarea, select {
 }
 
 .publication-teaser {
-	margin: 10px 0 20px;
+	margin: 0px 0 10px;
+	padding: 5px 0 5px;
 }
 
 .docimage {
@@ -358,7 +359,7 @@ input, textarea, select {
 }
 
 .research-teaser-list {
-	padding: 10px;
+	/*padding: 10px;*/
 }
 
 .people-refrence-list {
@@ -395,7 +396,7 @@ input, textarea, select {
 }
 
 .people-teaser-list, .people-refrence-list {
-	padding: 12px 4px;
+	/*padding: 12px 4px;*/
 	overflow: hidden;
 }
 
@@ -407,7 +408,7 @@ input, textarea, select {
 }
 
 .research-teaser {
-	padding: 5px;
+	padding: 7px 0px 7px 1px;
 }
 
 .research-teaser .left {
@@ -466,6 +467,7 @@ input, textarea, select {
 
 .publeft {
 	width: 23px;
+	min-height: 30px;
 	float: left;
 }
 
@@ -505,6 +507,7 @@ input, textarea, select {
 	cursor: pointer;
 	font-size: 12px;
 	position: relative;
+	/*word-break: break-all;*/
 }
 
 .tiny:hover, .tiny *:hover, .teaser *:hover, .teaser:hover {
@@ -525,7 +528,7 @@ input.refrence, input.find {
 	padding: 0px 10px;
 }
 
-.TTWForm .remove {
+.TTWForm .remove, a.edit-node {
 	float: right;
 }
 
@@ -535,5 +538,10 @@ input.refrence, input.find {
 	right: 0px;
 	bottom: 0px;
 	z-index: 99;
-	display: hidden;
+	display: none;
+}
+
+a.view-all {
+	margin: 5px 0px 15px;
+	display: inline-block;
 }
