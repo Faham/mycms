@@ -30,10 +30,13 @@ $menu = array(
 	array('name' => 'people',       'url' => 'admin/people',       ),
 	array('name' => 'research',     'url' => 'admin/research',     ),
 	array('name' => 'publication',  'url' => 'admin/publication',  ),
+	array('name' => 'register',  'url' => 'reg.html',  ),
 );
 $g['smarty']->assign('menu', $menu);
-
 // Set secondary menu options
+if(isset($g['trac_url'])){
+	$menu = array(array('name' => 'trac',           'url' => $g['trac_url'],                          ),);
+}
 $menu = array(
 	array('name' => 'trac',       'url' => 'https://papyrus.usask.ca/trac/hci/',  ),
 	array('name' => 'logout',     'url' => 'logout', 'user_id' => $g['user']['id'],     ),
@@ -855,12 +858,9 @@ else if (checkparams(array(
 	'operation' => 'edit',
 	'_isset'    => array('id')))) {
 	$id = $_GET['id'];
-	echo $id."<br/>";
 	$r = $content->get($id);
-	echo $r."<br/>";
 	//$r=1;
 	if ($r == 1) {
-		echo "r=1<br/>";
 		foreach ($_POST as $k => $v) {
 			if (property_exists("\\mycms\\$ct", $k)) {
 				if (validate($content->field_type[$k], $v))
@@ -869,7 +869,6 @@ else if (checkparams(array(
 					$g['error']->push("worng format($k ". $content->field_type[$k] . ") at $v");
 			}
 		}
-		echo $content->people_firstname."<br/>";
 		//$r = $content->validate();
 		//if (true !== $r) {
 		//	ob_start();
@@ -944,7 +943,6 @@ else if (checkparams(array(
 			$g['error']->push("No $ct found with id " . $id, 'error');
 		}
 	} else if ($r == 0) {
-		echo "r=0";
 		$g['error']->push("No $ct found with id " . $_GET['id'], 'error');
 	}
 }

@@ -69,6 +69,7 @@ function txt2img($p, &$smarty) {
 //-----------------------------------------------------------------------------
 
 function t($p, &$smarty) {
+    //echo $p['s'];
     if(isset($p['m']) && $p['m'] == false) {
         eval('echo L_' . str_replace(' ', '_', strtoupper($p['s'])) . ';');
     } else {

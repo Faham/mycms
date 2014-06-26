@@ -30,6 +30,9 @@ class auth {
         else if ('shibboleth' == $g['auth_method']) {
             return true;
         }
+        else if ('native' == $g['auth_method']) {
+            header('Location: http://localhost/mycms/login.html');
+        }
     }
 
 //-----------------------------------------------------------------------------
@@ -43,6 +46,14 @@ class auth {
         else if ('shibboleth' == $g['auth_method']) {
             return true;
         }
+        else if ('native' == $g['auth_method']) {
+            if(isset($_SESSION['username'])){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 
 //-----------------------------------------------------------------------------
@@ -54,13 +65,23 @@ class auth {
             return cas::get_user_id();
         }
         else if ('shibboleth' == $g['auth_method']) {
-            return "ssb001";
+            //return "ssb001";
+            return $g['admin'];
+        }
+        else if ('native' == $g['auth_method']) {
+           
+            //return "http://localhost/login";
+            if(isset($_SESSION['username']))
+                return $_SESSION['username'];
+            else
+                return null;
         }
     }
 
 //-----------------------------------------------------------------------------
 
     // params: $url is the redirect url after loging out
+    //TODO: shibboleth is not implemented
     public static function logout($url) {
         global $g;
 
@@ -69,6 +90,13 @@ class auth {
         }
         else if ('shibboleth' == $g['auth_method']) {
             return "http://localhost/mycms";
+        }
+        else if ('native' == $g['auth_method']) {
+            unset($_SESSION['username']);
+            $g['user'] = false;
+            //return "http://localhost/mycms";
+            return $url;
+;
         }
     }
 

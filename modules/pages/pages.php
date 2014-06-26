@@ -33,26 +33,47 @@ $menu = array(
 	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']['id']),
 );
 
-$g['smarty']->assign('menu_2', $menu);
-
-//-----------------------------------------------------------------------------
-
-switch($_GET['action']){
-
 //-----------------------------------------------------------------------------
 
 //TODO: after login it should continue on the current page not the homepage
-case 'login':
+if  ($_GET['action'] == 'login')
 	$g['auth']->authenticate();
-	goto HOME;
-case 'logout':
-	$g['auth']->logout(system::genlink(''));
-	goto HOME;
+
+else if ($_GET['action'] == 'logout')
+{
+	if ($g['user'])
+		$g['auth']->logout(system::genlink(''));
+	$_GET['action'] = 'home';
+}
+
 
 //-----------------------------------------------------------------------------
 
-HOME:
-case 'home': {
+
+//$auth_menu_state = $g['user'] === false ? 'login' : 'logout';
+$auth_menu_state = $g['user'] === false ? 'login' : 'logout';
+//$login_link = $auth_menu_state === 'login' ? 'login.html' : 'logout';
+// Set secondary menu options
+if(isset($g['trac_url'])){
+	$menu = array(
+		array('name' => 'trac',           'url' => $g['trac_url'],                          ),
+		);
+}
+if($g['auth']->is_authenticated()){
+	$menu = array(
+		array('name' => 'Admin', 'url' => 'admin',),
+	);
+}
+$menu = array(
+	//array('name' => 'trac',           'url' => $g['trac_url'],                          ),
+	//array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
+	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
+	//array('name' => 'Login', 'url' => 'login.html'),
+);
+$g['smarty']->assign('menu_2', $menu);
+
+
+if ($_GET['action'] == 'home') {
 	$imglist = pages::get_imagelist(true);
 	if (!$imglist['error'] && $imglist['count'] > 0)
 		$g['smarty']->assign('imglist', $imglist);
@@ -71,11 +92,11 @@ case 'home': {
 
 	$g['smarty']->assign('selectedmenu', 'Home');
 	$g['template'] = 'home';
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-case 'people': {
+else if ($_GET['action'] == 'people') {
 	if (isset($_GET['id']) && isset($_GET['details'])) {
 
 		$id = $_GET['id'];
@@ -140,11 +161,11 @@ case 'people': {
 
 		$g['template'] = 'people';
 	}
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-case 'research': {
+else if ($_GET['action'] == 'research') {
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 		$g['smarty']->assign('selectedmenu', 'Research');
@@ -166,12 +187,11 @@ case 'research': {
 
 		$g['template'] = 'research';
 	}
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-case 'publication':
-case 'publications': {
+else if ($_GET['action'] == 'publication' || $_GET['action'] == 'publications') {
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 		$g['smarty']->assign('selectedmenu', 'Publications');
@@ -193,41 +213,48 @@ case 'publications': {
 
 		$g['template'] = 'publication';
 	}
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-case 'courses': {
+else if ($_GET['action'] == 'courses') {
 	$g['smarty']->assign('page', 'Courses');
 	$g['smarty']->assign('selectedmenu', 'Courses');
 	$g['template'] = 'courses';
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-case 'download': {
+else if ($_GET['action'] == 'download') {
 	$g['smarty']->assign('page', 'Download');
 	$g['smarty']->assign('selectedmenu', 'Download');
 	$g['template'] = 'download';
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-case 'contact': {
+else if ($_GET['action'] == 'contact') {
 	$g['smarty']->assign('page', 'Contact');
 	$g['smarty']->assign('selectedmenu', 'Contact');
 	$g['template'] = 'contact';
-} break;
+}
 
 //-----------------------------------------------------------------------------
 
-default: {
+else if ($_GET['action'] == 'admin') {
+	$g['smarty']->assign('page', 'Admin');
+	$g['smarty']->assign('selectedmenu', 'Admin');
+	$g['template'] = 'admin';
+}
+
+//-----------------------------------------------------------------------------
+
+else {
 	$g['smarty']->assign('page', 'Error');
 	$g['template'] = 'notfound';
 }
 
 //-----------------------------------------------------------------------------
 
-}
 
 //-----------------------------------------------------------------------------

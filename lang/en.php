@@ -15,6 +15,8 @@
 @define('L_DOWNLOADS', 'Downloads');
 @define('L_DOWNLOAD', 'Download');
 @define('L_CONTACT', 'Contact');
+@define('L_ADMIN', 'Admin');
+@define('L_REGISTER', 'Register');
 @define('L_ERROR', 'Error');
 @define('L_SEARCH', 'Search');
 @define('L_PAGE_NOT_FOUND', 'Page Not Found');
