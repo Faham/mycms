@@ -30,7 +30,7 @@ $menu = array(
 	array('name' => 'people',       'url' => 'admin/people',       ),
 	array('name' => 'research',     'url' => 'admin/research',     ),
 	array('name' => 'publication',  'url' => 'admin/publication',  ),
-	array('name' => 'register',  'url' => 'reg.html',  ),
+	array('name' => 'register',  'url' => 'reg.php',  ),
 );
 $g['smarty']->assign('menu', $menu);
 // Set secondary menu options

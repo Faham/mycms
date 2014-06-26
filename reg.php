@@ -70,6 +70,29 @@
 						<input type="submit" name="submit" value="  SUBMIT  " class="left" />
 					</p>
 				</form>
+				<div class="user_list">
+					<table border="1">
+					<tr>
+						<th>User ID</th>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Register Date</th>
+					</tr>
+						<?php 
+							date_default_timezone_set("America/Halifax");
+							include('modules/login_reg/conn.php');
+							$query = mysql_query("select * from user");
+							while ( $db_field = mysql_fetch_assoc($query) ) {
+							echo "<tr>";
+							echo "<td align = \"center\">" . $db_field['uid'] . "</td>";
+							echo "<td align = \"center\">" . $db_field['username'] . "</td>";
+							echo "<td align = \"center\">" . $db_field['email'] . "</td>";
+							echo "<td align = \"center\">" . date("Y-m-d", $db_field['regdate']) . "</td>";
+							echo "</tr>";
+							}
+						?>
+					</table>
+				</div>
 			</fieldset>
 		</div>
 	</body>

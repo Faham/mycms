@@ -13,28 +13,6 @@ $g['template'] = 'home';
 
 //-----------------------------------------------------------------------------
 
-// Set main menu options
-$menu = array(
-	array('name' => 'Home',         'url' => '',             ),
-	array('name' => 'People',       'url' => 'people',       ),
-	array('name' => 'Research',     'url' => 'research',     ),
-	array('name' => 'Publications', 'url' => 'publications', ),
-	array('name' => 'Courses',      'url' => 'courses',      ),
-	array('name' => 'Download',     'url' => 'download',     ),
-	array('name' => 'Contact',      'url' => 'contact',      ),
-);
-$g['smarty']->assign('menu', $menu);
-
-$auth_menu_state = $g['user']['is_authenticated'] ? 'logout' : 'login';
-
-// Set secondary menu options
-$menu = array(
-	array('name' => 'trac',           'url' => $g['trac_url'],                          ),
-	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']['id']),
-);
-
-//-----------------------------------------------------------------------------
-
 //TODO: after login it should continue on the current page not the homepage
 if  ($_GET['action'] == 'login')
 	$g['auth']->authenticate();
@@ -45,29 +23,53 @@ else if ($_GET['action'] == 'logout')
 		$g['auth']->logout(system::genlink(''));
 	$_GET['action'] = 'home';
 }
+if($g['trac_url']){
+	$trac_state = 'trac';
+}else{
+	$trac_state = '';
+}
+//-----------------------------------------------------------------------------
+
+// Set main menu options
+if($g['user']['is_admin']){
+	$admin_state = 'admin';
+}else{
+	$admin_state = '';
+}
+$menu = array(
+	array('name' => 'Home',         'url' => '',             ),
+	array('name' => 'People',       'url' => 'people',       ),
+	array('name' => 'Research',     'url' => 'research',     ),
+	array('name' => 'Publications', 'url' => 'publications', ),
+	array('name' => 'Courses',      'url' => 'courses',      ),
+	array('name' => 'Download',     'url' => 'download',     ),
+	array('name' => 'Contact',      'url' => 'contact',      ),
+	array('name' => $admin_state, 	'url' => $admin_state,	 ),
+);
+
+$g['smarty']->assign('menu', $menu);
+
+$auth_menu_state = $g['user']['is_authenticated'] ? 'logout' : 'login';
+//echo $g['user']['id'];
+// Set secondary menu options
+/*$menu = array(
+	array('name' => 'trac',           'url' => $g['trac_url'],                          ),
+	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']['id'],),
+);*/
 
 
 //-----------------------------------------------------------------------------
 
 
 //$auth_menu_state = $g['user'] === false ? 'login' : 'logout';
-$auth_menu_state = $g['user'] === false ? 'login' : 'logout';
+$auth_menu_state = $g['user']['is_authenticated'] === false ? 'login' : 'logout';
 //$login_link = $auth_menu_state === 'login' ? 'login.html' : 'logout';
 // Set secondary menu options
-if(isset($g['trac_url'])){
-	$menu = array(
-		array('name' => 'trac',           'url' => $g['trac_url'],                          ),
-		);
-}
-if($g['auth']->is_authenticated()){
-	$menu = array(
-		array('name' => 'Admin', 'url' => 'admin',),
-	);
-}
+
 $menu = array(
-	//array('name' => 'trac',           'url' => $g['trac_url'],                          ),
+	array('name' => $trac_state,        'url' => $g['trac_url'],                          ),
 	//array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
-	array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
+	array('name' => $auth_menu_state, 	'url' => $auth_menu_state, 'user_id' => $g['user']['id']),
 	//array('name' => 'Login', 'url' => 'login.html'),
 );
 $g['smarty']->assign('menu_2', $menu);

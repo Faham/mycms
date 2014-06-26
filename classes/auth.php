@@ -93,7 +93,9 @@ class auth {
         }
         else if ('native' == $g['auth_method']) {
             unset($_SESSION['username']);
-            $g['user'] = false;
+            $g['user']['id'] = '';
+            $g['user']['is_authenticated'] = false;
+            $g['user']['is_admin'] = false;
             //return "http://localhost/mycms";
             return $url;
 ;

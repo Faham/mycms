@@ -7,4 +7,5 @@
 	    die("Database connection error" . mysql_error());
 	}
 	mysql_select_db("login", $conn);
+
 ?>
