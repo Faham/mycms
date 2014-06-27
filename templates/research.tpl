@@ -1,8 +1,8 @@
 
 {*---------------------------------------------------------------------------*}
 
+<h2>{t s='Research' m=0}</h2>
 {if isset($research)}
-	<h2>{t s='Research' m=0}</h2>
 	{for $i=0; $i < $research.count; $i++}
 		{if $research.rows[$i].research_status != 'past'}
 			{include "templates/snippets/research_teaser.tpl" research=$research.rows[$i]}

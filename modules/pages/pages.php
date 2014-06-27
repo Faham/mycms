@@ -170,8 +170,7 @@ case 'research': {
 
 //-----------------------------------------------------------------------------
 
-case 'publication':
-case 'publications': {
+case 'publication': {
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 		$g['smarty']->assign('selectedmenu', 'Publications');
@@ -183,16 +182,31 @@ case 'publications': {
 			$g['smarty']->assign('publication', $p);
 
 		$g['template'] = 'snippets/publication_default';
-	} else {
-		$g['smarty']->assign('page', 'Publications');
-		$g['smarty']->assign('selectedmenu', 'Publications');
-		$pubs = $g['content']['publication']->view('teaser', '', 'publication.publication_year DESC');
-
-		if (!$pubs['error'] && $pubs['count'] > 0)
-			$g['smarty']->assign('publications', $pubs);
-
-		$g['template'] = 'publication';
 	}
+} break;
+
+//-----------------------------------------------------------------------------
+
+case 'publications': {
+	$g['smarty']->assign('selectedmenu', 'Publications');
+	$g['smarty']->assign('page', 'Publications');
+
+	if (isset($_GET['id'])) {
+		$page = $_GET['id'];
+	} else {
+		$page = 1;
+	}
+
+	$pg_max = 100;
+	$pg_s = ($page - 1) * $pg_max;
+
+	$pubs = $g['content']['publication']->view('teaser', '', 'publication.publication_year DESC', "$pg_s,$pg_max");
+
+	if (!$pubs['error'] && $pubs['count'] > 0) {
+		$g['smarty']->assign('publications', $pubs);
+	}
+
+	$g['template'] = 'publication';
 } break;
 
 //-----------------------------------------------------------------------------

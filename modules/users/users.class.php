@@ -392,58 +392,6 @@ class users {
 
 //-----------------------------------------------------------------------------
 
-    public function get_yegans($user_id) {
-        global $g;
-
-        return $g['db']->query("SELECT yegan_id FROM user_yegan WHERE user_id = $user_id");
-    }
-
-//-----------------------------------------------------------------------------
-
-    public function has_yegan($user_id, $yegan_id) {
-        global $g;
-        $r = $g['user']->role;
-
-        if($r == "admin" || $r == "chief" || $r == "chief specialist")
-            return true;
-
-        $res = users::get_yegans($user_id);
-
-        foreach($res['rows'] as $row)
-        {
-            $yid = $row['yegan_id'];
-            if($yid == substr($yegan_id, 0, strlen($yid)))
-                return $yid;
-        }
-
-        return false;
-    }
-
-//-----------------------------------------------------------------------------
-
-    public function add_yegan($user_id, $yegan_id) {
-        if(!isset($user_id) || !isset($yegan_id)) return;
-        echo "user is : $user_id and yegan: $yegan_id";
-        global $g;
-
-        $res = $g['db']->query("SELECT * FROM user_yegan WHERE user_id = $user_id AND yegan_id = $yegan_id");
-        if($res['count'] == 0)
-            return $g['db']->query("INSERT INTO user_yegan(user_id, yegan_id) VALUE ($user_id, $yegan_id)");
-    }
-
-//-----------------------------------------------------------------------------
-
-    public function remove_yegan($user_id, $yegan_id) {
-        echo "test";
-        if(!isset($user_id) || !isset($yegan_id)) return;
-
-        global $g;
-
-        $g['db']->query("DELETE FROM user_yegan WHERE user_id = $user_id AND yegan_id = $yegan_id");
-    }
-
-//-----------------------------------------------------------------------------
-
 }
 
 //-----------------------------------------------------------------------------

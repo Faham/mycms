@@ -73,13 +73,14 @@ abstract class content extends \DB_DataObject {
 
 //-----------------------------------------------------------------------------
 
-    public function view($display = 'teaser',
-    	$where = '',
-    	$sortby = '',
-    	$limit = '0,99',
+    public function view(
+    	$display             = 'teaser',
+    	$where               = '',
+    	$sortby              = '',
+    	$limit               = '0,99',
     	$get_referenced_data = true,
-    	$refrence_limit = array(),
-    	$refrence_order = array()) {
+    	$refrence_limit      = array(),
+    	$refrence_order      = array()) {
 
         global $g;
 

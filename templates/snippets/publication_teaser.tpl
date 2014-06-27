@@ -18,7 +18,7 @@
 			</a>
 		{/if}
 	</div>
-	<a href='{gl url="publications/{$publication.publication_id}"}' class='textside'>
+	<a href='{gl url="publication/{$publication.publication_id}"}' class='textside'>
 		<div class="title">{$publication.publication_title}</div>
 		{include "templates/snippets/citation.tpl" publication=$publication}
 	</a>
