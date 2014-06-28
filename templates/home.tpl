@@ -14,7 +14,7 @@
 
 {*---------------------------------------------------------------------------*}
 
-<p id="hci_description">{t s="HCI_DESCRIPTION" m=0}</p>
+<p id="website_description">{t s="website_description" m=0}</p>
 
 {include "templates/snippets/section_title.tpl" title={t s=Faculty m=0}}
 {if isset($faculty)}

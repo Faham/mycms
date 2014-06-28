@@ -39,7 +39,7 @@
     <script type="text/javascript">var weburl = '{$weburl}';</script>
     <script type="text/javascript" src="{$weburl}static/js/main.js"></script>
 
-	<link rel="shortcut icon" href="http://hci.usask.ca/static/images/favicon.png">
+	<link rel="shortcut icon" href="{$weburl}static/images/favicon.png">
 	<!--[if lte IE 6]>
 		<link type="text/css" rel="stylesheet" href="/ie.css" media="all" />
 	<![endif]-->
