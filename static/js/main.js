@@ -437,40 +437,48 @@ $(document).ready(function()
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
         $('.image_list').append('<li class="addtional_image"><input type="file" name="image[]" accept="image/*"/><a class="rmImage"><font size="2">Remove<font></a></li>');
         var number = $('.addtional_image').length;
-        //$('.info').text(number+" li.");
         //limit number of addtional images
         if(number>=5){
             $('.addImage').hide();//hide add link
         }
+
+        
+        $('.rmImage').unbind("click",removeImageHandler);
+        $('.rmImage').click(removeImageHandler);
+
+    
     });
-    /*$(".image_list").on("click", ".rmImage", function () {
-        $(this).parent("li").remove();
-        var number = $('.addtional_image').length;
-        //limit number of addtional images
+    
+    var removeImageHandler = function(){
+        $(this).parent("li").remove();  
+        var number = $('.addtional_image').length; 
+        //limit number of addtional images    
         if(number<5){
             $('.addImage').show();//show add link
         }
-        //$('.info').text(number+" li.");
-    });*/
+    };
+
     $('.addVideo').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
         $('.video_list').append('<li class="addtional_video"><input type="file" name="video[]" accept="video/*"/><a class="rmVideo"><font size="2">Remove<font></a></li>');
         var number = $('.addtional_video').length;
-        //$('.info').text(number+" li.");
         //limit number of addtional videos
         if(number>=5){
             $('.addVideo').hide();//hide add link
         }
+
+        $('.rmVideo').unbind("click",removeVideoHandler);
+        $('.rmVideo').click(removeVideoHandler);
+
     });
-    /*$(".video_list").on("click", ".rmVideo", function() {
+    var removeVideoHandler = function(){
         $(this).parent("li").remove();
         var number = $('.addtional_video').length;
-        //$('.info').text(number+" li.");
         //limit number of addtional videos
         if(number<5){
             $('.addVideo').show();//show add link
         }
-    });*/
+    };
     $('.addDoc').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
         $('.doc_list').append('<li class="addtional_doc"><input type="file" name="video[]" accept="video/*"/><a class="rmDoc"><font size="2">Remove<font></a></li>');
@@ -480,8 +488,12 @@ $(document).ready(function()
         if(number>=5){
             $('.addDoc').hide();//hide add link
         }
+
+        $('.rmDoc').unbind("click",removeDocHandler);
+        $('.rmDoc').click(removeDocHandler);
+
     });
-    /*$(".doc_list").on("click", ".rmDoc", function() {
+    var removeDocHandler = function(){
         $(this).parent("li").remove();
         var number = $('.addtional_doc').length;
         //$('.info').text(number+" li.");
@@ -489,7 +501,7 @@ $(document).ready(function()
         if(number<5){
             $('.addDoc').show();//show add link
         }
-    });*/
+    };
 //-----------------------------------------------------------------------------
     // check password length while typing
     $("#people_password").keyup(function() {
