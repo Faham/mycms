@@ -77,6 +77,15 @@
 			<input type="text" name="people_nsid" id="people_nsid"
 				value="{$people.people_nsid}" pattern="[a-zA-Z][a-zA-Z][a-zA-Z][0-9][0-9][0-9]">
 				<!-- I don't know why pattern="[a-zA-Z]{3}[0-9]{3} doesn't work" -->
+				<div id="nsid_check_result"></div>
+		</div>
+
+		<div id="people_password-container" class="field f_100">
+			<label for="people_password">
+				Password
+			</label>
+			<input type="password" name="people_password" id="people_password">
+			<div id="password_check_result"></div>	
 		</div>
 
 		<div id="people_group-container" class="field f_100">

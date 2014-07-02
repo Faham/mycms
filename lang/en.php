@@ -15,9 +15,12 @@
 @define('L_DOWNLOADS', 'Downloads');
 @define('L_DOWNLOAD', 'Download');
 @define('L_CONTACT', 'Contact');
+//---------------------------------
+// home page -> admin interface
 @define('L_ADMIN', 'Admin');
+// empty menu item
 @define('L_', '');
-@define('L_REGISTER', 'Register');
+//---------------------------------
 @define('L_ERROR', 'Error');
 @define('L_SEARCH', 'Search');
 @define('L_PAGE_NOT_FOUND', 'Page Not Found');

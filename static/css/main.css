@@ -585,3 +585,7 @@ a.view-all {
 .image_list .video_list .doc_list{
 	float: left;
 }
+
+.label{
+	min-height: 150px;
+}

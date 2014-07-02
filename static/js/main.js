@@ -443,7 +443,7 @@ $(document).ready(function()
             $('.addImage').hide();//hide add link
         }
     });
-    $(".image_list").on("click", ".rmImage", function () {
+    /*$(".image_list").on("click", ".rmImage", function () {
         $(this).parent("li").remove();
         var number = $('.addtional_image').length;
         //limit number of addtional images
@@ -451,7 +451,7 @@ $(document).ready(function()
             $('.addImage').show();//show add link
         }
         //$('.info').text(number+" li.");
-    });
+    });*/
     $('.addVideo').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
         $('.video_list').append('<li class="addtional_video"><input type="file" name="video[]" accept="video/*"/><a class="rmVideo"><font size="2">Remove<font></a></li>');
@@ -462,7 +462,7 @@ $(document).ready(function()
             $('.addVideo').hide();//hide add link
         }
     });
-    $(".video_list").on("click", ".rmVideo", function () {
+    /*$(".video_list").on("click", ".rmVideo", function() {
         $(this).parent("li").remove();
         var number = $('.addtional_video').length;
         //$('.info').text(number+" li.");
@@ -470,7 +470,7 @@ $(document).ready(function()
         if(number<5){
             $('.addVideo').show();//show add link
         }
-    });
+    });*/
     $('.addDoc').click(function (){
         //$('.image_list').append('<li><div class="uploader"><input type="file" name="image[]" accept="image/*" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="removeButton" id="remove">Remove</button></li>');
         $('.doc_list').append('<li class="addtional_doc"><input type="file" name="video[]" accept="video/*"/><a class="rmDoc"><font size="2">Remove<font></a></li>');
@@ -481,7 +481,7 @@ $(document).ready(function()
             $('.addDoc').hide();//hide add link
         }
     });
-    $(".doc_list").on("click", ".rmDoc", function () {
+    /*$(".doc_list").on("click", ".rmDoc", function() {
         $(this).parent("li").remove();
         var number = $('.addtional_doc').length;
         //$('.info').text(number+" li.");
@@ -489,6 +489,31 @@ $(document).ready(function()
         if(number<5){
             $('.addDoc').show();//show add link
         }
+    });*/
+//-----------------------------------------------------------------------------
+    // check password length while typing
+    $("#people_password").keyup(function() {
+        var password = $(this).val();
+        var length = password.length;
+        if(length<6)
+            $("#password_check_result").text("Password length is " + length + ", is too short.");
+        else if(length>32)
+            $("#password_check_result").text("Password length is " + length + ", is too long.");
+        else
+            $("#password_check_result").text("Password length is " + length + ", is good to go.");
+        //$("#password_check_result").text(password+"    "+length);
+    });
+//-----------------------------------------------------------------------------
+ // check nsid is following format while typing
+    $("#people_nsid").keyup(function() {
+        var nsid = $(this).val();
+        var patt = /[a-zA-Z]{3}[0-9]{3}/;
+        if(patt.test(nsid))
+            $("#nsid_check_result").text("NSID is good to go.");
+        else
+            $("#nsid_check_result").text("NSID should be 3 letters plus 3 numbers");
     });
 //-----------------------------------------------------------------------------
 });
+
+

@@ -30,19 +30,36 @@ $menu = array(
 	array('name' => 'people',       'url' => 'admin/people',       ),
 	array('name' => 'research',     'url' => 'admin/research',     ),
 	array('name' => 'publication',  'url' => 'admin/publication',  ),
-	array('name' => 'register',  'url' => 'reg.php',  ),
 );
 $g['smarty']->assign('menu', $menu);
 // Set secondary menu options
-if(isset($g['trac_url'])){
-	$menu = array(array('name' => 'trac',           'url' => $g['trac_url'],                          ),);
+
+// If trac_url is empty, let 
+if($g['trac_url']){
+	$trac_state = 'trac';
+}else{
+	$trac_state = null;
+}
+if(isset($_SESSION['username'])){
+	$username = $_SESSION['username'];
+}else{
+	$username = null;
 }
 $menu = array(
-	array('name' => 'trac',       'url' => 'https://papyrus.usask.ca/trac/hci/',  ),
-	array('name' => 'logout',     'url' => 'logout', 'user_id' => $g['user']['id'],     ),
+	array('name' => $trac_state,       'url' => $trac_state,  ),
+	//array('name' => 'logout',     'url' => 'logout', 'user_id' => $g['user']['id'],     ),
+	array('name' => 'logout',     'url' => 'logout', 'user_id' => $username,     ),
 );
 $g['smarty']->assign('menu_2', $menu);
 
+//-----------------------------------------------------------------------------
+// if $g['auth_method'] = native, show password option in people pages.
+if($g['auth_method']!='native'){
+	?><style type="text/css">#people_password-container{
+		display:none;
+	}</style>
+	<?php
+}
 //-----------------------------------------------------------------------------
 
 function checkparams ($params) {
@@ -103,6 +120,12 @@ function validate ($type, &$v) {
 		break;
 	} case 'date': {
 		$val = date($format, strtotime($val));
+		break;
+	} case 'password':{
+		if(strlen($val) < 6 || strlen($val) > 32)
+			$val = false;
+		else
+			$val = MD5($val);
 		break;
 	} default:
 		$val = false;

@@ -28,14 +28,20 @@ if($g['trac_url']){
 }else{
 	$trac_state = '';
 }
-//-----------------------------------------------------------------------------
-
-// Set main menu options
+if(isset($_SESSION['username'])){
+	$username = $_SESSION['username'];
+}else{
+	$username = null;
+}
 if($g['user']['is_admin']){
 	$admin_state = 'admin';
 }else{
-	$admin_state = '';
+	$admin_state = null;
 }
+//-----------------------------------------------------------------------------
+
+// Set main menu options
+
 $menu = array(
 	array('name' => 'Home',         'url' => '',             ),
 	array('name' => 'People',       'url' => 'people',       ),
@@ -69,7 +75,8 @@ $auth_menu_state = $g['user']['is_authenticated'] === false ? 'login' : 'logout'
 $menu = array(
 	array('name' => $trac_state,        'url' => $g['trac_url'],                          ),
 	//array('name' => $auth_menu_state, 'url' => $auth_menu_state, 'user_id' => $g['user']),
-	array('name' => $auth_menu_state, 	'url' => $auth_menu_state, 'user_id' => $g['user']['id']),
+	//array('name' => $auth_menu_state, 	'url' => $auth_menu_state, 'user_id' => $g['user']['id']),
+	array('name' => $auth_menu_state, 	'url' => $auth_menu_state, 'user_id' => $username),
 	//array('name' => 'Login', 'url' => 'login.html'),
 );
 $g['smarty']->assign('menu_2', $menu);

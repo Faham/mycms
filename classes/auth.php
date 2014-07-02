@@ -47,7 +47,7 @@ class auth {
             return true;
         }
         else if ('native' == $g['auth_method']) {
-            if(isset($_SESSION['username'])){
+            if(isset($_SESSION['userid'])){
                 return true;
             }
             else{
@@ -71,8 +71,8 @@ class auth {
         else if ('native' == $g['auth_method']) {
            
             //return "http://localhost/login";
-            if(isset($_SESSION['username']))
-                return $_SESSION['username'];
+            if(isset($_SESSION['userid']))
+                return $_SESSION['userid'];
             else
                 return null;
         }
@@ -92,6 +92,7 @@ class auth {
             return "http://localhost/mycms";
         }
         else if ('native' == $g['auth_method']) {
+            unset($_SESSION['userid']);
             unset($_SESSION['username']);
             $g['user']['id'] = '';
             $g['user']['is_authenticated'] = false;
@@ -113,9 +114,8 @@ class auth {
             $ppl = $g['content']['people'];
             $r = $ppl->get('people_nsid', $user_id);
 
-            if ($r !== 0)
+            if ($r === 0)
                 return false;
-
             return $ppl->people_role === 'administrator';
         }
 
