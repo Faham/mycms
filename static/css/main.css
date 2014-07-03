@@ -546,6 +546,10 @@ a.view-all {
 	display: inline-block;
 }
 
+/*research*/
+.research_list li{
+	display: none;
+}
 #loadAllResearch {
     color:green;
     cursor:pointer;
@@ -581,11 +585,16 @@ a.view-all {
 #showLessPublication:hover {
     color:black;
 }
-/*************************/
-.image_list .video_list .doc_list{
-	float: left;
+
+/* make addtional inputs be organized*/
+.addtionalImages {
+	margin-left: 150px;
 }
 
-.label{
-	min-height: 150px;
+.addtionalVideos {
+	margin-left: 150px;
+}
+
+.addtionalDocs {
+	margin-left: 150px;
 }
