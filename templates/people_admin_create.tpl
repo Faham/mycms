@@ -72,6 +72,14 @@
 			<div id="password_check_result"></div>    
     	</div>
 
+    	<div id="people_repassword-container" class="field f_100">
+			<label for="people_repassword">
+				Confirm Password
+			</label>
+   			<input type="password" name="people_repassword" id="people_repassword">
+			<div id="repassword_check_result"></div>    
+    	</div>
+
 		<div id="people_group-container" class="field f_100">
 			<label for="people_group">
 				Group

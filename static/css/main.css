@@ -598,3 +598,13 @@ a.view-all {
 .addtionalDocs {
 	margin-left: 150px;
 }
+/* warning color of message */
+#nsid_check_result {
+	color: red;
+}
+#password_check_result {
+	color: red;
+}
+#repassword_check_result {
+	color: red;
+}

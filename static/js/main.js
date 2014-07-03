@@ -513,7 +513,6 @@ $(document).ready(function()
             $("#password_check_result").text("Password length is " + length + ", is too long.");
         else
             $("#password_check_result").text("Password length is " + length + ", is good to go.");
-        //$("#password_check_result").text(password+"    "+length);
     });
 //-----------------------------------------------------------------------------
  // check nsid is following format while typing
@@ -524,6 +523,16 @@ $(document).ready(function()
             $("#nsid_check_result").text("NSID is good to go.");
         else
             $("#nsid_check_result").text("NSID should be 3 letters plus 3 numbers");
+    });
+//-----------------------------------------------------------------------------
+    // check confirm password while typing
+    $("#people_repassword").keyup(function() {
+        var repassword = $(this).val();
+        var password = $("#people_password").val();
+        if(password!==repassword)
+            $("#repassword_check_result").text("Passwords are different please recheck.");
+        else 
+            $("#repassword_check_result").text("Passwords are the same.");
     });
 //-----------------------------------------------------------------------------
 });

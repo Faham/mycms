@@ -58,8 +58,12 @@ if($g['auth_method']!='native'){
 	?><style type="text/css">#people_password-container{
 		display:none;
 	}</style>
+	<style type="text/css">#people_repassword-container{
+		display:none;
+	}</style>
 	<?php
 }
+
 //-----------------------------------------------------------------------------
 
 function checkparams ($params) {
@@ -121,11 +125,14 @@ function validate ($type, &$v) {
 	} case 'date': {
 		$val = date($format, strtotime($val));
 		break;
-	} case 'password':{
-		if(strlen($val) < 6 || strlen($val) > 32)
-			$val = false;
-		else
+	} case 'password': {
+		if($val!=='')
+		{
+			/*if(strlen($val) < 6 || strlen($val) > 32)
+				$val = false;
+			else*/
 			$val = MD5($val);
+		}
 		break;
 	} default:
 		$val = false;

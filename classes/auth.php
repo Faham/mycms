@@ -31,7 +31,8 @@ class auth {
             return true;
         }
         else if ('native' == $g['auth_method']) {
-            header('Location: http://localhost/mycms/login.html');
+            //header('Location: http://localhost/mycms/login.html');
+            header('Location: '.$g['weburl'].'login.html');
         }
     }
 
