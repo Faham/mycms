@@ -16,6 +16,8 @@ class error {
 
     public function __construct()
     {
+        global $g;
+
         if(!isset($g['session']['error'])){
             $g['session']['error'] = array();
         } else {

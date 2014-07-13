@@ -71,7 +71,7 @@ class auth {
             $ppl = $g['content']['people'];
             $r = $ppl->get('people_nsid', $user_id);
 
-            if ($r !== 0)
+            if ($r !== 1)
                 return false;
 
             return $ppl->people_role === 'administrator';

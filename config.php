@@ -123,11 +123,11 @@ mycms\settings::get_all();
 $g['auth'] = new mycms\auth();
 $g['auth']->init();
 
-if (!$g['session']['user']['is_authenticated']) {
+if (!$g['user']['is_authenticated']) {
     if ($g['auth']->is_authenticated()) {
-        $g['session']['user']['is_authenticated'] = true;
-        $g['session']['user']['id'] = $g['auth']->get_user_id();
-        $g['session']['user']['is_admin'] = $g['auth']->is_admin($g['session']['user']['id']);
+        $g['user']['is_authenticated'] = true;
+        $g['user']['id'] = $g['auth']->get_user_id();
+        $g['user']['is_admin'] = $g['auth']->is_admin($g['session']['user']['id']);
     }
 }
 
