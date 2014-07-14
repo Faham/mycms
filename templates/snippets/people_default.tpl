@@ -2,7 +2,7 @@
 {*---------------------------------------------------------------------------*}
 
 {if isset($people)}
-<div class="people-default" data-type='people' data-id={$people.people_id}>
+<div class="people-default display-default" data-type='people' data-id={$people.people_id}>
 	{if isset($user) and $user.is_admin}
 		<a class="edit-node" href='{gl url="admin/people/view"}/{$people.people_id}'>edit</a>
 	{/if}
