@@ -18,7 +18,7 @@
 		{/for}
 	{/if}
 
-	<p>{$research.research_description}</p>
+	<div>{$research.research_description}</div>
 
 	{if isset($research.video) and $research.video.count > 0}
 		{include "templates/snippets/section_title.tpl" title={t s=Downloads m=0}}

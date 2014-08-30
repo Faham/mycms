@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="profileright">
-		<p>{$people.people_bio}</p>
+		<div>{$people.people_bio}</div>
 		<img src="{txt2img text={$people.people_email}}" />
 
 		{if isset($people.image) and $people.image.count > 1}

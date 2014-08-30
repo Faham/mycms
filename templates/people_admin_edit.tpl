@@ -187,19 +187,20 @@
 				value="{$people.people_end}">
 		</div>
 
-		<div id="people_bio-container" class="field f_100">
-			<label for="people_bio">
-				Bio
-			</label>
-			<textarea name="people_bio" id="people_bio">{$people.people_bio}</textarea>
-		</div>
-
 		<div id="image-container" class="field f_100">
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
 			</label>
 			<input type="file" name="image" accept="image/*"/>
 			{include "templates/snippets/image_thumb_list.tpl" image=$people.image content='people'}
+		</div>
+
+		<div id="people_bio-container" class="field f_100">
+			<label for="people_bio">
+				Bio
+			</label>
+			<br clear="all" />
+			<textarea name="people_bio" id="people_bio" class="rich-text-editor">{$people.people_bio}</textarea>
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">

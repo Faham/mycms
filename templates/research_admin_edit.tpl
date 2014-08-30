@@ -99,13 +99,6 @@
 				value="{$research.research_summary}">
 		</div>
 
-		<div id="research_description-container" class="field f_100">
-			<label for="research_description">
-				Description
-			</label>
-			<textarea name="research_description" id="research_description">{$research.research_description}</textarea>
-		</div>
-
 		<div id="image-container" class="field f_100">
 			<label for="image">
 				Upload image<div class="smalltext">(.jpg, .gif, or .png)</div>
@@ -120,6 +113,14 @@
 			</label>
 			<input type="file" name="video" accept="video/*"/>
 			{include "templates/snippets/video_list.tpl" video=$research.video content='research'}
+		</div>
+
+		<div id="research_description-container" class="field f_100">
+			<label for="research_description">
+				Description
+			</label>
+			<br clear="all" />
+			<textarea name="research_description" id="research_description" class="rich-text-editor">{$research.research_description}</textarea>
 		</div>
 
 		<div id="form-submit" class="field f_100 clearfix submit">

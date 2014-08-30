@@ -25,19 +25,21 @@
 {*---------------------------------------------------------------------------*}
 
 	<meta name="description" content="$g.desc">
-	<link rel="stylesheet" href="{$weburl}static/css/reset.css"   type="text/css" media="all">
-	<link rel="stylesheet" href="{$weburl}static/css/main.css"    type="text/css" media="all">
-    <link rel="stylesheet" href="{$weburl}static/css/ttwform.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{$weburl}static/css/uniform.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{$weburl}static/css/admin.css"   type="text/css" media="all"/>
-	<link rel="stylesheet" href="{$weburl}static/css/print.css"   type="text/css" media="print">
+	<link rel="stylesheet" href="{$weburl}static/css/reset.css"      type="text/css" media="all">
+	<link rel="stylesheet" href="{$weburl}static/css/main.css"       type="text/css" media="all">
+    <link rel="stylesheet" href="{$weburl}static/css/ttwform.css"    type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{$weburl}static/css/uniform.css"    type="text/css" media="screen"/>
+	<link rel="stylesheet" href="{$weburl}static/css/tinyeditor.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{$weburl}static/css/admin.css"      type="text/css" media="all"/>
+	<link rel="stylesheet" href="{$weburl}static/css/print.css"      type="text/css" media="print">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="{$weburl}static/js/jquery.tools.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js">     </script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js">                       </script>
+    <script type="text/javascript" src="{$weburl}static/js/jquery.tools.js">      </script>
     <script type="text/javascript" src="{$weburl}static/js/jquery.uniform.min.js"></script>
-    <script type="text/javascript">var weburl = '{$weburl}';</script>
-    <script type="text/javascript" src="{$weburl}static/js/main.js"></script>
+    <script type="text/javascript">var weburl = '{$weburl}';                      </script>
+    <script type="text/javascript" src="{$weburl}static/js/main.js">              </script>
+    <script type="text/javascript" src="{$weburl}static/js/tiny.editor.js">   </script>
 
 	<link rel="shortcut icon" href="{$weburl}static/images/favicon.png">
 	<!--[if lte IE 6]>
